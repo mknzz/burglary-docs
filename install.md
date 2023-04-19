@@ -76,5 +76,3 @@ If you want to edit any of the boss related code you can do so in cl_public.lua,
 ## Enabling XP/Levels
 You can find the boss_reputation.sql file in the qb-burglary folder.
 You must add the boss_reputation table to your database, you can do this by importing the "boss_reputation.sql" file
-
-
