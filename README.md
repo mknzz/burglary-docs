@@ -1,6 +1,6 @@
 You can find the official documentation for our FiveM houserobbery script on the github.io page.
 
-https://skryptz5m.github.io/burglary-docs/
+https://mknzz.github.io/burglary-docs/
 
 Created using [Just The Docs](https://github.com/just-the-docs/just-the-docs) ❤️
 
