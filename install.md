@@ -53,28 +53,25 @@ You must add all of the items above to your item list, qb-core -> shared -> item
 
 ## Finding the bossman
 
-You can change the bossman coords in cl_public.lua. Bossman options will be moved to the main config once rewritten.
+You can change the bossman coords and other options in the main config.lua.
 
 ```
-local function SpawnBoss()
-    if bossEntity == nil then
-        local scenario = "WORLD_HUMAN_DRUG_DEALER"
-        local pos = vector4(246.25, 370.86, 105.74 - 1.0, 158.99) -- Change coords here
-        local model = "ig_malc"
-    
-        RequestModel(model)
-        while not HasModelLoaded(model) do
-            Wait(0)
-        end
-    
-        bossEntity = CreatePed(0, model, pos.x, pos.y, pos.z, pos.w, false, false)
-        FreezeEntityPosition(bossEntity, true)
-        SetEntityInvincible(bossEntity, true)
-        SetBlockingOfNonTemporaryEvents(bossEntity, true)
-        if scenario then TaskStartScenarioInPlace(bossEntity, scenario, 0, false) end
-    end
-end
+-- A random boss will be chosen onResourceStart in sv_public.lua
+Config.Bossman = {
+    [1] = {
+        ["model"] = "ig_malc",
+        ["location"] = vector4(246.25, 370.86, 105.74 - 1.0, 158.99),
+        ["scenario"] = "WORLD_HUMAN_DRUG_DEALER",
+    },
+    [2] = {
+        ["model"] = "ig_malc",
+        ["location"] = vector4(-194.57, -1669.65, 33.57 - 1.0, 254.98),
+        ["scenario"] = "WORLD_HUMAN_DRUG_DEALER",
+    }
+}
 ```
+
+If you want to edit any of the boss related code you can do so in cl_public.lua, starting at line 300.
 
 ## Enabling XP/Levels
 You can find the boss_reputation.sql file in the qb-burglary folder.

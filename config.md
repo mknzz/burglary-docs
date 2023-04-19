@@ -30,7 +30,7 @@ If you have not renamed your server resources, you do not need to change the res
 
 ## Changing the minigame
 
-You can change the minigame for breaking in, disabling the security and cracking safes in the main config
+You can change the minigame for breaking in, disabling the security and cracking safes in the main config.lua.
 
 ```
 -- Set the skill check minigame for lockpicking a door
@@ -64,11 +64,32 @@ Config.SafeSkillcheck = "square"
 
 The events for these minigames can be found cl_public.lua. You can modify these events or add a new event for your own minigame.
 
-![image](https://user-images.githubusercontent.com/123037761/213883117-18dff52b-6b01-4669-8166-c3e59cf83161.png)
+```
+--- Breaking into the house
+--  Config.DoorSkillcheck = "square"
+RegisterNetEvent("lockpicks:UseLockpickSquare", function() - Line 572
 
-The minigame events shown above are handled by these functions, also in cl_public.lua.
+--- Disabling the security panel
+--  Config.SecuritySkillcheck = "sqaure"
+RegisterNetEvent("lockpicks:HackSecuritySquare", function(id, spawnId) - Line 775
 
-![image](https://user-images.githubusercontent.com/123037761/213883202-219972bd-1690-4a09-9c74-766907438ced.png)
+--- Cracking safe
+--  Config.SafeSkillcheck = "square"
+RegisterNetEvent("lockpicks:LockpickSafeSquare", function(id) - Line 978
+```
+
+The minigame events shown above are handled by these functions in cl_public.lua.
+
+```
+--- Trigger the break in minigame
+function BreakIn() - Line 1083
+
+--- Trigger the disable security minigame
+function DisableSecurity(id, spawnId) - Line 1104
+
+--- Trigger the crack safe minigame
+function CrackSafe(id) - Line 1118
+```
 
 ## Breaking in time
 
@@ -82,7 +103,7 @@ Config.MinTime = 5
 Config.MaxTime = 23
 ```
 
-You can completely remove the time check from the minigame events in cl_public.lua. Look for the events shown in the adding a minigame section [above](https://skryptz5m.github.io/burglary-docs/config.html#adding-a-minigame).
+You can completely remove the time check from the minigame events in cl_public.lua. Look for the events shown in the adding a minigame section [above](https://mknzz.github.io/burglary-docs/config.html#adding-a-minigame).
 
 ```
 -- Remove this to remove the time check
@@ -293,7 +314,7 @@ end
 
 If blips are also broken when shooting/fighting you will have to make a few more changes
 
-In ps-dispatch -> cl_events.lua look for local function Shooting()
+In ps-dispatch -> cl_events.lua look for ```local function Shooting()``` line 117
 
 ```
 local function Shooting()
@@ -328,7 +349,7 @@ local function Shooting()
 end
 ```
 
-Replace the Shooting function shown above with this function
+Replace the entire ```local function Shooting()``` with this function
 
 ```
 local function Shooting(housePos)
@@ -362,9 +383,9 @@ local function Shooting(housePos)
 end
 ```
 
-In ps-dispatch -> cl_loops.lua look for ```exports['ps-dispatch']:Shooting()``` around line 43
+In ps-dispatch -> cl_eventhandlers.lua look for this line inside the event "CEventShockingGunshotFired" ```exports['ps-dispatch']:Shooting(ped, coords)``` around line 64
 
-Replace the Shooting() line with this block
+Replace ```exports['ps-dispatch']:Shooting(ped, coords)``` with this block
 
 ```
 local house = exports['qb-burglary']:GetTier()
@@ -376,9 +397,9 @@ end
 exports['ps-dispatch']:Shooting(pos or nil)
 ```
 
-Do the same again for fighting, in ps-dispatch -> cl_loops.lua look for ```exports['ps-dispatch']:Fight()``` around line 50
+Do the same again for fighting, in ps-dispatch -> cl_eventhandlers.lua look for this line inside the event "CEventShockingSeenMeleeAction" ```exports['ps-dispatch']:Fight(ped, coords)``` around line 125
 
-Replace the Fight() line with this block
+Replace ```exports['ps-dispatch']:Fight(ped, coords)``` with this block
 
 ```
 local house = exports['qb-burglary']:GetTier()
@@ -390,9 +411,9 @@ end
 exports['ps-dispatch']:Fight(pos or nil)
 ```
 
-In ps-dispatch -> cl_events.lua look for local function Fight()
+In ps-dispatch -> cl_events.lua look for ```local function Fight()``` line 176
 
-Replace the Fight() function with this function
+Replace the entire ```local function Fight()``` with this function
 
 ```
 local function Fight(housePos)
