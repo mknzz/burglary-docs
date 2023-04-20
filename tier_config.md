@@ -4,15 +4,15 @@ title: House configs
 nav_order: 4
 ---
 
-# Configuring qb-burglary (qb-burglary\houses\tier1.lua, tier2.lua, tier3.lua) these are the config files for each house tier
+# Configuring qb-burglary
 
-Open the tier 1-3 lua configs in the houses subfolder
+## qb-burglary\houses\tier1.lua\tier2.lua\tier3.lua
 
-If you want to edit the house config for T1 go to houses -> tier1.lua
+Open the tier 1-3 lua configs in the houses subfolder. If you want to edit the house config for T1 go to houses -> tier1.lua.
 
 ## Adding more houses to rob
 
-Simply copy and paste one of the existing houses and replace the ["location"] vector3 and ["heading"] int
+Simply copy and paste one of the existing houses and replace the ["location"] and ["heading"]
 
 ```
 -- We will be editing the tier1.lua config as an example, the layout exactly the same as tier2 & tier3
@@ -32,7 +32,7 @@ Config.T1_Houses = {
 
 ## Setting the required level to start a job
 
-If you are using Config.Reputation you can set the required level for a certain tier in each one of the house configs
+If you are using Config.Reputation you can set the required level for a certain tier in each one of the house configs.
 
 ``` 
 -- We will be editing the tier1.lua config as an example, the layout exactly the same as tier2 & tier3
@@ -67,10 +67,9 @@ Config.T1_RequiredSafeCracker = "lockpick"
 
 ## Setting the reward items for searching locations
 
-A random rarity will be chosen based on ["chance"], once a rarity is chosen one random item from that rarity will be given
+A random rarity will be chosen based on ["chance"], once a rarity is chosen one random item from that rarity will be given.
 
 ["exp"] is how much XP the player will receive when searching locations, only if Config.Reputation = true
-
 ["item"] is the QB item name
 ["amount"] is the QB item amount min & max
 
@@ -147,7 +146,7 @@ Config.T1_RewardItems = {
 
 ## Setting the reward items for safes
 
-This works exactly the same as the search location rewards
+This works exactly the same as the search location rewards table.
 
 ["exp"] is how much XP the player will receive when searching locations, only if Config.Reputation = true
 ["item"] is the QB item name
@@ -226,9 +225,9 @@ Config.T1_SafeRewardItems = {
 
 ## Setting the amount given from cash props
 
-A random amount of cash will be given based on the Config.T1_RewardCashAmount min & max
+A random amount of cash will be given based on the Config.T1_RewardCashAmount.
 
-math.random(Config.T1_RewardCashAmount[1], Config.T1_RewardCashAmount[2])
+Example: math.random(Config.T1_RewardCashAmount[1], Config.T1_RewardCashAmount[2])
 
 ```
 -- We will be editing the tier1.lua config as an example, the layout exactly the same as tier2 & tier3
