@@ -12,6 +12,10 @@ Welcome to the documentation page! Here, you will find all the information you n
 {: .note }
 If you are struggling to locate the asset on keymaster, look for "qb-instance"
 
+If you are a cop you will be able to enter any house that is available. If you are trying to rob a house and there's no locations, you are probably set as a cop.
+
+For ps-dispatch issues https://mknzz.github.io/burglary-docs/config.html#adding-or-changing-dispatch-alerts
+
 ----
 [Just the Docs]: https://just-the-docs.github.io/just-the-docs/
 [GitHub Pages]: https://docs.github.com/en/pages
