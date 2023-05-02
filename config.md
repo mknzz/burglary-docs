@@ -389,8 +389,9 @@ Replace ```exports['ps-dispatch']:Shooting(ped, coords)``` with this block
 
 ```
 local house = exports['qb-burglary']:GetTier()
+local inside = exports['qb-burglary']:GetInsideStatus()
 local pos
-if house then
+if house and inside then
     local currentId = exports['qb-burglary']:GetCurrentHouse()
     pos = house[currentId]['location']
 end
@@ -403,8 +404,9 @@ Replace ```exports['ps-dispatch']:Fight(ped, coords)``` with this block
 
 ```
 local house = exports['qb-burglary']:GetTier()
+local inside = exports['qb-burglary']:GetInsideStatus()
 local pos
-if house then
+if house and inside then
     local currentId = exports['qb-burglary']:GetCurrentHouse()
     pos = house[currentId]['location']
 end
