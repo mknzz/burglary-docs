@@ -239,6 +239,8 @@ local function AlertCoppers(housePos)
 end
 ```
 
+# Fixing ps-dispatch security blips
+
 If dispatch blips are broken when using ps-dispatch you will have to make some quick changes
 
 In ps-dispatch -> cl_events.lua look for the local function HouseRobbery()
@@ -311,6 +313,8 @@ local function AlertCoppers(housePos)
     end
 end
 ```
+
+# Fixing ps-dispatch shooting blips
 
 If blips are also broken when shooting/fighting you will have to make a few more changes
 
@@ -397,6 +401,8 @@ if house and inside then
 end
 exports['ps-dispatch']:Shooting(pos or nil)
 ```
+
+# Fixing ps-dispatch fighting blips
 
 Do the same again for fighting, in ps-dispatch -> cl_eventhandlers.lua look for this line inside the event "CEventShockingSeenMeleeAction" ```exports['ps-dispatch']:Fight(ped, coords)``` around line 125
 
