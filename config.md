@@ -44,29 +44,29 @@ Config.SafeSkillcheck = "square"
 ```
 
 ### Minigames for breaking in
-[qb-lock](https://github.com/Nathan-FiveM/qb-lock) ```Config.DoorSkillcheck = "circle"```
+•[qb-lock](https://github.com/Nathan-FiveM/qb-lock) ```Config.DoorSkillcheck = "circle"```
 
-[ps-ui](https://github.com/Project-Sloth/ps-ui) ```Config.DoorSkillcheck = "ps-circle"```
+•[ps-ui](https://github.com/Project-Sloth/ps-ui) ```Config.DoorSkillcheck = "ps-circle"```
 
-[qb-skillbar](https://github.com/qbcore-framework/qb-skillbar) ```Config.DoorSkillcheck = "square"```
+•[qb-skillbar](https://github.com/qbcore-framework/qb-skillbar) ```Config.DoorSkillcheck = "square"```
 
-[qb-lockpick](https://github.com/qbcore-framework/qb-lockpick) ```Config.DoorSkillcheck = "lockpick"``` 
+•[qb-lockpick](https://github.com/qbcore-framework/qb-lockpick) ```Config.DoorSkillcheck = "lockpick"``` 
 
 ### Minigames for disabling the security
-[qb-lock](https://github.com/Nathan-FiveM/qb-lock) ```Config.SecuritySkillcheck = "circle"```
+•[qb-lock](https://github.com/Nathan-FiveM/qb-lock) ```Config.SecuritySkillcheck = "circle"```
 
-[ps-ui](https://github.com/Project-Sloth/ps-ui) ```Config.SecuritySkillcheck = "ps-circle"```
+•[ps-ui](https://github.com/Project-Sloth/ps-ui) ```Config.SecuritySkillcheck = "ps-circle"```
 
-[ps-ui](https://github.com/Project-Sloth/ps-ui) ```Config.SecuritySkillcheck = "ps-scrambler"```
+•[ps-ui](https://github.com/Project-Sloth/ps-ui) ```Config.SecuritySkillcheck = "ps-scrambler"```
 
-[qb-skillbar](https://github.com/qbcore-framework/qb-skillbar) ```Config.SecuritySkillcheck = "square"```
+•[qb-skillbar](https://github.com/qbcore-framework/qb-skillbar) ```Config.SecuritySkillcheck = "square"```
 
 ### Minigames for cracking the safe
-[qb-lock](https://github.com/Nathan-FiveM/qb-lock) ```Config.SafeSkillcheck = "circle"```
+•[qb-lock](https://github.com/Nathan-FiveM/qb-lock) ```Config.SafeSkillcheck = "circle"```
 
-[ps-ui](https://github.com/Project-Sloth/ps-ui) ```Config.SafeSkillcheck = "ps-circle"```
+•[ps-ui](https://github.com/Project-Sloth/ps-ui) ```Config.SafeSkillcheck = "ps-circle"```
 
-[qb-skillbar](https://github.com/qbcore-framework/qb-skillbar) ```Config.SafeSkillcheck = "square"```
+•[qb-skillbar](https://github.com/qbcore-framework/qb-skillbar) ```Config.SafeSkillcheck = "square"```
 
 ## Adding a minigame
 
