@@ -43,7 +43,7 @@ Config.SecuritySkillcheck = "square"
 Config.SafeSkillcheck = "square"
 ```
 
-### Minigames for Config.DoorSkillcheck
+### Minigames for breaking in
 ```Config.DoorSkillcheck = "circle"``` [qb-lock](https://github.com/Nathan-FiveM/qb-lock)
 
 ```Config.DoorSkillcheck = "ps-circle"``` [ps-ui](https://github.com/Project-Sloth/ps-ui)
@@ -52,7 +52,7 @@ Config.SafeSkillcheck = "square"
 
 ```Config.DoorSkillcheck = "lockpick"``` [qb-lockpick](https://github.com/qbcore-framework/qb-lockpick)
 
-### Minigames for Config.SecuritySkillcheck
+### Minigames for disabling the security
 ```Config.SecuritySkillcheck = "circle"``` [qb-lock](https://github.com/Nathan-FiveM/qb-lock)
 
 ```Config.SecuritySkillcheck = "ps-circle"``` [ps-ui](https://github.com/Project-Sloth/ps-ui)
@@ -61,7 +61,7 @@ Config.SafeSkillcheck = "square"
 
 ```Config.SecuritySkillcheck = "square"``` [qb-skillbar](https://github.com/qbcore-framework/qb-skillbar)
 
-### Minigames for Config.SafeSkillcheck
+### Minigames for cracking the safe
 ```Config.SafeSkillcheck = "circle"``` [qb-lock](https://github.com/Nathan-FiveM/qb-lock)
 
 ```Config.SafeSkillcheck = "ps-circle"``` [ps-ui](https://github.com/Project-Sloth/ps-ui)
