@@ -43,6 +43,7 @@ Config.SecuritySkillcheck = "square"
 Config.SafeSkillcheck = "square"
 ```
 
+```
 ### Minigames for Config.DoorSkillcheck
 - "circle" - [qb-lock](https://github.com/Nathan-FiveM/qb-lock)
 - "ps-circle" - [ps-ui](https://github.com/Project-Sloth/ps-ui)
@@ -59,6 +60,7 @@ Config.SafeSkillcheck = "square"
 - "circle" - [qb-lock](https://github.com/Nathan-FiveM/qb-lock)
 - "ps-circle" - [ps-ui](https://github.com/Project-Sloth/ps-ui)
 - "square" - [qb-skillbar](https://github.com/qbcore-framework/qb-skillbar)
+```
 
 ## Adding a minigame
 
