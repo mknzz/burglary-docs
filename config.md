@@ -247,6 +247,45 @@ local function AlertCoppers(housePos)
 end
 ```
 
+For cd_dispatch users just replace the default AlertCoppers function with this one
+
+```
+local function AlertCoppers(housePos)
+    if not copsAlerted then
+        local street1, street2 = GetStreetNameAtCoord(housePos.x, housePos.y, housePos.z, Citizen.ResultAsInteger(),
+            Citizen.ResultAsInteger())
+        local street1name = GetStreetNameFromHashKey(street1)
+        local street2name = GetStreetNameFromHashKey(street2)
+        local gender = Core.Functions.GetPlayerData().charinfo.gender == 1 and "female" or "male"
+        local dispatchMsg = string.format("Possible B&E in progress, %s suspect, at %s", gender, street1name..street2name)
+
+        ------- You can remove this export and add your own dispatch export/event -------
+        local data = exports['cd_dispatch']:GetPlayerInfo()
+        TriggerServerEvent('cd_dispatch:AddNotification', {
+            job_table = {'police', }, 
+            coords = housePos,
+            title = '10-90',
+            message = dispatchMsg,
+            flash = 0,
+            unique_id = data.unique_id,
+            sound = 1,
+            blip = {
+                sprite = 40, 
+                scale = 1.2, 
+                colour = 3,
+                flashes = false, 
+                text = '911 - House Robbery',
+                time = 5,
+                radius = 0,
+            }
+        })
+        ------- You can remove this export and add your own dispatch export/event -------
+
+        copsAlerted = true
+    end
+end
+```
+
 ### Fixing ps-dispatch blips
 
 If dispatch blips are broken when using ps-dispatch you will have to make some quick changes
