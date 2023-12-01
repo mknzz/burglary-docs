@@ -290,72 +290,34 @@ end
 
 If dispatch blips are broken when using ps-dispatch you will have to make some quick changes
 
-In ps-dispatch -> cl_events.lua look for the local function HouseRobbery()
+In cl_public.lua locate the AlertCoppers(housePos) function line 5
 
-```
-local function HouseRobbery()
-    local currentPos = GetEntityCoords(PlayerPedId())
-    local locationInfo = getStreetandZone(currentPos)
-    local gender = GetPedGender()
-    TriggerServerEvent("dispatch:server:notify", {
-        dispatchcodename = "houserobbery", -- has to match the codes in sv_dispatchcodes.lua so that it generates the right blip
-        dispatchCode = "10-90",
-        firstStreet = locationInfo,
-        gender = gender,
-        model = nil,
-        plate = nil,
-        priority = 2, -- priority
-        firstColor = nil,
-        automaticGunfire = false,
-        origin = {
-            x = currentPos.x,
-            y = currentPos.y,
-            z = currentPos.z
-        },
-        dispatchMessage = _U('houserobbery'), -- message
-        job = { "police" } -- jobs that will get the alerts
-    })
-end
-```
-
-Replace the HouseRobbery function shown above with this function
-
-```
-local function HouseRobbery(housePos)
-    local currentPos = housePos
-    local locationInfo = getStreetandZone(currentPos)
-    local gender = GetPedGender()
-    TriggerServerEvent("dispatch:server:notify", {
-        dispatchcodename = "houserobbery", -- has to match the codes in sv_dispatchcodes.lua so that it generates the right blip
-        dispatchCode = "10-90",
-        firstStreet = locationInfo,
-        gender = gender,
-        model = nil,
-        plate = nil,
-        priority = 2, -- priority
-        firstColor = nil,
-        automaticGunfire = false,
-        origin = {
-            x = currentPos.x,
-            y = currentPos.y,
-            z = currentPos.z
-        },
-        dispatchMessage = _U('houserobbery'), -- message
-        job = { "police" } -- jobs that will get the alerts
-    })
-end
-```
-
-Once you have done that you want to go back to the AlertCoppers function in cl_public.lua and replace it with this function
-
+Replace the entire AlertCoppers function with this, or you can add '''coords = housePos''' to the alert data yourself
 ```
 --- Alerting the coppers
 local copsAlerted = false
 local function AlertCoppers(housePos)
     if not copsAlerted then
+        local street1, street2 = GetStreetNameAtCoord(housePos.x, housePos.y, housePos.z, Citizen.ResultAsInteger(),
+            Citizen.ResultAsInteger())
+        local street1name = GetStreetNameFromHashKey(street1)
+        local street2name = GetStreetNameFromHashKey(street2)
+        local gender = Core.Functions.GetPlayerData().charinfo.gender == 1 and "Female" or "Male"
+
         ------- You can remove this export and add your own dispatch export/event -------
-        exports['ps-dispatch']:HouseRobbery(housePos)
+        exports["ps-dispatch"]:CustomAlert({
+            message = "Possible B&E in progress",
+            dispatchCode = "10-90",
+            description = "Possible B&E in progress, " .. gender .. " " .. "suspect",
+            radius = 0,
+            sprite = 40,
+            color = 2,
+            scale = 1.0,
+            length = 3,
+            coords = housePos -- Set the coords to the house door
+        })
         ------- You can remove this export and add your own dispatch export/event -------
+
         copsAlerted = true
     end
 end
@@ -365,134 +327,67 @@ end
 
 If blips are also broken when shooting/fighting you will have to make a few more changes
 
-In ps-dispatch -> cl_events.lua look for ```local function Shooting()``` line 117
+In ps-dispatch -> [client] -> alerts.lua look for ```local function Shooting()``` line 26
 
+Replace the entire Shooting() function with this
 ```
 local function Shooting()
-    local currentPos = GetEntityCoords(PlayerPedId())
-    local locationInfo = getStreetandZone(currentPos)
-    local gender = GetPedGender()
-    local PlayerPed = PlayerPedId()
-    local CurrentWeapon = GetSelectedPedWeapon(PlayerPed)
-    local speed = math.floor(GetEntitySpeed(vehicle) * 2.236936) .. " MPH" -- * 3.6 = KMH    /    * 2.236936 = MPH
-    local weapon = WeaponTable[CurrentWeapon] or "UNKNOWN"
+    local coords = GetEntityCoords(cache.ped)
 
-    TriggerServerEvent("dispatch:server:notify", {
-        dispatchcodename = "shooting", -- has to match the codes in sv_dispatchcodes.lua so that it generates the right blip
-        dispatchCode = "10-11",
-        firstStreet = locationInfo,
-        gender = gender,
-        weapon = weapon,
-        model = nil,
-        plate = nil,
+    local house = exports['qb-burglary']:GetTier()
+    local inside = exports['qb-burglary']:GetInsideStatus()
+    local houseCoords
+    if house and inside then
+        local currentId = exports['qb-burglary']:GetCurrentHouse()
+        houseCoords = house[currentId]['location']
+    end
+
+    local dispatchData = {
+        message = locale('shooting'),
+        codeName = 'shooting',
+        code = '10-11',
+        icon = 'fas fa-gun',
         priority = 2,
-        firstColor = nil,
-        automaticGunfire = false,
-        origin = {
-            x = currentPos.x,
-            y = currentPos.y,
-            z = currentPos.z
-        },
-        dispatchMessage = _U('shooting'),
-        job = { "police" }
-    })
+        coords = houseCoords or coords, -- Set the robbery door coords
+        street = GetStreetAndZone(coords),
+        gender = GetPlayerGender(),
+        weapon = GetWeaponName(),
+        jobs = { 'leo' }
+    }
 
+    TriggerServerEvent('ps-dispatch:server:notify', dispatchData)
 end
-```
-
-Replace the entire ```local function Shooting()``` with this function
-
-```
-local function Shooting(housePos)
-    local currentPos = housePos or GetEntityCoords(PlayerPedId())
-    local locationInfo = getStreetandZone(currentPos)
-    local gender = GetPedGender()
-    local PlayerPed = PlayerPedId()
-    local CurrentWeapon = GetSelectedPedWeapon(PlayerPed)
-    local speed = math.floor(GetEntitySpeed(vehicle) * 2.236936) .. " MPH" -- * 3.6 = KMH    /    * 2.236936 = MPH
-    local weapon = WeaponTable[CurrentWeapon] or "UNKNOWN"
-
-    TriggerServerEvent("dispatch:server:notify", {
-        dispatchcodename = "shooting", -- has to match the codes in sv_dispatchcodes.lua so that it generates the right blip
-        dispatchCode = "10-11",
-        firstStreet = locationInfo,
-        gender = gender,
-        weapon = weapon,
-        model = nil,
-        plate = nil,
-        priority = 2,
-        firstColor = nil,
-        automaticGunfire = false,
-        origin = {
-            x = currentPos.x,
-            y = currentPos.y,
-            z = currentPos.z
-        },
-        dispatchMessage = _U('shooting'),
-        job = { "police" }
-    })
-end
-```
-
-In ps-dispatch -> cl_eventhandlers.lua look for this line inside the event "CEventShockingGunshotFired" ```exports['ps-dispatch']:Shooting(ped, coords)``` around line 64
-
-Replace ```exports['ps-dispatch']:Shooting(ped, coords)``` with this block
-
-```
-local house = exports['qb-burglary']:GetTier()
-local inside = exports['qb-burglary']:GetInsideStatus()
-local pos
-if house and inside then
-    local currentId = exports['qb-burglary']:GetCurrentHouse()
-    pos = house[currentId]['location']
-end
-exports['ps-dispatch']:Shooting(pos or nil)
 ```
 
 ### Fixing ps-dispatch fighting blips
 
-Do the same again for fighting, in ps-dispatch -> cl_eventhandlers.lua look for this line inside the event "CEventShockingSeenMeleeAction" ```exports['ps-dispatch']:Fight(ped, coords)``` around line 125
+Do the exact same for ```local function Fight()``` line 117
 
-Replace ```exports['ps-dispatch']:Fight(ped, coords)``` with this block
-
+Replace the entire Fight() function with this
 ```
-local house = exports['qb-burglary']:GetTier()
-local inside = exports['qb-burglary']:GetInsideStatus()
-local pos
-if house and inside then
-    local currentId = exports['qb-burglary']:GetCurrentHouse()
-    pos = house[currentId]['location']
-end
-exports['ps-dispatch']:Fight(pos or nil)
-```
+local function Fight()
+    local coords = GetEntityCoords(cache.ped)
 
-In ps-dispatch -> cl_events.lua look for ```local function Fight()``` line 176
+    local house = exports['qb-burglary']:GetTier()
+    local inside = exports['qb-burglary']:GetInsideStatus()
+    local houseCoords
+    if house and inside then
+        local currentId = exports['qb-burglary']:GetCurrentHouse()
+        houseCoords = house[currentId]['location']
+    end
 
-Replace the entire ```local function Fight()``` with this function
-
-```
-local function Fight(housePos)
-    local currentPos = housePos or GetEntityCoords(PlayerPedId())
-    local locationInfo = getStreetandZone(currentPos)
-    local gender = GetPedGender()
-    TriggerServerEvent("dispatch:server:notify", {
-        dispatchcodename = "fight", -- has to match the codes in sv_dispatchcodes.lua so that it generates the right blip
-        dispatchCode = "10-10",
-        firstStreet = locationInfo,
-        gender = gender,
-        model = nil,
-        plate = nil,
+    local dispatchData = {
+        message = locale('melee'),
+        codeName = 'fight',
+        code = '10-10',
+        icon = 'fas fa-hand-fist',
         priority = 2,
-        firstColor = nil,
-        automaticGunfire = false,
-        origin = {
-            x = currentPos.x,
-            y = currentPos.y,
-            z = currentPos.z
-        },
-        dispatchMessage = _U('melee'),
-        job = { "police" }
-    })
-end
+        coords = houseCoords or coords, -- Set the robbery door coords
+        gender = GetPlayerGender(),
+        street = GetStreetAndZone(coords),
+        jobs = { 'leo' }
+    }
 
+    TriggerServerEvent('ps-dispatch:server:notify', dispatchData)
+end
 ```
