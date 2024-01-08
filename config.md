@@ -4,7 +4,7 @@ title: Main config
 nav_order: 3
 ---
 
-# Configuring qb-burglary (config.lua)
+# Configuring sk-burglary (3.1)
 
 Open the main config file (config.lua) and make sure the required resource names are the same as the resources on your server
 

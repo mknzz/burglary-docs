@@ -4,76 +4,51 @@ title: Installing
 nav_order: 2
 ---
 
-# Installing qb-burglary
+{: .note }
+Please note that you won't be able to utilize your configurations from qb-burglary 2.0. The content within the configuration files has been revamped for better readability and organization. Although there are some similarities within the configs, manual replacement will be necessary.
 
+# Installing sk-burglary 3.1
+
+Please read the installation guide below carefully.
+
+Before following these steps make sure qb-burglary 2.0 has been removed from your resource folder.
 
 {: .required }
-> - **qb-core** This resource name can be changed in config.lua, you can also change the core object name
+> 1. Extract the 3.1 resource and copy it into either the [qb] or [standalone] folder. This step is optional; you can place the resource anywhere, as long as it's started after the required resources.
+>
+> 2. Configuration might be required in the config.lua file. Check the Config.DefaultResources table and ensure that the resource names match those on your server.
+>
+> 3. Add the items from items.md to your item list.
+>
+> 4. Add the item images from the [img] sub folder to your inventory images folder.
+>
+
+## Requirements
+
+{: .required }
+> - **qb-core**
 > 
-> - **qb-target** This resource name can be changed in config.lua, anything qb-target related can be found in cl_public.lua
+> - **qb-target**
 >
-> - **qb-menu** This resource name can be changed in config.lua, anything qb-menu related can be found in cl_public.lua
+> - **qb-menu**
 >
-> - **oxmysql** This is only required if you are using levels
+> - **qb-skillbar**
+>
+> - **qb-lockpick**
 >
 > - Server version **3245+** / OneSync enabled
+>
+> - Game Build **2802+**
 
-{: .note }
-If you have renamed your qb-target resource, or you are using another target you must change the dependency name in fxmanifest.lua. We recommend using the latest qb-target.
-
-## Add qb-burglary to your resource folder
-It is recommended that you add qb-burglary to the [qb] folder.
-
-## Add the inventory images
-You can find the images in the qb-burglary folder.
-Take the provided images and add them to your qb-inventory images folder, qb-inventory -> html -> images
-
-## Add the required items
-```
---TV prop item
-['bigtv'] 				 	     = {['name'] = 'bigtv', 			  	  		['label'] = 'TV', 						['weight'] = 70000, 	['type'] = 'item', 		['image'] = 'stolentv.png', 			['unique'] = true, 		['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Definitely not stolen'},
---PC prop item
-['computer'] 				 	 = {['name'] = 'computer', 			  	  		['label'] = 'Computer', 				['weight'] = 70000, 	['type'] = 'item', 		['image'] = 'stolencomputer.png', 		['unique'] = true, 		['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Definitely not stolen'},
---Microwave prop item
-['microwave'] 				 	 = {['name'] = 'microwave', 			  	  	['label'] = 'Microwave', 				['weight'] = 70000, 	['type'] = 'item', 		['image'] = 'stolenmicro.png', 			['unique'] = true, 		['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Definitely not stolen'},
---Stereo prop item
-['stereo'] 				 	     = {['name'] = 'stereo', 			  	  		['label'] = 'HIFI', 					['weight'] = 70000, 	['type'] = 'item', 		['image'] = 'stolenstereo.png', 		['unique'] = true, 		['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Definitely not stolen'},
-```
-
-```
---T1 safe key item
-['t1_safe_key'] 			 	 = {['name'] = 't1_safe_key', 			 		['label'] = 'Key', 		['weight'] = 500, 		['type'] = 'item', 		['image'] = 'safe_key.png', 			['unique'] = true, 		['useable'] = false, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Probably unlocks something'},
---T2 safe key item
-['t2_safe_key'] 			 	 = {['name'] = 't2_safe_key', 			 		['label'] = 'Key', 		['weight'] = 500, 		['type'] = 'item', 		['image'] = 'safe_key.png', 			['unique'] = true, 		['useable'] = false, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Probably unlocks something'},
---T3 safe key item
-['t3_safe_key'] 			 	 = {['name'] = 't3_safe_key', 			 		['label'] = 'Key', 		['weight'] = 500, 		['type'] = 'item', 		['image'] = 'safe_key.png', 			['unique'] = true, 		['useable'] = false, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Probably unlocks something'},
-```
-
-You must add all of the items above to your item list, qb-core -> shared -> items.lua or shared.lua
-
-## Finding the bossman
-
-You can change the bossman coords and other options in the main config.lua.
-
-```
--- A random boss will be chosen onResourceStart in sv_public.lua
-Config.Bossman = {
-    [1] = {
-        ["model"] = "ig_malc",
-        ["location"] = vector4(246.25, 370.86, 105.74 - 1.0, 158.99),
-        ["scenario"] = "WORLD_HUMAN_DRUG_DEALER",
-    },
-    [2] = {
-        ["model"] = "ig_malc",
-        ["location"] = vector4(-194.57, -1669.65, 33.57 - 1.0, 254.98),
-        ["scenario"] = "WORLD_HUMAN_DRUG_DEALER",
-    }
-}
-```
-
-If you want to edit any of the boss related code you can do so in cl_public.lua, starting at line 300.
-
-## Enabling XP/Levels
-You can find the boss_reputation.sql file in the qb-burglary folder.
-You must add the boss_reputation table to your database, you can do this by importing the "boss_reputation.sql" file.
-Once you have imported the sql file set Config.Reputation = true in the main config.lua
+## Optional Resources
+> - **ox_lib** - [Github](https://github.com/overextended/ox_lib)
+>
+> - **ox_target** [Github](https://github.com/overextended/ox_target)
+>
+> - **ox_inventory** [Github](https://github.com/overextended/ox_inventory)
+>
+> - **oxmysql** [Github](https://github.com/overextended/oxmysql)
+>
+> - **ps-ui** [Github](https://github.com/Project-Sloth/ps-ui)
+>
+> - **pd-safe** [Github](https://github.com/VHall1/pd-safe)
