@@ -9,7 +9,9 @@ nav_order: 2
 {: .note }
 Please note that you won't be able to utilize your configurations from qb-burglary 2.0. The content within the configuration files has been revamped for better readability and organization. Although there are some similarities within the configs, manual replacement will be necessary.
 
-Please read the installation guide below carefully. Before following these steps make sure qb-burglary 2.0 has been removed from your resource folder.
+### Please read the installation guide below carefully.
+
+Before following these steps make sure qb-burglary 2.0 has been removed from your resource folder.
 
 > 1. Extract the 3.1 resource and copy it into either the [qb] or [standalone] folder. This step is optional; you can place the resource anywhere, as long as it's started after the required resources.
 >
@@ -19,6 +21,8 @@ Please read the installation guide below carefully. Before following these steps
 >
 > 4. Add the item images from the [img] sub folder to your inventory images folder.
 >
+
+## Resources
 
 {: .required }
 > - **qb-core**
@@ -36,7 +40,7 @@ Please read the installation guide below carefully. Before following these steps
 > - Game Build **2802+**
 
 {: .optional }
-> - **ox_lib** - [Github](https://github.com/overextended/ox_lib)
+> - **ox_lib** [Github](https://github.com/overextended/ox_lib)
 >
 > - **ox_target** [Github](https://github.com/overextended/ox_target)
 >
