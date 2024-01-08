@@ -54,6 +54,9 @@ callouts:
   required:
     title: Requirements
     color: green
+  optional:
+    title: Optional
+    color: yellow
 
 aux_links:
   Tebex: https://skryptz.tebex.io/package/5026669

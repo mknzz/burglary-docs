@@ -35,7 +35,7 @@ Please read the installation guide below carefully. Before following these steps
 >
 > - Game Build **2802+**
 
-## Optional Resources
+{: .optional }
 > - **ox_lib** - [Github](https://github.com/overextended/ox_lib)
 >
 > - **ox_target** [Github](https://github.com/overextended/ox_target)
