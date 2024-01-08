@@ -38,6 +38,7 @@ search:
 callouts_level: quiet # or loud
 callouts:
   highlight:
+    title: Optional Resources
     color: yellow
   important:
     title: Important
@@ -54,9 +55,6 @@ callouts:
   required:
     title: Requirements
     color: green
-  optional:
-    title: Optional
-    color: yellow
 
 aux_links:
   Tebex: https://skryptz.tebex.io/package/5026669
