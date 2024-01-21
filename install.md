@@ -9,7 +9,7 @@ nav_order: 2
 {: .note }
 Please note that you won't be able to utilize your configurations from qb-burglary 2.0. The content within the configuration files has been revamped for better readability and organization. Although there are some similarities within the configs, manual replacement will be necessary.
 
-### You need the following required resources.
+## You need the following required resources.
 
 > - **qb-core**
 > 
@@ -22,13 +22,9 @@ Please note that you won't be able to utilize your configurations from qb-burgla
 > - **qb-lockpick**
 
 {: .important }
-It is **strongly recommended** to use the latest recommended FiveM server artifact version, which is currently **7290**. However, this resource is compatible with server versions starting from **3245** and onwards.
+It is **strongly recommended** to use the latest recommended FiveM server artifact version, which is currently **7290**. However, this resource is compatible with server versions starting from **3245** and onwards. For the game build, it is advised to use any version ranging from **2545** to **2802**. Nevertheless, this resource should function with game builds starting from **1604** and above. Please note that **OneSync** must be enabled.
 
-For the game build, it is advised to use any version ranging from **2545** to **2802**. Nevertheless, this resource should function with game builds starting from **1604** and above.
-
-Please note that **OneSync** must be enabled.
-
-### You can also use the following optional resources for enhanced functionality.
+## You can also use the following optional resources for enhanced functionality.
 
 > - **ox_lib** [Github](https://github.com/overextended/ox_lib)
 >
