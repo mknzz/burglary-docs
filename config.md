@@ -6,6 +6,8 @@ nav_order: 3
 
 # Configuring sk-burglary 3.1
 
+## Finding the main config file
+
 The main `config.lua` file can be located in the `shared` subfolder.
 
 ## Setting up default resources

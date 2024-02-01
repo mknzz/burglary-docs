@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Houses Configuration
-nav_order: 4
+title: Interiors Configuration
+nav_order: 5
 ---
 
 # Configuring sk-burglary 3.1
