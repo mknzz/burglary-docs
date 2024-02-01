@@ -9,7 +9,7 @@ nav_order: 1
 
 Welcome to the documentation page! Here, you will find all the information you need to install and configure qb-burglary effectively. We have everything you need to make the most of your experience. If you have any questions or need further assistance, please feel free to create a ticket in the discord using the #request-help channel.
 
-{: .important }
+{: .note }
 If you are struggling to locate the escrowed version of the asset on keymaster, look for **qb-instance**.
 
 ----
