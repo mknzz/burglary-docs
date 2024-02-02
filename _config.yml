@@ -35,7 +35,7 @@ search:
   button: false
 
 
-callouts_level: quiet # or loud
+callouts_level: loud # or loud
 callouts:
   highlight:
     title: Optional Resources
