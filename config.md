@@ -54,9 +54,10 @@ Config.OptionalResources = {
 
 ## Setting up reputation
 
-Firstly, you need to add the boss_reputation table to your database. The SQL file for this table, boss_reputation.sql, can be found in the 3.1 folder of this repository.
+{: .important }
+You need to add the boss_reputation table to your database. The SQL file for this table, boss_reputation.sql, can be found in the 3.1 folder of this repository.
 
-The leveling system can be enabled or disabled. This can be done by setting the Config.Levels variable in the configuration file:
+The leveling system can be enabled or disabled. This can be done by setting the Config.Levels variable:
 
 ```Config.Levels = true  -- Set to 'true' to enable, 'false' to disable```
 
@@ -83,6 +84,14 @@ You can set the latest time at which a break-in can occur by adjusting the Confi
 ```Config.MaxTime = 23  -- Set to your desired maximum time (in hours)```
 
 In this example, the maximum time is set to 23, which means that if the time is 11PM or later, you can initiate a break-in.
+
+To allow house robbing at any time, modify the `NotWithinBreakInHours` function in funcs.lua as follows:
+
+```
+function NotWithinBreakInHours()
+    return false  -- Disables the time check, allowing house robbing at any time
+end
+```
 
 ## Queue time
 
