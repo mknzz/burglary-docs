@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Interiors Configuration
+title: Interiors Config
 nav_order: 5
 ---
 

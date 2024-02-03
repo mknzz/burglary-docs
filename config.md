@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Main Configuration
+title: Main Config
 nav_order: 3
 ---
 
@@ -42,9 +42,9 @@ Config.OptionalResources = {
 }
 ```
 
-> - **ox_lib**: When enabled, this will be utilized for the circle minigame, notifications, progress bar, and context menu. qb-menu must be disabled in Config.RequiredResources.
->
 > - **ox_target**: When enabled, this will be utilized for targetting zones and entities. qb-target must be disabled in Config.RequiredResources.
+>
+> - **ox_lib**: When enabled, this will be utilized for the circle minigame, notifications, progress bar, and context menu. qb-menu must be disabled in Config.RequiredResources.
 >
 > - **ox_inventory**: When enabled, this will be utilized instead of qb-inventory. No changes to Config.RequiredResources needed.
 >
@@ -108,3 +108,36 @@ You can set the duration of the job by adjusting the Config.JobTime variable:
 ```Config.JobTime = 12  -- Set to your desired job time duration (in minutes)```
 
 If a player leaves the house after the job time has expired, the job will automatically end.
+
+## Phone mail or notify
+
+Players can receive job offers via email or direct notification, depending on the Config.SendMail variable.
+
+```
+Config.SendMail = true  -- 'true' for email, 'false' for direct notification
+```
+
+If it’s false, players will receive a direct notification and the job will start automatically.
+
+The `SendMail` function in funcs.lua sends an email to the player’s QB phone. If you’re using a different phone system, you’ll need to modify this function.
+
+```
+-- Function to send QB phone mail
+function SendMail(subject, sender, message, buttonEvent, tier)
+    local button = nil
+    if buttonEvent and tier then
+        button = {
+            enabled = true,
+            buttonEvent = buttonEvent,
+            buttonData = tier
+        }
+    end
+
+    TriggerServerEvent('qb-phone:server:sendNewMail', {
+        sender = sender,
+        subject = subject,
+        message = message,
+        button = button
+    })
+end
+```

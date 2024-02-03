@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Houses Configuration
+title: Houses Config
 nav_order: 4
 ---
 
