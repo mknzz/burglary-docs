@@ -25,7 +25,7 @@ Please note that you won't be able to utilize your configurations from qb-burgla
 
 **Before following these steps make sure qb-burglary 2.0 has been removed from your resource folder.**
 
-> 1. Extract the 3.1 resource and copy it into either the `qb`` or `standalone`` folder. This step is optional; you can place the resource anywhere, as long as it's started after the required resources.
+> 1. Extract the 3.1 resource and copy it into either the `qb` or `standalone` folder. This step is optional; you can place the resource anywhere, as long as it's started after the required resources.
 >
 > 2. Configuration might be required in the config.lua file. Check the Config.DefaultResources table and ensure that the resource names match those on your server.
 >
