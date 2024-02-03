@@ -48,12 +48,48 @@ Config.OptionalResources = {
 >
 > - **ox_inventory**: When enabled, this will be utilized instead of qb-inventory. No changes to Config.RequiredResources needed.
 >
-> - **oxmysql** - [Github](https://github.com/overextended/oxmysql)
+> - **ps-ui**: When enabled, this can be utilized for the circle and scrambler minigame.
 >
-> - **ps-ui** - [Github](https://github.com/Project-Sloth/ps-ui)
->
-> - **pd-safe** - [Github](https://github.com/VHall1/pd-safe)
+> - **pd-safe**: When enabled, this can be utilized for the safescracker minigame.
 
-## Breaking in time
+## Setting up reputation
 
-## Queue and finish time
+Firstly, you need to add the boss_reputation table to your database. The SQL file for this table, boss_reputation.sql, can be found in the 3.1 folder of this repository.
+
+The leveling system can be enabled or disabled. This can be done by setting the Config.Levels variable in the configuration file:
+```Config.Levels = true  -- Set to 'true' to enable, 'false' to disable```
+
+You can also customize the maximum level that can be achieved in the leveling system by adjusting the Config.MaxLevel variable:
+```Config.MaxLevel = 10  -- Set to your desired maximum level```
+
+If level scaling is enabled, you can adjust the chance of getting a tier 2 or tier 3 house based on the current level. This can be done by setting the Config.LevelScaling variable:
+```Config.LevelScaling = true  -- Set to 'true' to enable, 'false' to disable```
+
+If level scaling is disabled, you can select which tier house if you meet the required level.
+
+## Break in time
+
+Set the time period for robbing houses. You will not be able to start the break-in minigame if it is outside this time period.
+
+You can set the earliest time at which a break-in can occur by adjusting the Config.MinTime variable. This value is based on a 24-hour clock.
+```Config.MinTime = 5  -- Set to your desired minimum time (in hours)```
+
+You can set the latest time at which a break-in can occur by adjusting the Config.MaxTime variable. This value is also based on a 24-hour clock.
+```Config.MaxTime = 23  -- Set to your desired maximum time (in hours)```
+
+In this example, the maximum time is set to 23, which means that if the time is 11PM or later, you can initiate a break-in.
+
+## Queue time
+
+The time is measured in minutes and the actual queue time is randomly determined based on the minimum and maximum times you set.
+
+```Config.QueueTime = { 5, 25 }  -- Set to your desired min and max queue times```
+
+## Job expire time
+
+Set the time limit for a player to complete a job. The time is measured in minutes.
+
+You can set the duration of the job by adjusting the Config.JobTime variable:
+```Config.JobTime = 12  -- Set to your desired job time duration (in minutes)```
+
+If a player leaves the house after the job time has expired, the job will automatically end.

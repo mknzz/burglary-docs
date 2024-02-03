@@ -9,21 +9,6 @@ nav_order: 2
 {: .note }
 Please note that you won't be able to utilize your configurations from qb-burglary 2.0. The content within the configuration files has been revamped for better readability and organization. Although there are some similarities within the configs, manual replacement will be necessary.
 
-## Please read the installation guide below carefully.
-
-**Before following these steps make sure qb-burglary 2.0 has been removed from your resource folder.**
-
-> 1. Extract the 3.1 resource and copy it into either the [qb] or [standalone] folder. This step is optional; you can place the resource anywhere, as long as it's started after the required resources.
->
-> 2. Configuration might be required in the config.lua file. Check the Config.DefaultResources table and ensure that the resource names match those on your server.
->
-> 3. Add the items from items.md to your item list.
->
-> 4. Add the item images from the [img] sub folder to your inventory images folder.
-
-{: .important }
-It is **strongly recommended** to use the latest recommended FiveM server artifact version, which is currently **7290**. However, this resource should be compatible with server versions starting from **3245** and onwards. For the game build, it is advised to use any version ranging from **2545** to **2802**. Nevertheless, this resource should function with game builds starting from **1604** and above. Please note that **OneSync** must be enabled.
-
 ## You need the following required resources.
 
 > - **qb-core**
@@ -35,6 +20,21 @@ It is **strongly recommended** to use the latest recommended FiveM server artifa
 > - **qb-skillbar**
 >
 > - **qb-lockpick**
+
+## Please read the installation guide below carefully.
+
+**Before following these steps make sure qb-burglary 2.0 has been removed from your resource folder.**
+
+> 1. Extract the 3.1 resource and copy it into either the `qb`` or `standalone`` folder. This step is optional; you can place the resource anywhere, as long as it's started after the required resources.
+>
+> 2. Configuration might be required in the config.lua file. Check the Config.DefaultResources table and ensure that the resource names match those on your server.
+>
+> 3. Add the items from items.md to your item list.
+>
+> 4. Add the item images from the `img` subfolder to your inventory images folder.
+
+{: .important }
+It is **strongly recommended** to use the latest recommended FiveM server artifact version, which is currently **7290**. However, this resource should be compatible with server versions starting from **3245** and onwards. For the game build, it is advised to use any version ranging from **2189** to **2802**. Nevertheless, this resource should function with game builds starting from **1604** and above. Please note that **OneSync** must be enabled.
 
 ## You can also use the following optional resources for enhanced functionality.
 
