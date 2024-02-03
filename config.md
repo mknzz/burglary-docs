@@ -141,3 +141,97 @@ function SendMail(subject, sender, message, buttonEvent, tier)
     })
 end
 ```
+
+## Dispatch alert
+
+Please navigate to the `funcs.lua` file and find the `RobberyAlert(coords)` function. We're utilizing `ps-dispatch` to send alerts to the police. However, you're welcome to modify this to suit your needs. Additionally, you'll find snippets for other dispatch resources provided below.
+
+```
+-- Send a dispatch alert using ps-dispatch
+function RobberyAlert(coords)
+    local street1, street2 = GetStreetNameAtCoord(coords.x, coords.y, coords.z, Citizen.ResultAsInteger(),
+        Citizen.ResultAsInteger())
+    local street1name = GetStreetNameFromHashKey(street1)
+    local street2name = GetStreetNameFromHashKey(street2)
+    local street = street1name..street2name
+    local dispatchData = {
+        message = 'Suspicious Individual',
+        dispatchCode = '10-90',
+        description = 'Possible B&E in progress, ' .. street,
+        radius = 0,
+        sprite = 40,
+        color = 2,
+        scale = 1.0,
+        length = 3,
+        coords = coords -- Houserobbery door coords
+    }
+
+    exports['ps-dispatch']:CustomAlert(dispatchData)
+end
+```
+
+## Dispatch blips
+
+If the dispatch blips for houserobberies are not appearing at the correct location, it’s likely due to the use of player coords when sending a dispatch alert.
+
+To fix this issue, you should use the coords provided by the `RobberyAlert(coords)` function.
+
+{: .note }
+Alternatively, you can use the following export to get the correct house coords.
+
+`exports['sk-burglary']:GetCurrentDoorCoords()` -- If no door coords are available, player coords will be returned
+
+## Dispatch shooting blips
+
+If the dispatch blips for shooting or fighting are not appearing at the correct location, it’s likely due to the use of player coords when sending a dispatch alert.
+
+`exports['sk-burglary']:GetCurrentDoorCoords()` -- If no door coords are available, player coords will be returned
+
+To fix the `Shooting()` and `Fight()` functions in `ps-dispatch`, please navigate to the `alerts.lua` file in the `client` folder, you will need to make the following changes:
+
+Replace the entire `Shooting()` function (line 26) with this:
+
+```
+local function Shooting()
+    local coords = GetEntityCoords(cache.ped)
+    local houseCoords = exports['sk-burglary']:GetCurrentDoorCoords() -- Houserobbery door coords
+
+    local dispatchData = {
+        message = locale('shooting'),
+        codeName = 'shooting',
+        code = '10-11',
+        icon = 'fas fa-gun',
+        priority = 2,
+        coords = houseCoords or coords, -- Houserobbery door coords
+        street = GetStreetAndZone(coords),
+        gender = GetPlayerGender(),
+        weapon = GetWeaponName(),
+        jobs = { 'leo' }
+    }
+
+    TriggerServerEvent('ps-dispatch:server:notify', dispatchData)
+end
+```
+
+Same again, replace the entire `Fight()` function (line 117) with this:
+
+```
+local function Fight()
+    local coords = GetEntityCoords(cache.ped)
+    local houseCoords = exports['sk-burglary']:GetCurrentDoorCoords() -- Houserobbery door coords
+
+    local dispatchData = {
+        message = locale('melee'),
+        codeName = 'fight',
+        code = '10-10',
+        icon = 'fas fa-hand-fist',
+        priority = 2,
+        coords = houseCoords or coords, -- Houserobbery door coords
+        gender = GetPlayerGender(),
+        street = GetStreetAndZone(coords),
+        jobs = { 'leo' }
+    }
+
+    TriggerServerEvent('ps-dispatch:server:notify', dispatchData)
+end
+```
