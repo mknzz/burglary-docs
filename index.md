@@ -7,7 +7,7 @@ nav_order: 1
 3.1.8 Latest
 {: .label .label-purple }
 
-# Welcome to the sk-burglary docs page!
+# Welcome to the sk-burglary docs!
 
 Here, you will find all the information you need to install and configure qb-burglary effectively. We have everything you need to make the most of your experience. If you have any questions or need further assistance, please feel free to create a ticket in the discord using the #request-help channel.
 

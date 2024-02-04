@@ -178,7 +178,6 @@ To fix this issue, you should use the coords provided by the `RobberyAlert(coord
 
 {: .note }
 Alternatively, you can use the following export to get the correct house coords.
-
 `exports['sk-burglary']:GetCurrentDoorCoords()` -- If no door coords are available, player coords will be returned
 
 ## Dispatch shooting blips
