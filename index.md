@@ -9,7 +9,9 @@ nav_order: 1
 
 # Welcome to the sk-burglary docs!
 
-Here, you will find all the information you need to install and configure qb-burglary effectively. We have everything you need to make the most of your experience. If you have any questions or need further assistance, please feel free to create a ticket in the discord using the #request-help channel.
+Here, you will find all the information you need to install and configure qb-burglary effectively. We have everything you need to make the most of your experience. If you have any questions or need further assistance, please feel free to create a ticket in the [SKryptz Discord](https://discord.gg/) using the #request-help channel.
+
+If you are just getting started with sk-burglary 3.1, try the [Installing](https://mknzz.github.io/burglary-docs/install.html) docs.
 
 {: .note }
 If you are struggling to locate the escrowed version of the asset on keymaster, look for **qb-instance**.
