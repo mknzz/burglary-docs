@@ -15,12 +15,12 @@ For the following docs, we’re using the `tier3.lua` house config file as an ex
 
 ## Adding more houses to rob
 
-To add more Tier 3 (T3) houses to rob, navigate to the `houses` subfolder and open the `tier3.lua` file. Within the `Config.T3_Houses` table, copy and paste an existing house entry and adjust the values as needed.
+To add more T3 houses to rob, navigate to the `houses` subfolder and open the `tier3.lua` file. Within the `Config.T3_Houses` table, copy and paste an existing house entry and adjust the values as needed.
 
 ```
 -- Configuration for T3 houses
 Config.T3_Houses = {
-    [1] = { -- Make sure to increment this
+    [1] = { -- Increment this when adding another house
         -- The door coordinates for the house.
         door_coords = vector3(-36.56, -570.73, 38.83),
 
