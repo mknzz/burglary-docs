@@ -74,11 +74,11 @@ Config.T3_BreakInMinigame = {
 
 There are three minigame options available:
 
-> - minigame = **square**: This is the default QB skillcheck minigame.
+> - **square**: This is the default QB skillcheck minigame.
 >
-> - minigame = **lockpick**: This option allows you to use the default `qb-lockpick` minigame. Ensure that this resource is present and **enabled** in the `Config.RequiredResources` table in the `config.lua` file.
+> - **lockpick**: This option allows you to use the default `qb-lockpick` minigame. Ensure that this resource is present and **enabled** in the `Config.RequiredResources` table in the `config.lua` file.
 >
-> - minigame = **circle**: This option allows you to use either the `ps-ui` or `ox_lib` for the circle minigame. Ensure that one of these resources is present and **enabled** in the `Config.OptionalResources` table in the `config.lua` file.
+> - **circle**: This option allows you to use either the `ps-ui` or `ox_lib` for the circle minigame. Ensure that one of these resources is present and **enabled** in the `Config.OptionalResources` table in the `config.lua` file.
 
 ## Changing level requirements
 
