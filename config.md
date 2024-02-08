@@ -142,7 +142,7 @@ function SendMail(subject, sender, message, buttonEvent, tier)
 end
 ```
 
-## Dispatch alert
+## Dispatch alerts
 
 Please navigate to the `funcs.lua` file and find the `RobberyAlert(coords)` function. We're utilizing `ps-dispatch` to send alerts to the police. However, you're welcome to modify this to suit your needs. Additionally, you'll find snippets for other dispatch resources provided below.
 
@@ -194,7 +194,6 @@ Replace the entire `Shooting()` function (line 26) with this:
 local function Shooting()
     local coords = GetEntityCoords(cache.ped)
     local houseCoords = exports['sk-burglary']:GetCurrentDoorCoords() -- Houserobbery door coords
-
     local dispatchData = {
         message = locale('shooting'),
         codeName = 'shooting',
@@ -218,7 +217,6 @@ Same again, replace the entire `Fight()` function (line 117) with this:
 local function Fight()
     local coords = GetEntityCoords(cache.ped)
     local houseCoords = exports['sk-burglary']:GetCurrentDoorCoords() -- Houserobbery door coords
-
     local dispatchData = {
         message = locale('melee'),
         codeName = 'fight',
