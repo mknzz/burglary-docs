@@ -86,10 +86,10 @@ You can set the chance of receiving a T3 house by changing the `Config.T3_HouseC
 
 `Config.T3_HouseChance = 0.17 -- The value can range from 0.0 (no chance) to 1.0 (guaranteed chance).` 
 
-You can set the scaling factor that boosts the chance of receiving a T3 house. For this to take effect, the `Config.LevelScaling` variable in `config.lua` must be set to **true**.
+You can set the scaling factor that boosts the chance of receiving a T3 house.
 
-`Config.T3_LevelScaling = 0.027 -- (0.0 to 1.0)`
+`Config.T3_LevelScaling = 0.027 -- (0.0 to 1.0)` For this to take effect, the `Config.LevelScaling` variable in `config.lua` must be set to **true**.
 
-You can set the level required to request T3 house offers. The `Config.LevelScaling` variable in `config.lua` must be set to **false**. If you meet the required level, you will also be able to choose the tier of the house.
+You can set the level required to request T3 house offers. If you meet the required level, you will also be able to choose the tier of the house.
 
-`Config.T3_RequiredLevel = 7 -- (1 - Config.MaxLevel)`
+`Config.T3_RequiredLevel = 7 -- (1 - Config.MaxLevel)` For this to take effect, the `Config.LevelScaling` variable in `config.lua` must be set to **false**.

@@ -57,15 +57,15 @@ Config.OptionalResources = {
 {: .important }
 You need to add the boss_reputation table to your database. The SQL file for this table, boss_reputation.sql, can be found in the 3.1 folder of this repository.
 
-The leveling system can be enabled or disabled. This can be done by setting the Config.Levels variable:
+The leveling system can be enabled or disabled. This can be done by setting the Config.Levels variable.
 
 ```Config.Levels = true  -- Set to 'true' to enable, 'false' to disable```
 
-You can also customize the maximum level that can be achieved in the leveling system by adjusting the Config.MaxLevel variable:
+You can also customize the maximum level that can be achieved in the leveling system by adjusting the Config.MaxLevel variable.
 
 ```Config.MaxLevel = 10  -- Set to your desired maximum level```
 
-If level scaling is enabled, you can adjust the chance of getting a tier 2 or tier 3 house based on the current level. This can be done by setting the Config.LevelScaling variable:
+If level scaling is enabled, you can adjust the chance of getting a tier 2 or tier 3 house based on the current level. This can be done by setting the Config.LevelScaling variable.S
 
 ```Config.LevelScaling = true  -- Set to 'true' to enable, 'false' to disable```
 
@@ -103,7 +103,7 @@ The time is measured in minutes and the actual queue time is randomly determined
 
 Set the time limit for a player to complete a job. The time is measured in minutes.
 
-You can set the duration of the job by adjusting the Config.JobTime variable:
+You can set the duration of the job by adjusting the Config.JobTime variable.
 
 ```Config.JobTime = 12  -- Set to your desired job time duration (in minutes)```
 
@@ -184,7 +184,7 @@ Alternatively, you can use the following export to get the correct house coords.
 
 If the dispatch blips for shooting or fighting are not appearing at the correct location, it’s likely due to the use of player coords when sending a dispatch alert.
 
-To fix the `Shooting()` and `Fight()` functions in `ps-dispatch`, please navigate to the `alerts.lua` file in the `client` folder, you will need to make the following changes:
+To fix the `Shooting()` and `Fight()` functions in `ps-dispatch`, please navigate to the `alerts.lua` file in the `client` folder, you will need to make the following changes.
 
 Replace the entire `Shooting()` function (line 26) with this:
 
