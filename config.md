@@ -144,7 +144,7 @@ end
 
 ## Dispatch alerts
 
-Please navigate to the `funcs.lua` file and find the `RobberyAlert(coords)` function. We're utilizing `ps-dispatch` to send alerts to the police. However, you're welcome to modify this to suit your needs. Additionally, you'll find snippets for other dispatch resources provided below.
+Please navigate to the `funcs.lua` file and find the `RobberyAlert(coords)` function. We're utilizing `ps-dispatch` to send alerts to the police.
 
 ```
 -- Send a dispatch alert using ps-dispatch
@@ -183,8 +183,6 @@ Alternatively, you can use the following export to get the correct house coords.
 ## Dispatch shooting blips
 
 If the dispatch blips for shooting or fighting are not appearing at the correct location, it’s likely due to the use of player coords when sending a dispatch alert.
-
-`exports['sk-burglary']:GetCurrentDoorCoords()` -- If no door coords are available, player coords will be returned
 
 To fix the `Shooting()` and `Fight()` functions in `ps-dispatch`, please navigate to the `alerts.lua` file in the `client` folder, you will need to make the following changes:
 
