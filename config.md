@@ -42,15 +42,15 @@ Config.OptionalResources = {
 }
 ```
 
-> - **ox_target**: To use `ox_target` instead of `qb-target`, set the `enabled` variable to `true` for `ox_target` in the `Config.OptionalResources` table in `config.lua`. Example: `[1] = { name = "ox_target", enabled = true },`.
+> - **ox_target**: To use `ox_target` instead of `qb-target`, set the `enabled` variable to `true` for `ox_target` in the `Config.OptionalResources` table in `config.lua`. Example: `[1] = { name = "ox_target", enabled = true },`
 >
-> - **ox_lib**: To use `ox_lib`, set the `enabled` variable to `true` for `ox_lib` in the `Config.OptionalResources` table in `config.lua`. `qb-menu` must be disabled in `Config.RequiredResources` if you wish to use this context menu instead. Example: `[2] = { name = "ox_lib", enabled = true },`.
+> - **ox_lib**: To use `ox_lib`, set the `enabled` variable to `true` for `ox_lib` in the `Config.OptionalResources` table in `config.lua`. `qb-menu` must be disabled in `Config.RequiredResources` if you wish to use this context menu instead. Example: `[2] = { name = "ox_lib", enabled = true },`
 >
-> - **ox_inventory**: To use `ox_inventory`, set the `enabled` variable to `true` for `ox_inventory` in the `Config.OptionalResources` table in `config.lua`. No changes to `Config.RequiredResources` needed. Example: `[3] = { name = "ox_inventory", enabled = true },`.
+> - **ox_inventory**: To use `ox_inventory`, set the `enabled` variable to `true` for `ox_inventory` in the `Config.OptionalResources` table in `config.lua`. No changes to `Config.RequiredResources` needed. Example: `[3] = { name = "ox_inventory", enabled = true },`
 >
-> - **ps-ui**: To use `ps-ui`, set the `enabled` variable to `true` for `ps-ui` in the `Config.OptionalResources` table in `config.lua`. This can be utilized for the circle and scrambler minigame. For more information check out [Break In Minigame](https://mknzz.github.io/burglary-docs/tier_config.html#setting-up-break-in-minigame). Example: `[5] = { name = "ps-ui", enabled = true },`.
+> - **ps-ui**: To use `ps-ui`, set the `enabled` variable to `true` for `ps-ui` in the `Config.OptionalResources` table in `config.lua`. This can be utilized for the circle and scrambler minigame. For more information check out [Break In Minigame](https://mknzz.github.io/burglary-docs/tier_config.html#setting-up-break-in-minigame). Example: `[5] = { name = "ps-ui", enabled = true },`
 >
-> - **pd-safe**: To use `pd-safe`, set the `enabled` variable to `true` for `pd-safe` in the `Config.OptionalResources` table in `config.lua`. This can be utilized for the safescracker minigame. Example: `[6] = { name = "pd-safe", enabled = true },`.
+> - **pd-safe**: To use `pd-safe`, set the `enabled` variable to `true` for `pd-safe` in the `Config.OptionalResources` table in `config.lua`. This can be utilized for the safescracker minigame. Example: `[6] = { name = "pd-safe", enabled = true },`
 
 ## Setting up reputation
 
