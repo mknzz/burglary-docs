@@ -45,11 +45,11 @@ Config.OptionalResources = {
 To enable an optional resource, set the `enabled` variable to `true` for the corresponding resource in the `Config.OptionalResources` table. 
 
 Here are some examples:
-> - **ox_target**: This resource is an alternative to `qb-target`. To use it, set `enabled` to `true`: ```[1] = { name = "ox_target", enabled = true },``` Remember, you may need to disable `qb-target` in the `Config.RequiredResources` table.
+> - **ox_target**: Example: `[1] = { name = "ox_target", enabled = true },` You may need to disable `qb-target` in the `Config.RequiredResources` table.
 >
 > - **ox_lib**: Example: `[2] = { name = "ox_lib", enabled = true },` To utilize the context menu, `qb-menu` must be disabled in the `Config.RequiredResources` table.
 >
-> - **ox_inventory**: Example: `[3] = { name = "ox_inventory", enabled = true },` No changes to `Config.RequiredResources` needed.
+> - **ox_inventory**: Example: `[3] = { name = "ox_inventory", enabled = true },` No changes to the `Config.RequiredResources` table needed.
 >
 > - **ps-ui**: Example: `[5] = { name = "ps-ui", enabled = true },` This can be utilized for the circle and scrambler minigame. For more information check out [Break In Minigame](https://mknzz.github.io/burglary-docs/tier_config.html#setting-up-break-in-minigame).
 >
