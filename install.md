@@ -26,7 +26,7 @@ Please note that you won't be able to utilize your configurations from qb-burgla
 **Before following these steps make sure qb-burglary 2.0 has been removed from your resource folder.**
 
 {: .important }
-It is **strongly recommended** to use the latest recommended FiveM server artifact version, which is currently **7290**. However, this resource should be compatible with server versions starting from **3245** and onwards. For the game build, it is advised to use any version ranging from **2189** to **2802**. Please note that **OneSync** must be enabled.
+It is **strongly recommended** to use the latest recommended FiveM server artifact version, which is currently **7290**. However, this resource should be compatible with server versions starting from **3245** and onwards. For the game build, it is advised to use any version ranging from **2372** to **2802**. Please note that **OneSync** must be enabled.
 
 > 1. Extract the 3.1 resource and copy it into either the `qb` or `standalone` folder. This step is optional; you can place the resource anywhere, as long as it's started after the required resources.
 >

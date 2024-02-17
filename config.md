@@ -62,17 +62,29 @@ You need to add the boss_reputation table to your database. The SQL file for thi
 
 The leveling system can be enabled or disabled. This can be done by setting the Config.Levels variable.
 
-```Config.Levels = true  -- Set to 'true' to enable, 'false' to disable```
+```
+Config.Levels = true  -- Set to 'true' to enable, 'false' to disable
+```
 
 You can also customize the maximum level that can be achieved in the leveling system by adjusting the Config.MaxLevel variable.
 
-```Config.MaxLevel = 10  -- Set to your desired maximum level```
+```
+Config.MaxLevel = 10  -- Set to your desired maximum level
+```
 
 If level scaling is enabled, you can adjust the chance of getting a tier 2 or tier 3 house based on the current level. This can be done by setting the Config.LevelScaling variable.S
 
-```Config.LevelScaling = true  -- Set to 'true' to enable, 'false' to disable```
+```
+Config.LevelScaling = true  -- Set to 'true' to enable, 'false' to disable
+```
 
 If level scaling is disabled, you can select which tier house if you meet the required level.
+
+To add rep, you can utilize the `AddRep` function as follows:
+
+```
+AddRep({ 100, 200 }) -- This will add a random amount of rep between 100 and 200
+```
 
 ## Break in time
 
@@ -80,11 +92,15 @@ Set the time period for robbing houses. You will not be able to start the break-
 
 You can set the earliest time at which a break-in can occur by adjusting the Config.MinTime variable. This value is based on a 24-hour clock.
 
-```Config.MinTime = 5  -- Set to your desired minimum time (in hours)```
+```
+Config.MinTime = 5  -- Set to your desired minimum time (in hours)
+```
 
 You can set the latest time at which a break-in can occur by adjusting the Config.MaxTime variable. This value is also based on a 24-hour clock.
 
-```Config.MaxTime = 23  -- Set to your desired maximum time (in hours)```
+```
+Config.MaxTime = 23  -- Set to your desired maximum time (in hours)
+```
 
 In this example, the maximum time is set to 23, which means that if the time is 11PM or later, you can initiate a break-in.
 
@@ -100,7 +116,9 @@ end
 
 The time is measured in minutes and the actual queue time is randomly determined based on the minimum and maximum times you set.
 
-```Config.QueueTime = { 5, 25 }  -- Set to your desired min and max queue times```
+```
+Config.QueueTime = { 5, 25 }  -- Set to your desired min and max queue times
+```
 
 ## Job expire time
 
@@ -108,7 +126,9 @@ Set the time limit for a player to complete a job. The time is measured in minut
 
 You can set the duration of the job by adjusting the Config.JobTime variable.
 
-```Config.JobTime = 12  -- Set to your desired job time duration (in minutes)```
+```
+Config.JobTime = 12  -- Set to your desired job time duration (in minutes)
+```
 
 If a player leaves the house after the job time has expired, the job will automatically end.
 
