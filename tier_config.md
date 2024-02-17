@@ -8,7 +8,7 @@ nav_order: 4
 
 ## Finding the house config files
 
-There are separate configuration files for each tier of houses. These files, `tier1.lua`, `tier2.lua`, and `tier3.lua`, are located in the `houses` subfolder. Each configuration file contains specific settings for the houses in its respective tier, including **door coords**, **lock status**, **interior ID**, **active robbery status**, and **required items** for breaking in.
+There are separate configuration files for each tier of houses. These files, `tier1.lua`, `tier2.lua`, and `tier3.lua`, are located in the `houses` subfolder. Each configuration file contains specific settings for the houses in its respective tier.
 
 {: .note }
 For the following docs, we’re using the `tier3.lua` house config file as an example. Configuration is exactly the same for `tier1.lua` and `tier2.lua`.
