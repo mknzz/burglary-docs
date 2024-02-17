@@ -6,6 +6,8 @@ nav_order: 2
 
 # Installing sk-burglary 3.1
 
+Before following these steps make sure qb-burglary 2.0 has been removed from your resource folder.
+
 {: .note }
 Please note that you won't be able to utilize your configurations from qb-burglary 2.0. The content within the configuration files has been revamped for better readability and organization. Although there are some similarities within the configs, manual replacement will be necessary.
 
@@ -22,8 +24,6 @@ Please note that you won't be able to utilize your configurations from qb-burgla
 > - **qb-lockpick**
 
 ## Please read the installation guide below carefully.
-
-**Before following these steps make sure qb-burglary 2.0 has been removed from your resource folder.**
 
 {: .important }
 It is **strongly recommended** to use the latest recommended FiveM server artifact version, which is currently **7290**. However, this resource should be compatible with server versions starting from **3245** and onwards. For the game build, it is advised to use any version ranging from **2372** to **2802**. Please note that **OneSync** must be enabled.
