@@ -6,7 +6,7 @@ nav_order: 5
 
 # Troubleshooting sk-burglary 3.1
 
-Please make sure you have followed the [Installing](https://mknzz.github.io/burglary-docs/install.html) and [Main Config](https://mknzz.github.io/burglary-docs/config.html) docs.
+Please make sure you have followed [Installing](https://mknzz.github.io/burglary-docs/install.html) and [Main Config](https://mknzz.github.io/burglary-docs/config.html).
 
 ## The break in minigame is not working
 
