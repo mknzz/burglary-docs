@@ -9,7 +9,7 @@ nav_order: 1
 
 # Welcome to the sk-burglary Documentation!
 
-Here, you will find all the information you need to install and configure sk-burglary effectively. We have everything you need to make the most of your experience.
+Here, you will find all the information you need to install and configure both the escrow and open-source versions of sk-burglary effectively. We have everything you need to make the most of your experience.
 
 > - **Getting Started**: Follow our detailed [Installation Guide](https://mknzz.github.io/burglary-docs/install.html) to set up sk-burglary.
 >
