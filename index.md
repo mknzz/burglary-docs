@@ -13,7 +13,7 @@ Here, you will find all the information you need to install and configure sk-bur
 
 > - **Getting Started**: Follow our detailed [Installation Guide](https://mknzz.github.io/burglary-docs/install.html) to set up sk-burglary.
 >
-> - **Support**: Check out our [Troubleshooting](https://mknzz.github.io/burglary-docs/troubleshooting.html) page for common issues. For further assistance, create a ticket in the [SKryptz Discord](https://discord.com/invite/7adPGz93SU) using the **#request-help ** channel. Don’t hesitate to reach out! 
+> - **Support**: Check out our [Troubleshooting](https://mknzz.github.io/burglary-docs/troubleshooting.html) page for common issues. For further assistance, create a ticket in the [SKryptz Discord](https://discord.com/invite/7adPGz93SU) using the **#request-help** channel. Don’t hesitate to reach out! 
 
 {: .note }
 If you’re having trouble finding the escrowed version of the asset on Keymaster, look for **qb-instance**.
