@@ -44,21 +44,33 @@ Config.OptionalResources = {
 
 To enable an optional resource, set the `enabled` variable to `true` for the corresponding resource in the `Config.OptionalResources` table. 
 
-Here are some examples:
-> - **ox_target**: Example: `[1] = { name = "ox_target", enabled = true },` You may need to disable `qb-target` in the `Config.RequiredResources` table.
+**ox_target**:
+> 1. Enable `ox_target` in `Config.OptionalResources` like this: ```[1] = { name = "ox_target", enabled = true }```
 >
-> - **ox_lib**: Example: `[2] = { name = "ox_lib", enabled = true },` To utilize the context menu, `qb-menu` must be disabled in the `Config.RequiredResources` table.
+> 2. Disable `qb-target` in `Config.RequiredResources`
+
+**ox_lib**:
+> 1. Enable `ox_lib` in `Config.OptionalResources` like this: ```[2] = { name = "ox_lib", enabled = true }```
 >
-> - **ox_inventory**: Example: `[3] = { name = "ox_inventory", enabled = true },` No changes to the `Config.RequiredResources` table needed.
+> 2. Disable `qb-menu` in `Config.RequiredResources`
+
+**ox_inventory**:
+> 1. Enable `ox_inventory` in `Config.OptionalResources` like this: ```[3] = { name = "ox_inventory", enabled = true }```
+
+**ps-ui**:
+> 1. Enable `ps-ui` in `Config.OptionalResources` like this: ```[5] = { name = "ps-ui", enabled = true }```
 >
-> - **ps-ui**: Example: `[5] = { name = "ps-ui", enabled = true },` This can be utilized for the circle and scrambler minigame. For more information check out [Break In Minigame](https://mknzz.github.io/burglary-docs/tier_config.html#setting-up-break-in-minigame).
+> - **Usage**: `circle` and `scrambler` minigame. For more information, check out [Break In Minigame](https://mknzz.github.io/burglary-docs/tier_config.html#setting-up-break-in-minigame).
+
+**pd-safe**:
+> 1. Enable `pd-safe` in `Config.OptionalResources` like this: ```[6] = { name = "pd-safe", enabled = true }```
 >
-> - **pd-safe**: Example: `[6] = { name = "pd-safe", enabled = true },` This can be utilized for the safescracker minigame.
+> - **Usage**: `safescracker` minigame.
 
 ## Setting up reputation
 
 {: .important }
-You need to add the boss_reputation table to your database. The SQL file for this table, boss_reputation.sql, can be found in the 3.1 folder of this repository.
+You need to add the `boss_reputation` table to your database. The SQL file for this table, `boss_reputation.sql`, can be found in the 3.1 folder of this repository.
 
 The leveling system can be enabled or disabled. This can be done by setting the Config.Levels variable.
 
@@ -72,7 +84,7 @@ You can also customize the maximum level that can be achieved in the leveling sy
 Config.MaxLevel = 10  -- Set to your desired maximum level
 ```
 
-If level scaling is enabled, you can adjust the chance of getting a tier 2 or tier 3 house based on the current level. This can be done by setting the Config.LevelScaling variable.S
+If level scaling is enabled, you can adjust the chance of getting a tier 2 or tier 3 house based on the current level. This can be done by setting the Config.LevelScaling variable.
 
 ```
 Config.LevelScaling = true  -- Set to 'true' to enable, 'false' to disable
@@ -80,11 +92,14 @@ Config.LevelScaling = true  -- Set to 'true' to enable, 'false' to disable
 
 If level scaling is disabled, you can select which tier house if you meet the required level.
 
-To add rep, you can utilize the `AddRep` function as follows:
+To add rep, you can utilize the client-side `AddRep` function as follows:
 
 ```
 AddRep({ 100, 200 }) -- This will add a random amount of rep between 100 and 200
 ```
+
+{: .note }
+Rep is earned solely from daily tasks. In `main.lua`, search for `AddRep` to find commented lines showing previous ways to earn reputation, such as breaking in and hacking.
 
 ## Break in time
 
