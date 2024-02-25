@@ -45,25 +45,25 @@ Config.OptionalResources = {
 To enable an optional resource, set the `enabled` variable to `true` for the corresponding resource in the `Config.OptionalResources` table. 
 
 **ox_target**:
-> 1. Enable `ox_target` in `Config.OptionalResources` like this: ```[1] = { name = "ox_target", enabled = true }```
+> 1. Enable `ox_target` in `Config.OptionalResources` like this: ```[1] = {name = "ox_target", enabled = true}```
 >
 > 2. Disable `qb-target` in `Config.RequiredResources`
 
 **ox_lib**:
-> 1. Enable `ox_lib` in `Config.OptionalResources` like this: ```[2] = { name = "ox_lib", enabled = true }```
+> 1. Enable `ox_lib` in `Config.OptionalResources` like this: ```[2] = {name = "ox_lib", enabled = true}```
 >
 > 2. Disable `qb-menu` in `Config.RequiredResources`
 
 **ox_inventory**:
-> 1. Enable `ox_inventory` in `Config.OptionalResources` like this: ```[3] = { name = "ox_inventory", enabled = true }```
+> 1. Enable `ox_inventory` in `Config.OptionalResources` like this: ```[3] = {name = "ox_inventory", enabled = true}```
 
 **ps-ui**:
-> 1. Enable `ps-ui` in `Config.OptionalResources` like this: ```[5] = { name = "ps-ui", enabled = true }```
+> 1. Enable `ps-ui` in `Config.OptionalResources` like this: ```[5] = {name = "ps-ui", enabled = true}```
 >
 > - **Usage**: `circle` and `scrambler` minigame. For more information, check out [Break In Minigame](https://mknzz.github.io/burglary-docs/tier_config.html#setting-up-break-in-minigame).
 
 **pd-safe**:
-> 1. Enable `pd-safe` in `Config.OptionalResources` like this: ```[6] = { name = "pd-safe", enabled = true }```
+> 1. Enable `pd-safe` in `Config.OptionalResources` like this: ```[6] = {name = "pd-safe", enabled = true}```
 >
 > - **Usage**: `safescracker` minigame.
 
