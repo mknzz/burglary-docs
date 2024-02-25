@@ -92,14 +92,14 @@ Config.LevelScaling = true  -- Set to 'true' to enable, 'false' to disable
 
 If level scaling is disabled, you can select which tier house if you meet the required level.
 
+{: .note }
+Rep is earned solely from daily tasks. In `main.lua`, search for `AddRep` to find commented lines showing previous ways to earn rep, such as breaking in and hacking.
+
 To add rep, you can utilize the client-side `AddRep` function as follows:
 
 ```
 AddRep({ 100, 200 }) -- This will add a random amount of rep between 100 and 200
 ```
-
-{: .note }
-Rep is earned solely from daily tasks. In `main.lua`, search for `AddRep` to find commented lines showing previous ways to earn reputation, such as breaking in and hacking.
 
 ## Break in time
 
