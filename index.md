@@ -4,7 +4,7 @@ title: Home
 nav_order: 1
 ---
 
-3.1.8 Latest
+3.2 Latest
 {: .label .label-purple }
 
 # Welcome to the sk-burglary Documentation!
