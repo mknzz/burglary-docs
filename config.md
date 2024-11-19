@@ -4,7 +4,7 @@ title: Main Config
 nav_order: 3
 ---
 
-# Configuring sk-burglary 3.2
+# Configuring sk-burglary 3.3
 
 ## Finding the main config file
 
@@ -16,12 +16,14 @@ If you have renamed your QB resources, you will need to adjust the `Config.Defau
 
 ```
 Config.DefaultResources = {
-    -- The names here must correspond to the resource names on your server.
+    -- These names must match the resource names on your server.
     [1] = { name = "qb-core", enabled = true },
     [2] = { name = "qb-target", enabled = true },
     [3] = { name = "qb-menu", enabled = true },
     [4] = { name = "qb-skillbar", enabled = true },
     [5] = { name = "qb-lockpick", enabled = true },
+    [6] = { name = "qb-minigames", enabled = false },
+    [7] = { name = "qb-inventory", enabled = true },
 }
 ```
 
@@ -68,6 +70,15 @@ To enable an optional resource, set the `enabled` variable to `true` for the cor
 [6] = {name = "pd-safe", enabled = true}
 - Usage: `safescracker` minigame.
 
+## Setting up optional sound
+
+You can optionally enable xsound by setting Config.OptionalSound to true. Currently, it is used to play the outdoor alarm during the T4 heist.
+
+```
+Config.OptionalSound = true
+Config.OptionalSoundResource = "xsound"
+```
+
 ## Setting up reputation
 
 {: .important }
@@ -93,13 +104,65 @@ Config.LevelScaling = true  -- Set to 'true' to enable, 'false' to disable
 
 If level scaling is disabled, you can select which tier house if you meet the required level.
 
-{: .note }
-Rep is earned solely from daily tasks. In `main.lua`, search for `AddRep` to find commented lines showing previous ways to earn rep, such as breaking in and hacking.
-
 To add rep, you can utilize the client-side `AddRep` function as follows:
 
 ```
 AddRep({ 100, 200 }) -- This will add a random amount of rep between 100 and 200
+```
+
+## Reputation per level
+
+The amount of reputation required to reach each level can be configured using the `Config.RepPerLevel` table.
+
+```
+Config.RepPerLevel = {
+    [1] = 5000,
+    [2] = 10000,
+    [3] = 17500,
+    [4] = 27500,
+    [5] = 40000,
+    [6] = 55000,
+    [7] = 75000,
+    [8] = 100000,
+    [9] = 130000,
+    [10] = 170000
+}
+```
+
+This table defines the reputation needed to complete each level. For example, 5,000 reputation is required for level 1 and 10,000 for level 2.
+
+## Earning reputation
+
+Reputation is earned by completing specific actions, with rewards varying based on the action and its difficulty.
+
+The `AddRepForReason` function in `func.lua` is triggered by `main.lua` when players successfully perform actions like breaking in or bypassing security.
+
+{: .note }
+Reputation is also earned from daily tasks, which are loaded only when you check the list at the bossman.
+
+```
+-- Reputation rewards based on different actions and tiers
+local repRewards = {
+    ['breaking_in'] = { [1] = { rep = { 500, 1000 } }, [2] = { rep = { 1000, 1500 } }, [3] = { rep = { 1500, 2500 } }, [4] = { rep = { 2500, 3500 } } },
+    ['bypass_security'] = { [1] = { rep = { 800, 1200 } }, [2] = { rep = { 1200, 1800 } }, [3] = { rep = { 1800, 2800 } }, [4] = { rep = { 2800, 4000 } } },
+    ['complete_job'] = { [1] = { rep = { 1000, 1500 } }, [2] = { rep = { 1500, 2000 } }, [3] = { rep = { 2000, 3000 } }, [4] = { rep = { 3000, 4500 } } },
+    ['crack_safe'] = { [1] = { rep = { 700, 1200 } }, [2] = { rep = { 1200, 1800 } }, [3] = { rep = { 1800, 2500 } }, [4] = { rep = { 2500, 3500 } } },
+    ['loot_ped'] = { [1] = { rep = { 300, 700 } }, [2] = { rep = { 500, 1200 } }, [3] = { rep = { 800, 1800 } }, [4] = { rep = { 1500, 2500 } } },
+    ['crack_door'] = { [1] = { rep = { 600, 1100 } }, [2] = { rep = { 1000, 1600 } }, [3] = { rep = { 1500, 2200 } }, [4] = { rep = { 2000, 3000 } } },
+}
+
+-- Function to add reputation based on the reason and tier
+function AddRepForReason(reason, tier)
+    -- Check if the reason exists in the repRewards table
+    if repRewards[reason] then
+        -- Check if the tier exists for that reason
+        local tierData = repRewards[reason][tier]
+        if tierData then
+            local repToAdd = tierData.rep
+            AddRep(repToAdd)
+        end
+    end
+end
 ```
 
 ## Break in time
@@ -132,6 +195,9 @@ end
 
 The time is measured in minutes and the actual queue time is randomly determined based on the minimum and maximum times you set.
 
+{: .note }
+Moved queue time to tiered [houses] configurations in update 3.3, allowing different times per tier.
+
 ```
 Config.QueueTime = { 5, 25 }  -- Set to your desired min and max queue times
 ```
@@ -140,7 +206,8 @@ Config.QueueTime = { 5, 25 }  -- Set to your desired min and max queue times
 
 Set the time limit for a player to complete a job. The time is measured in minutes.
 
-You can set the duration of the job by adjusting the Config.JobTime variable.
+{: .note }
+Moved job time to tiered [houses] configurations in update 3.3, allowing different times per tier.
 
 ```
 Config.JobTime = 12  -- Set to your desired job time duration (in minutes)

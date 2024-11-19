@@ -4,7 +4,7 @@ title: Installing
 nav_order: 2
 ---
 
-# Installing sk-burglary 3.2
+# Installing sk-burglary 3.3
 
 {: .note }
 Please note that you won't be able to utilize your configurations from qb-burglary 2.0. The content within the configuration files has been revamped for better readability and organization. Although there are some similarities within the configs, manual replacement will be necessary.
