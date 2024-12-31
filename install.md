@@ -7,9 +7,9 @@ nav_order: 2
 # Installing sk-burglary 3.3
 
 {: .note }
-**QBox has been tested and is working, tested version [QBox txAdminRecipe](https://github.com/Qbox-project/txAdminRecipe/blob/main/qbox.yaml).**
+**QBox** has been tested and is working, tested version [QBox txAdminRecipe](https://github.com/Qbox-project/txAdminRecipe/blob/main/qbox.yaml).
 **Make sure ox_lib, ox_target, and ox_inventory `enabled = true` in the main `config.lua.`**
-**In your QBox server config `setr qbx:enableBridge "true"` # When true, enables the qb-core bridge for qbx_core.**
+In your **QBox** server config `setr qbx:enableBridge "true"` # When true, enables the qb-core bridge for qbx_core. This should be true by default.
 
 ## You need the following required resources by default.
 
