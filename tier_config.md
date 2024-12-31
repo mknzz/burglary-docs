@@ -84,7 +84,8 @@ There are three minigame options available:
 
 Here's how you can set up and configure a new minigame by adding it into the minigame handler.
 
-{: .note } This is all exactly the same process for each tier, also the same for changing other minigames `Config.T3_SecurityMinigame` and `Config.T3_SafeMinigame`. It's just these are in the tiered [interior] configs.
+{: .note }
+This is all exactly the same process for each tier, also the same for changing other minigames `Config.T3_SecurityMinigame` and `Config.T3_SafeMinigame`. It's just these are in the tiered [interior] configs.
 
 **1. Define the minigame in config:**
 

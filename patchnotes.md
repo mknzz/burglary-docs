@@ -8,7 +8,31 @@ nav_order: 6
 
 Latest patch notes for both escrow and full source versions.
 
-## **Update 3.3.1**
+## **Update 3.3.1 - Latest**
+
+### **General Fixes & Improvements**  
+- **ox_target Spam**: Attempted to fix the spam issue when trying to remove zones.  
+- **Debugging Disabled**: Disabled some debugging elements for cleaner logs.  
+- **Entity Spawn Logging**: Added print statements when attempting to spawn entities (`Config.PrintStuff`), helping identify missing models, typically due to different game versions.  
+- **Error Handling:**  
+  - Print error message if minigame/menu resources are missing.  
+  - Fixed `ox_target` security error.  
+  - Fixed `ox_lib` menu error when accessing the fence menu.  
+  - Fixed `sk-menu` nil error if not present on the server.
+- **Group Change Reverted**: Reverted a group change to resolve group display issues.  
+- **Guard Spawning**: Slowed down guard spawning to reduce MS load.  
+
+### **Documentation**  
+- **Minigame Setup**: Updated documentation for setting up or changing minigames [Visit Minigame Documentation](https://mknzz.github.io/burglary-docs/tier_config.html#setting-up-a-new-minigame).
+- **README.md**: Updated for clarity.
+- - **Ox Items List**: Updated `ox_items.lua`.
+
+### **Compatability**  
+- **QBox**: Fully tested and working with [QBox txAdminRecipe](https://github.com/Qbox-project/txAdminRecipe/blob/main/qbox.yaml).  
+  - Ensure `ox_lib`, `ox_target`, and `ox_inventory` are enabled (`true`) in `main config.lua`.  
+  - Set `qbx:enableBridge "true"` in your QBox server config to enable the QB-Core bridge for `qbx_core` (this should be true by default).
+
+---
 
 ## **Update 3.3** - Our biggest yet!
 
@@ -56,7 +80,6 @@ Latest patch notes for both escrow and full source versions.
 **Interior Overhaul**  
 - Over 250+ new objects added across interiors, including 35 unique items for more immersive environments.  
 
----
 
 ### **Miscellaneous Improvements and Fixes**  
 - Smoother animation and scene entry when interacting with a security keypad; the player ped now correctly moves towards and faces the security panel.  
