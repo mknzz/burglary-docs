@@ -84,4 +84,5 @@ Latest patch notes for both escrow and full source versions.
 - Updated inventory handling to use `ox_inventory's` addItem export directly, if available, instead of `qb-inventory`.
 - Resolved an issue where the "Sneaky Beaky" task could complete after canceling a job without performing any actions.
 - Fixed an issue where carry props were not being removed properly when using the updated `qb-inventory`.
+
 ---
