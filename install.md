@@ -4,7 +4,7 @@ title: Installing
 nav_order: 2
 ---
 
-# Installing sk-burglary 3.3
+# Installing sk-burglary 3.3.1
 
 {: .note }
 **QBox** has been tested and is working, tested version [QBox txAdminRecipe](https://github.com/Qbox-project/txAdminRecipe/blob/main/qbox.yaml).
