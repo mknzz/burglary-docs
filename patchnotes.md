@@ -25,7 +25,7 @@ Latest patch notes for both escrow and full source versions.
 ### **Documentation**  
 - **Minigame Setup**: Updated documentation for setting up or changing minigames [Visit Minigame Documentation](https://mknzz.github.io/burglary-docs/tier_config.html#setting-up-a-new-minigame).
 - **README.md**: Updated for clarity.
-- - **Ox Items List**: Updated `ox_items.lua`.
+- **Ox Items List**: Updated to work with 3.3 `ox_items.lua`.
 
 ### **Compatability**  
 - **QBox**: Fully tested and working with [QBox txAdminRecipe](https://github.com/Qbox-project/txAdminRecipe/blob/main/qbox.yaml).  
