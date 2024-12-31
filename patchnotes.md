@@ -44,7 +44,7 @@ Latest patch notes for both escrow and full source versions.
 
 **New Selling Mechanic**  
 - Added a fence menu for selling items.  
-  - Items are randomly selected at resource start.  
+  - Items are randomly selected from the `Config.BuyersList` table in `config.lua` at resource start.  
   - Prices vary based on supply, demand, and rarity.  
   - Items expire after a set time or when a specified quantity is sold.  
 - Optimized for *sk-menu* with auto-refreshing functionality.  
