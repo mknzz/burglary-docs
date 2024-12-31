@@ -80,7 +80,6 @@ Latest patch notes for both escrow and full source versions.
 **Interior Overhaul**  
 - Over 250+ new objects added across interiors, including 35 unique items for more immersive environments.  
 
-
 ### **Miscellaneous Improvements and Fixes**  
 - Smoother animation and scene entry when interacting with a security keypad; the player ped now correctly moves towards and faces the security panel.  
 - Enhanced processes for selling items and receiving marked money.  
