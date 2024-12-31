@@ -7,7 +7,8 @@ nav_order: 2
 # Installing sk-burglary 3.3
 
 {: .note }
-Please note that you won't be able to utilize your configurations from qb-burglary 2.0. The content within the configuration files has been revamped for better readability and organization. Although there are some similarities within the configs, manual replacement will be necessary.
+**QBox has been tested and is working, tested version [QBox txAdminRecipe](https://github.com/Qbox-project/txAdminRecipe/blob/main/qbox.yaml).**
+**Make sure ox_lib, ox_target, and ox_inventory `enabled = true` in the main `config.lua.`**
 
 ## You need the following required resources by default.
 
@@ -23,20 +24,20 @@ Please note that you won't be able to utilize your configurations from qb-burgla
 
 ## Please read the installation guide below carefully.
 
+{: .important }
+It is **strongly recommended** to use the latest recommended FiveM server artifact version, which is currently **7290**. However, this resource should be compatible with server versions starting from **3245** and onwards. For the game build, it is advised to use version **3095**. Please note that **OneSync** must be enabled.
+
 Before following these steps make sure qb-burglary 2.0 has been removed from your resource folder.
 
 > 1. Extract the 3.1 resource and copy it into either the `qb` or `standalone` folder. This step is optional; you can place the resource anywhere, as long as it's started after the required resources.
 >
 > 2. Configuration might be required in the `config.lua` file. Check the `Config.DefaultResources` table and ensure that the resource names match those on your server.
 >
-> 3. Add the items from `items.md` to your item list.
+> 3. Add the items from `items_ox.md` or `items_qb.md` to your item list depending on your inventory resource.
 >
 > 4. Add the item images from the `img` subfolder to your inventory images folder.
 >
 > 5. For a more detailed guide on configuration, please visit the [Main Config](https://mknzz.github.io/burglary-docs/config.html#configuring-sk-burglary-31) section of our docs.
-
-{: .important }
-It is **strongly recommended** to use the latest recommended FiveM server artifact version, which is currently **7290**. However, this resource should be compatible with server versions starting from **3245** and onwards. For the game build, it is advised to use any version ranging from **2372** to **2802**. Please note that **OneSync** must be enabled.
 
 ## You can also use the following optional resources for enhanced functionality.
 

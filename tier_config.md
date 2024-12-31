@@ -80,6 +80,98 @@ There are three minigame options available:
 >
 > - **circle**: This option allows you to use either the `ps-ui` or `ox_lib` for the circle minigame. Ensure that one of these resources is present and **enabled** in the `Config.OptionalResources` table in the `config.lua` file.
 
+## Setting up a new minigame
+
+Here's how you can set up and configure a new minigame by adding it into the minigame handler.
+
+{: .note } This is all exactly the same process for each tier, also the same for changing other minigames `Config.T3_SecurityMinigame` and `Config.T3_SafeMinigame`. It's just these are in the tiered [interior] configs.
+
+**1. Define the minigame in config:**
+
+Add a new entry in `Config.T3_BreakInMinigame` for your new minigame in the [houses] `tier3.lua` file.
+
+```
+Config.T3_BreakInMinigame = {
+    -- Set your new minigame for T3 break in here "new_minigame"
+    minigame = "new_minigame", -- Minigame options: "circle", "square", "lockpick"
+
+    -- Settings for your new minigame "new_minigame"
+    new_minigame = {
+        parameter1 = value1, -- Could be speed or time etc
+        parameter2 = value2,
+        -- Add more parameters as needed
+    },
+
+    -- Settings for optional circle minigames.
+    circle = {
+        amount = 5,
+        speed = 6,
+        custom = {
+            size = 27,
+            multi = 1.5
+        }
+    },
+
+    -- Settings for default square minigame.
+    square = {
+        time = 875,
+        amount = 5,
+        difficulty = "hard"
+    },
+}
+```
+
+**2. Minigame handler integration:**
+
+The minigame handler functions are located in the `client/funcs.lua` file. Here you'll modify or add to the `StartAMinigame` function to include your new minigame.
+
+```
+function StartAMinigame(minigameData, anim, successCallback)
+    if anim then
+        LoadAnimDict(anim[1])
+        TaskPlayAnim(PlayerPedId(), anim[1], anim[2], 1.0, 1.0, -1, 63, 0.0, false, false, false)
+    end
+
+    local minigameHandlers = {
+        lockpick = DefaultLockpick,
+        square = DefaultSkillbar,
+        mhacking = DefaultMobileHack,
+        scrambler = Scrambler,
+        circle = CircleSkillbar,
+        safecracker = SafeCracker,
+
+        -- Add your new handler here "new_minigame"
+        new_minigame = NewMinigameHandler,
+    }
+
+    local minigameType = minigameData.minigame
+    local minigameHandler = minigameHandlers[minigameType]
+
+    if minigameHandler then
+        if minigameType == 'lockpick' then
+            minigameHandler(successCallback)
+        else
+            minigameHandler(minigameData, successCallback)
+        end
+    end
+end
+```
+
+**3. Adding the new minigame function:**
+
+In `client/funcs.lua`, define `NewMinigameHandler` to manage the logic of your new minigame.
+
+```
+function NewMinigameHandler(minigameData, successCallback)
+    -- Your minigame settings from the config
+    local parameter1 = minigameData.new_minigame.parameter1
+    local parameter2 = minigameData.new_minigame.parameter2
+    -- Example: Use an external library or resource to run the minigame
+    local success = exports['new_minigame_resource']:Start(parameter1, parameter2)
+    successCallback(success)
+end
+```
+
 ## Changing level requirements
 
 You can set the chance of receiving a T3 house by changing the `Config.T3_HouseChance` variable.
