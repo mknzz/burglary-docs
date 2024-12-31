@@ -22,13 +22,13 @@ nav_order: 2
 > - **qb-skillbar**
 >
 > - **qb-lockpick**
+>
+> - **qb-minigames**
 
 ## Please read the installation guide below carefully.
 
 {: .important }
 It is **strongly recommended** to use the latest recommended FiveM server artifact version, which is currently **7290**. However, this resource should be compatible with server versions starting from **3245** and onwards. For the game build, it is advised to use version **3095**. Please note that **OneSync** must be enabled.
-
-Before following these steps make sure qb-burglary 2.0 has been removed from your resource folder.
 
 > 1. Extract the 3.1 resource and copy it into either the `qb` or `standalone` folder. This step is optional; you can place the resource anywhere, as long as it's started after the required resources.
 >
