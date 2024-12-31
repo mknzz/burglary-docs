@@ -4,11 +4,11 @@ title: Patch Notes
 nav_order: 6
 ---
 
-# sk-burglary Patch Notes
+# Patch Notes for sk-burglary
 
 Latest patch notes for both escrow and full source versions.
 
-## **Update 3.3**
+## **Update 3.3.1**
 
 ## **Update 3.3** - Our biggest yet!
 
