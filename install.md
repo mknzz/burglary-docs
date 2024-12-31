@@ -9,6 +9,7 @@ nav_order: 2
 {: .note }
 **QBox has been tested and is working, tested version [QBox txAdminRecipe](https://github.com/Qbox-project/txAdminRecipe/blob/main/qbox.yaml).**
 **Make sure ox_lib, ox_target, and ox_inventory `enabled = true` in the main `config.lua.`**
+**In your QBox server config `setr qbx:enableBridge "true"` # When true, enables the qb-core bridge for qbx_core.**
 
 ## You need the following required resources by default.
 
@@ -52,3 +53,6 @@ Before following these steps make sure qb-burglary 2.0 has been removed from you
 > - **ps-ui** - [Github](https://github.com/Project-Sloth/ps-ui)
 >
 > - **pd-safe** - [Github](https://github.com/VHall1/pd-safe)
+>
+> - **sk-menu** - [Github](https://github.com/mknzz/sk-menu)
+>
