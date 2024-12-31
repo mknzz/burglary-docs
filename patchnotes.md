@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Troubleshooting
+title: Patch Notes
 nav_order: 6
 ---
 
