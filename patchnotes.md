@@ -8,7 +8,27 @@ nav_order: 6
 
 Latest patch notes for both escrow and full source versions.
 
-## **Update 3.3.1 - Latest**
+## **Update 3.3.3 - Latest**
+
+### **General Fixes & Improvements**  
+- **Blacksreen Loop**: Fixed blackscreen loop when entering an interior caused by missing object or ped models. Added `IsModelValid()` and `IsModelInCdimage()` checks to prevent blackscreen loops by skipping invalid models and printing a message with the model name if `Config.PrintStuff` is enabled.
+- **ox_target Security Zone**: Adjusted ox_target box zone size/pos for security keypad props.
+- **ox_target T1 Exit Zone**: Fixed ox_target exit interior box zone for the T1 motel, broken in update 3.3.2 due to adjustments to `ipl_coords`.
+
+---
+
+## **Update 3.3.2**
+
+### **General Fixes & Improvements**  
+- **sk-menu group/member menu**: Fixed an issue where creating or joining a group using sk-menu would not display the group in the menu when ox_lib was enabled. This was caused by group data being set for the ox_lib menu instead of sk-menu, as the addGroupToMenu and addMemberToMenu functions prioritized ox_lib in `client\menu.lua`.
+- **Create main interior door**: Added an additional main door for the motel T1 interior and both T3 interiors using the `extra_props` table in the interior config. This ensures there's no escape from the interior when the default interior door object is missing or fails to be retrieved, moved, or frozen. No more T1 motel void!
+- **Adjusted Config.BuyersList**: Since ox_inventory does not include the `markedbills` item by default, which the `dirty_cash = true` setting in the `Config.BuyersList` relies on, dirty_cash has been set to false by default. If you want to use this feature, simply update the `dirty_item_name` to match the name of your dirty cash item in your ox_inventory item list and set dirty_cash to true.
+- Added Ammo Crate and  as useable item in `server\items.lua`
+- Removed Christmas trees from T2/T3
+
+---
+
+## **Update 3.3.1**
 
 ### **General Fixes & Improvements**  
 - **ox_target Spam**: Attempted to fix the spam issue when trying to remove zones.  

@@ -1,6 +1,6 @@
 ## Documentation
 
-You can find the official documentation for our FiveM houserobbery script (Version 3.3.1) on the github.io page.
+You can find the official documentation for our FiveM houserobbery script (Version 3.3.3) on the github.io page.
 
 https://mknzz.github.io/burglary-docs/
 
