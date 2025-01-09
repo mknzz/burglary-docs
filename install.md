@@ -28,7 +28,7 @@ In your **QBox** server config `setr qbx:enableBridge "true"` # When true, enabl
 ## Please read the installation guide below carefully.
 
 {: .important }
-It is **strongly recommended** to use the latest recommended FiveM server artifact version, which is currently **7290**. However, this resource should be compatible with server versions starting from **3245** and onwards. For the game build, it is advised to use version **3095**. Please note that **OneSync** must be enabled.
+It is **strongly recommended** to use the latest recommended FiveM server artifact version, which is currently **7290**. However, this resource should be compatible with server versions starting from **3245** and onwards. For the game build, it is advised to use version **2082** or newer. Please note that **OneSync** must be enabled.
 
 > 1. Extract the 3.1 resource and copy it into either the `qb` or `standalone` folder. This step is optional; you can place the resource anywhere, as long as it's started after the required resources.
 >
@@ -56,3 +56,6 @@ It is **strongly recommended** to use the latest recommended FiveM server artifa
 >
 > - **sk-menu** - [Github](https://github.com/mknzz/sk-menu)
 >
+> - **lb-phone**
+>
+> - **qs-smartphone** - `client/funcs.lua`, replace all instances of `qb-phone` with `qs-smartphone`.
