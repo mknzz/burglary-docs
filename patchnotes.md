@@ -8,7 +8,39 @@ nav_order: 6
 
 Latest patch notes for both escrow and full source versions.
 
-## **Update 3.3.3 - Latest**
+## **Update 3.3.4 - Latest**  
+
+### **General Fixes & Improvements**  
+- **Auto Resource Detection**: Added `Config.AutoResourceSetup` to automatically detect and enable required resources. Minigames are now detected based on availability.  
+- **Exterior Entities Handling**: Introduced the `exteriorEntities` table to manage all exterior objects and peds, replacing `interiorEntities` and `guardEntities` for outside elements. Also refactored T4 security panel and guard handling.  
+- **Guard Behavior Fixes**:  
+  - Guards will no longer use vehicles to reach a target.  
+  - Fixed guards not returning to patrolling or standing when they lose their target.  
+  - Temporarily replaced knife/melee guards with shotguns.  
+
+### **Carry Object Improvements**  
+- Moved the carry objects table from `carry.lua` to `config.lua`.  
+- Fixed an issue where props would not consistently appear when using `ox_inventory`, only showing when the carry prop was used.  
+- A new thread now checks the player's inventory for the carry item when using `ox_inventory`.  
+
+### **Sell Menu Fixes & Buyer Categories**  
+- Fixed the sell menu not refreshing when all items expired or ran out.  
+- Split buyers into **Tech, Collectibles, and Misc** categories, each with a unique ped. A random ped is chosen from each category on `onServerResourceStart`.  
+- Added all burglary items to `Config.BuyersList` and included additional comments for configuring the buyer system. Adjust rarity, price, and other settings as needed.  
+
+### **Targeting & Interaction Fixes**  
+- **T4 Security Keypad Targeting**: Fixed an issue where targeting the T4 door security keypad with `ox_inventory` was broken due to incorrect item metadata handling.  
+
+### **Miscellaneous Updates**  
+- **Sell Menu Item Images**: Updated the `sk-menu` repository to include images for all burglary items in the sell menu.  
+- **Required Cop Count Handling**: Now defined in **tiered house configs** when `Config.LevelScaling = false`.  
+- **Alarm Sound Update**:  
+  - Updated the link for the alarm sound MP3.  
+  - Planning to replace it with YT and add a **fallback option** (likely a GTA soundtrack) in the next update.  
+- **Bug Fixes & Typo Corrections**:  
+  - Fixed a typo in the item image for `'figure2'` in both item.lua lists.  
+
+## **Update 3.3.3**
 
 ### **General Fixes & Improvements**  
 - **Blacksreen Loop**: Fixed blackscreen loop when entering an interior caused by missing object or ped models. Added `IsModelValid()` and `IsModelInCdimage()` checks to prevent blackscreen loops by skipping invalid models and printing a message with the model name if `Config.PrintStuff` is enabled.
