@@ -12,7 +12,7 @@ Latest patch notes for both escrow and full source versions.
 
 ### **General Fixes & Improvements**  
 - **Auto Resource Detection**: Added `Config.AutoResourceSetup` to automatically detect and enable required resources. Minigames are now detected based on availability.  
-- **Exterior Entities Handling**: Introduced the `exteriorEntities` table to manage all exterior objects and peds, replacing `interiorEntities` and `guardEntities` for outside elements. Also refactored T4 security panel and guard handling.  
+- **Exterior Entities Handling**: Introduced the `exteriorEntities` table to manage all exterior objects and peds, replacing `interiorEntities` and `guardEntities` for outside entities. Also refactored T4 security panel and guard handling.  
 - **Guard Behavior Fixes**:  
   - Guards will no longer use vehicles to reach a target.  
   - Fixed guards not returning to patrolling or standing when they lose their target.  
