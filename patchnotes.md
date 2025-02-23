@@ -8,7 +8,50 @@ nav_order: 6
 
 Latest patch notes for both escrow and full source versions.
 
-## **Update 3.3.4 - Latest**  
+**Update 3.3.5 - Latest**
+
+**Item Name Compatibility**  
+- When `ox_inventory` is enabled, the script now auto-converts item names during prop pickups.  
+- Added a mapping table to `config.lua` → `Config.ReplaceQbItemNames` to handle item name translations.  
+- Added all items used in the T4 interior – you will now receive the correct item when using `ox_inventory`.  
+
+**Job Menu Improvements**  
+- Added an option to `config.lua` → `Config.ShowAllJobTiers` to enable or disable showing all job tiers in the job menu.  
+- Job menu items are now disabled if the required level is not met and the blank menu item has been fixed. If Config.ShowAllJobTiers is disabled it will just add the unlocked tier to the job menu when the required level is met.   
+
+**Security Minigames**
+- Added **Var** and **Thermite** minigames from `ps-ui`. These can now be used in `SecurityMinigame` tables for both interior and exterior security panels.  
+- Fixed an issue where the **security panel phone hacking scene** would replay and cause the player to get stuck in the hack loop after certain minigames (`circle`/`mhacking`).  
+
+**General Fixes & Adjustments**  
+- Prevented `ox_target` warnings for setup peds and prop pickups.  
+- **Coffee in T3 now actually looks like coffee ☕**  
+- Adjusted two models in T3 interiors that were previously inaccessible with `ox_target`.  
+- Rearranged T3 **safe contents** to improve targeting and interaction.  
+- **Replaced the cash stack** inside safes with a better model for `ox_target` functionality.  
+- **Removed firearms from T2.**
+- **T1 Motel:** Actually fixed the **interior exit** for `ox_target`, correctly adjusting `ipl_coords`.  
+- **T3 High-End Interior:** Adjusted **extra main door coordinates** to prevent door glitching.    
+
+**Interior & Loot Changes**  
+- **T4 Interior:**  
+  - Replaced **4 weapon models** with `ox_target` compatible ones.  
+  - Added **7 new lootable items**.  
+  - Added **2 brand-new items** to loot.  
+- **T3 Interiors:**  
+  - Replaced **4 weapon models** with `ox_target` compatible ones.  
+  - Added **1 new weapon** to loot.  
+- **Seasonal Cleanup:**  
+  - Removed **Xmas tree** from T3 Franklin's interior.  
+  - Removed **milk & cookies** from the T4 interior.  
+
+**Group Password & Menu**  
+- You can now **create/join groups with a password** (only using `sk-menu`).  
+- **Revamped `sk-menu` UI** – added an option to include a textbox in menu items.
+
+---
+
+## **Update 3.3.4**
 
 ### **General Fixes & Improvements**  
 - **Auto Resource Detection**: Added `Config.AutoResourceSetup` to automatically detect and enable required resources. Minigames are now detected based on availability.  
@@ -38,7 +81,9 @@ Latest patch notes for both escrow and full source versions.
   - Updated the link for the alarm sound MP3.  
   - Planning to replace it with YT and add a **fallback option** (likely a GTA soundtrack) in the next update.  
 - **Bug Fixes & Typo Corrections**:  
-  - Fixed a typo in the item image for `'figure2'` in both item.lua lists.  
+  - Fixed a typo in the item image for `'figure2'` in both item.lua lists.
+
+---
 
 ## **Update 3.3.3**
 
