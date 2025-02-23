@@ -8,7 +8,7 @@ nav_order: 6
 
 Latest patch notes for both escrow and full source versions.
 
-**Update 3.3.5 - Latest**
+## Update 3.3.5 - Latest
 
 **Item Name Compatibility**  
 - When `ox_inventory` is enabled, the script now auto-converts item names during prop pickups.  
