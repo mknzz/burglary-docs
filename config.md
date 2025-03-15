@@ -72,7 +72,7 @@ To enable an optional resource, set the `enabled` variable to `true` for the cor
 [6] = {name = "pd-safe", enabled = true}
 - Usage: `safescracker` minigame.
 
-## Optional Easy Resource Setup
+## Optional easy resource setup
 
 If you'd prefer not to manually configure enabled resources in both tables or set up minigames, you can simply enable `Config.AutoResourceSetup` in the main `config.lua`. 
 
