@@ -6,6 +6,9 @@ nav_order: 2
 
 # Installing sk-burglary 3.3.5
 
+{: .important }
+It is **strongly recommended** to use the latest recommended FiveM server artifact version, which is currently **7290**. However, this resource should be compatible with server versions starting from **3245** and onwards. For the game build, it is advised to use version **3095** or newer. Please note that **OneSync** must be enabled.
+
 ## You need the following required resources by default.
 
 > - **qb-core**
@@ -21,9 +24,6 @@ nav_order: 2
 > - **qb-minigames**
 
 ## Please read the installation guide below carefully.
-
-{: .important }
-It is **strongly recommended** to use the latest recommended FiveM server artifact version, which is currently **7290**. However, this resource should be compatible with server versions starting from **3245** and onwards. For the game build, it is advised to use version **3095** or newer. Please note that **OneSync** must be enabled.
 
 > 1. Extract the 3.3 resource and copy it into either the `qb` or `standalone` folder. This step is optional; you can place the resource anywhere, as long as it's started after the required resources.
 >
@@ -63,7 +63,7 @@ It is **strongly recommended** to use the latest recommended FiveM server artifa
 1. **Disable qb-target, qb-inventory, and qb-menu** by setting `enabled = false` in the main `config.lua`.
 2. **Enable ox_lib, ox_target, and ox_inventory** by setting `enabled = true` in the main `config.lua`.
 
+Alternatively, you can use the [Auto Setup option](https://mknzz.github.io/burglary-docs/config.html#optional-easy-resource-setup).
+
 ### For your **QBox** server config:
 Make sure to set: `setr qbx:enableBridge "true"` - This enables the qb-core bridge for `qbx_core`. It should be **true** by default.
-
-Alternatively, you can use the [Auto Setup option](https://mknzz.github.io/burglary-docs/config.html#configuring-sk-burglary-31).

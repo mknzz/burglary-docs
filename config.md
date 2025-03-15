@@ -74,9 +74,9 @@ To enable an optional resource, set the `enabled` variable to `true` for the cor
 
 ## Optional Easy Resource Setup
 
-If you'd prefer not to manually configure enabled resources in both tables or set up a running minigame, you can simply enable `Config.AutoResourceSetup` in the main `config.lua`. 
+If you'd prefer not to manually configure enabled resources in both tables or set up minigames, you can simply enable `Config.AutoResourceSetup` in the main `config.lua`. 
 
-This option will automatically detect and enable the required resources if they are running. Additionally, minigames will be automatically detected based on their availability.
+This option will automatically detect and enable the required/optional resources if they are running. Additionally, minigames will be automatically detected based on their availability.
 
 ## Setting up optional sound
 
