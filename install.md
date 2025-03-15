@@ -6,11 +6,6 @@ nav_order: 2
 
 # Installing sk-burglary 3.3.5
 
-{: .note }
-**QBox** has been tested and is working, tested version [QBox txAdminRecipe](https://github.com/Qbox-project/txAdminRecipe/blob/main/qbox.yaml).
-**Make sure ox_lib, ox_target, and ox_inventory `enabled = true` in the main `config.lua.`**
-In your **QBox** server config `setr qbx:enableBridge "true"` # When true, enables the qb-core bridge for qbx_core. This should be true by default.
-
 ## You need the following required resources by default.
 
 > - **qb-core**
@@ -30,7 +25,7 @@ In your **QBox** server config `setr qbx:enableBridge "true"` # When true, enabl
 {: .important }
 It is **strongly recommended** to use the latest recommended FiveM server artifact version, which is currently **7290**. However, this resource should be compatible with server versions starting from **3245** and onwards. For the game build, it is advised to use version **3095** or newer. Please note that **OneSync** must be enabled.
 
-> 1. Extract the 3.1 resource and copy it into either the `qb` or `standalone` folder. This step is optional; you can place the resource anywhere, as long as it's started after the required resources.
+> 1. Extract the 3.3 resource and copy it into either the `qb` or `standalone` folder. This step is optional; you can place the resource anywhere, as long as it's started after the required resources.
 >
 > 2. Configuration might be required in the `config.lua` file. Check the `Config.DefaultResources` table and ensure that the resource names match those on your server.
 >
@@ -59,3 +54,16 @@ It is **strongly recommended** to use the latest recommended FiveM server artifa
 > - **lb-phone**
 >
 > - **qs-smartphone** - `client/funcs.lua`, replace all instances of `qb-phone` with `qs-smartphone`.
+
+## Using with QBox
+
+**QBox** has been tested and is working. You can find the tested version here: [QBox txAdminRecipe](https://github.com/Qbox-project/txAdminRecipe/blob/main/qbox.yaml).
+
+### Configuration Steps:
+1. **Disable qb-target, qb-inventory, and qb-menu** by setting `enabled = false` in the main `config.lua`.
+2. **Enable ox_lib, ox_target, and ox_inventory** by setting `enabled = true` in the main `config.lua`.
+
+### For your **QBox** server config:
+Make sure to set: `setr qbx:enableBridge "true"` - This enables the qb-core bridge for `qbx_core`. It should be **true** by default.
+
+Alternatively, you can use the [Auto Setup option](https://mknzz.github.io/burglary-docs/config.html#configuring-sk-burglary-31).

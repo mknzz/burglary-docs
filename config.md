@@ -72,6 +72,12 @@ To enable an optional resource, set the `enabled` variable to `true` for the cor
 [6] = {name = "pd-safe", enabled = true}
 - Usage: `safescracker` minigame.
 
+## Optional Easy Resource Setup
+
+If you'd prefer not to manually configure enabled resources in both tables or set up a running minigame, you can simply enable `Config.AutoResourceSetup` in the main `config.lua`. 
+
+This option will automatically detect and enable the required resources if they are running. Additionally, minigames will be automatically detected based on their availability.
+
 ## Setting up optional sound
 
 You can optionally enable xsound by setting `Config.OptionalSound` to true. Currently, it is used to play the outdoor alarm during the T4 heist.
