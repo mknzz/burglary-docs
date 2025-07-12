@@ -4,7 +4,7 @@ title: Installing
 nav_order: 2
 ---
 
-# Installing sk-burglary 3.3.5
+# Installing sk-burglary 3.3.6
 
 {: .important }
 It is **strongly recommended** to use the latest recommended FiveM server artifact version, which is currently **7290**. However, this resource should be compatible with server versions starting from **3245** and onwards. For the game build, it is advised to use version **3095** or newer. Please note that **OneSync** must be enabled.

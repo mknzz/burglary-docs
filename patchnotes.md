@@ -8,7 +8,80 @@ nav_order: 6
 
 Latest patch notes for both escrow and full source versions.
 
-## Update 3.3.5 - Latest
+# Update 3.3.6 - Latest
+
+**New Spawn & Ped Options**
+- `sellman` peds can now be created with **passive bodyguards** via the main config.  
+- **Spawn props** alongside `sellman` and `bossman` peds via the main config.  
+- The Tier 4 setup ped is now a **traitor guard** - bribeable or fightable (only if you refuse to pay extra) to access loot/info. Configuration: `houses/tier4.lua → Config.T4_JobPrep`.
+
+**Inventory & UI Support**
+- **Added support for `qs-inventory`.**  
+- **Added support for `yphone`.**  
+- Players **cannot sprint while carrying props**.  
+- Weight check using `CanAddItem` for all search/pickup/looting actions is now actually handled and players are notified if their inventory is full.
+
+**Loot & Boss Mechanics**
+- The **heist axe** has been moved from the setup ped and is now attached to the boss guard's back - **lootable by any group member** when dead.  
+- **Boss guard now carries an LMG.**  
+- **All guards** are now lootable by any group member. (Fully supported - configure in `houses/tier4.lua → Config.T4_Houses → security_guards`.)  
+- Configurable **tool removal chance** during break-ins and door cracking via `Config.ChanceOfItemRemoval` in the main config.  
+- **Tier-specific required items** are now configurable per house in `[houses]`, and can be toggled via `Config.RequireRequestItem` / `Config.RemoveRequestedItem`.
+
+**Pricing & Economic Tweaks**
+- Improved **`sellman` price variation** - thresholds and multipliers added in the main config `Config.SupplyAndDemand`.  
+- Electric box logic now **selects a random available box** to disable lockdowns, rather than matching.  
+- **CCTV is now usable at any tier**, and alerts police at Tiers 1–3.
+
+**Security & Alarm**
+- Interior security keypads are now **always targetable**.  
+- **New indoor burglar alarm** using `xsound` for Tiers 2 & 3 (`Config.OptionalSound`) - fallback to the classic beep.  
+- Updated **exterior alarm sound URL** to a permanent `xsound` link https://www.myinstants.com/media/sounds/securityalarm.mp3.  
+- Fixed issues with **lockdown state** and **boss guard reset** behavior.
+
+**Targeting & Interaction**
+- Switched to `AddTargetEntity` for networked peds - fixed `qb-target` errors when looting dead peds.  
+- Added `EntityTarget` and `RemoveEntityTarget` functions in `funcs.lua` to support clean removal for both `qb-target` and `ox_target`.  
+- **House blips now include tier prefixes** (e.g., "T1 Job") with updated colors.  
+- **Adjusted Tier 2 TV interaction zone** for better `ox_target` accessibility.  
+- Improved **door enter/exit logic** - prevents duplicate zones and warning spam.  
+- Ensured an animation is passed to `ox_lib` progress bars to **prevent moving while interacting** (searching, looting, etc.).
+- Added a group wide busy state for search/pickup locations to prevent multiple members from interacting with the same target simultaneously.
+
+**Group & Job Management**
+- Job request mails now include **unique IDs** and **expiry timers** (`Config.MailExpiryTime`) - prevents accepting expired jobs.  
+- Improved **group cleanup logic** when the leader/member disconnects, exits, or crashes.  
+- On client start, triggers `police:server:UpdateCurrentCops` to hopefully force update the cop count.  
+- Added **persistent, tier-based job cooldowns** (until server restart) via `[houses]` → `Config.T*_JobCooldownSeconds` and `Config.T*_JobCooldownThreshold`. Global cooldown settings in the main config `Config.JobCooldown`.
+- Added **tier-based reputation loss on failure** via `[houses]` → `Config.T*_RepRemovalPercent`.  
+- T4 setup busy state now **resets at job end**.  
+- **Break-in notifications** are now only shown to nearby players for Tiers 2 & 3.  
+- **Hint notifications** are now exclusive to Tiers 2 & 3.  
+- Fixed `house.tier nil` error during cop breach zone handling.
+
+**Animation & Props**
+- **Carry animation** is now properly stopped on drop for a smoother transition instead of ClearPedTasks.  
+- Players can **stow/hide tools while moving** without interrupting animations.  
+- Prevents **repeating animations** when picking up props (adjusted anim flags).  
+- **Floating props** are now cleaned up properly after entering/exiting interiors.  
+- Carry animation and prop are **cancelled if player becomes armed** (item is not removed).
+
+**Ped & AI Behavior**
+- Guards use **selected randomized ped parents, hair styles, face paint**, and other variation attributes.  
+- Interior peds now **check for ownership transfer** and **retarget other players** correctly.  
+  - No longer respawn when the owner leaves.  
+  - Now despawn **only when the interior is empty**.  
+- Prevented `CPed::SetVariation` palette ID warning.  
+- Fixed **guard targeting, attributes, and relationship group resets** on owner change.  
+  - Reapplies appearance features properly.  
+- Improved cleanup of guards/setup peds using the **CPed pool** for accurate deletion.
+
+**Config & Initialization**
+- Refactored **resource initialization** in `init.lua` and both resource tables in the main config.  
+- Added **missing translations** from escrowed files.  
+- Moved `SendLBMail` event to a non-escrowed file: `server/items.lua`.
+
+## Update 3.3.5
 
 **Item Name Compatibility**  
 - When `ox_inventory` is enabled, the script now auto-converts item names during prop pickups.  

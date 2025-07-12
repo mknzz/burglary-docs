@@ -4,7 +4,7 @@ title: Houses Config
 nav_order: 4
 ---
 
-# Configuring sk-burglary 3.3.5
+# Configuring sk-burglary 3.3.6
 
 ## Finding the house config files
 
