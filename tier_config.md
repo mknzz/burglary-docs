@@ -8,10 +8,10 @@ nav_order: 4
 
 ## Finding the house config files
 
-There are separate configuration files for each tier of houses. These files, `tier1.lua`, `tier2.lua`, and `tier3.lua`, are located in the `houses` subfolder. Each configuration file contains specific settings for the houses in its respective tier.
+There are separate configuration files for each tier of houses. These files, `tier1.lua`, `tier2.lua`,`tier3.lua`, and `tier4.lua` are located in the `houses` subfolder. Each configuration file contains specific settings for the houses in its respective tier.
 
 {: .note }
-For the following docs, we’re using the `tier3.lua` house config file as an example. Configuration is exactly the same for `tier1.lua` and `tier2.lua`.
+For the following docs, we’re using the `tier3.lua` house config file as an example. Configuration is exactly the same for `tier1.lua`, `tier2.lua` and `tier4.lua`.
 
 ## Adding more houses to rob
 
@@ -191,4 +191,42 @@ You can set the level required to request T3 house offers. If you meet the requi
 
 ```
 Config.T3_RequiredLevel = 7 -- (1 - Config.MaxLevel)
+```
+
+## Changing required job request item
+
+You can modify the items required to request a job from the bossman by editing the item names in the `Config.T3_RequiredItem` table
+
+```
+-- The required items for requesting a T3 house offer
+Config.T3_RequiredItem = {
+    require_all = true, -- Whether all required items are needed.
+    "advancedlockpick",
+    "housescrewdriver"
+}
+```
+
+## Changing job cooldown settings
+
+You can set the cooldown time for requesting a T3 house by changing the `Config.T3_JobCooldownSeconds` variable.
+
+```
+-- T3 Job cooldown time in seconds
+Config.T3_JobCooldownSeconds = 240
+```
+
+To set the cooldown threshold (the number of jobs completed before the cooldown is applied), adjust the `Config.T3_JobCooldownThreshold` variable.
+
+```
+-- T3 Job cooldown threshold (number of jobs before cooldown applies)
+Config.T3_JobCooldownThreshold = 3
+```
+
+## Changing rep loss amount
+
+You can adjust the amount of reputation removed when a job is cancelled by modifying the `Config.T3_RepRemovalPercent` table.
+
+```
+-- The percentage of reputation removed when a T3 house is failed or cancelled.
+Config.T3_RepRemovalPercent = { 8, 10 } -- 8% to 10% (min to max)
 ```

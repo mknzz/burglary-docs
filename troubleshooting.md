@@ -28,15 +28,3 @@ If you're attempting to break into a door and nothing happens, follow these step
 For more break in minigame information, please visit the [Houses Config](https://mknzz.github.io/burglary-docs/tier_config.html) section of our docs.
 
 ---
-
-## Errors using LB Phone
-
-If you’re experiencing errors or are unable to receive or accept a job when using LB-Phone, please read the following:
-
-> - **Cause**: Recent changes to how LB-Phone handles mail caused issues. Originally, it used the qb send mail event, but LB-Phone did not work as expected. To resolve this, the lb-phone option was added to the `Config.OptionalResources` table to directly use the `lb sendmail` export. Additionally, LB-Phone's method for handling button data was altered. 
-> 
-> - **Solution**: 
->   - If you're running an up-to-date version of LB-Phone, **disable** the lb-phone option in `Config.OptionalResources`. It should work correctly afterward.
->   - If your LB-Phone version is outdated, **enable** the lb-phone option in `Config.OptionalResources`.
-
----

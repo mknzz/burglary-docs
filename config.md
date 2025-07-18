@@ -17,13 +17,13 @@ If you have renamed your QB resources, you will need to adjust the `Config.Defau
 ```
 Config.DefaultResources = {
     -- These names must match the resource names on your server.
-    [1] = { name = "qb-core", enabled = true },
-    [2] = { name = "qb-target", enabled = true },
-    [3] = { name = "qb-menu", enabled = true },
-    [4] = { name = "qb-skillbar", enabled = false },
-    [5] = { name = "qb-lockpick", enabled = false },
-    [6] = { name = "qb-minigames", enabled = true },
-    [7] = { name = "qb-inventory", enabled = true },
+    core = { name = "qb-core", enabled = true },     -- Keep enabled for both QB and QBox. QBox's qbx_core provides 'qb-core' in its fxmanifest.lua.
+    target = { name = "qb-target", enabled = true }, -- Change enabled to false if you're using another target resource.
+    menu = { name = "qb-menu", enabled = true },     -- Change enabled to false if you're using another menu resource.
+    skill = { name = "qb-skillbar", enabled = false },
+    lock = { name = "qb-lockpick", enabled = false },
+    minigames = { name = "qb-minigames", enabled = true },
+    inventory = { name = "qb-inventory", enabled = true },
 }
 ```
 
@@ -35,14 +35,16 @@ If you have not renamed your QB resources, you do not need to change the resourc
 ```
 Config.OptionalResources = {
     -- These names must match the resource names on your server.
-    [1] = { name = "ox_target", enabled = false },
-    [2] = { name = "ox_lib", enabled = false },
-    [3] = { name = "ox_inventory", enabled = false },
-    [4] = { name = "oxmysql", enabled = false },
-    [5] = { name = "ps-ui", enabled = false },
-    [6] = { name = "pd-safe", enabled = false }
-    [7] = { name = "lb-phone", enabled = false }, -- No longer needed after the lb-phone update, should work fine disabled.
-    [8] = { name = "sk-menu", enabled = false }
+    target = { name = "ox_target", enabled = false },         -- Change enabled to true if you're using ox_target, make sure you set qb-target enabled to false. https://github.com/overextended/ox_target
+    lib = { name = "ox_lib", enabled = false },               -- Change enabled to true if you're using ox_lib. Set qb-menu enabled to false. https://github.com/overextended/ox_lib
+    inventory = { name = "ox_inventory", enabled = false },   -- Change enabled to true if you're using ox_inventory. https://github.com/overextended/ox_inventory
+    qsinventory = { name = "qs-inventory", enabled = false }, -- Change enabled to true if you're using quasar-inventory.
+    mysql = { name = "oxmysql", enabled = false },            -- Change enabled to true if you're using oxmysql. https://github.com/overextended/oxmysql
+    ui = { name = "ps-ui", enabled = false },                 -- https://github.com/Project-Sloth/ps-ui
+    phone = { name = "lb-phone", enabled = false },           -- Change enabled to true if you're using lb-phone (3.1.6).
+    yseries = { name = "yseries", enabled = false },          -- Change enabled to true if you're using yseries phone.
+    menu = { name = "sk-menu", enabled = false },             -- Recommended | Set qb-menu enabled to false. https://github.com/mknzz/sk-menu
+    safe = { name = "pd-safe", enabled = false },
 }
 ```
 
@@ -50,26 +52,26 @@ To enable an optional resource, set the `enabled` variable to `true` for the cor
 
 ## ox_target
 - Enable `ox_target` in `Config.OptionalResources`:
-[1] = {name = "ox_target", enabled = true}
+target = {name = "ox_target", enabled = true}
 - Disable `qb-target` in `Config.RequiredResources`.
 
 ## ox_lib
 - Enable `ox_lib` in `Config.OptionalResources`:
-[2] = {name = "ox_lib", enabled = true}
+lib = {name = "ox_lib", enabled = true}
 - Disable `qb-menu` in `Config.RequiredResources`.
 
 ## ox_inventory
 - Enable `ox_inventory` in `Config.OptionalResources`:
-[3] = {name = "ox_inventory", enabled = true}
+inventory = {name = "ox_inventory", enabled = true}
 
 ## ps-ui
 - Enable `ps-ui` in `Config.OptionalResources`:
-[5] = {name = "ps-ui", enabled = true}
+ui = {name = "ps-ui", enabled = true}
 - Usage: `circle` and `scrambler` minigame. For more information, check out Break In Minigame.
 
 ## pd-safe
 - Enable `pd-safe` in `Config.OptionalResources`:
-[6] = {name = "pd-safe", enabled = true}
+safe = {name = "pd-safe", enabled = true}
 - Usage: `safescracker` minigame.
 
 ## Optional easy resource setup
@@ -223,6 +225,22 @@ Config.JobTime = 12  -- Set to your desired job time duration (in minutes)
 
 If a player leaves the house after the job time has expired, the job will automatically end.
 
+## Break in item
+
+You can enable or disable the removal of break in items when the minigame is failed by setting the `Config.RemoveBreakinItem` variable
+
+To adjust the chance of item removal on failure, modify the `Config.ChanceOfItemRemoval` value.
+
+```
+Config.ChanceOfItemRemoval = 0.5 -- 50% chance of removing the item if the break in is failed (also for cracking interior doors)
+```
+
+## Job cooldown
+
+You can enable or disable global cooldown settings using the `Config.JobCooldown` table. This includes the PerPlayer, Global, and CooldownSeconds options.
+
+To adjust cooldown times and thresholds for each tier, edit the corresponding values in the tiered [houses] configurations. For more information, visit the [cooldown settings section of the documentation](https://mknzz.github.io/burglary-docs/tier_config.html#changing-job-cooldown-settings).
+
 ## Phone mail or notify
 
 Players can receive job offers via email or direct notification, depending on the `Config.SendMail` variable.
@@ -256,6 +274,16 @@ function SendMail(subject, sender, message, buttonEvent, tier)
     })
 end
 ```
+
+## Required job request item
+
+You can control whether an item is required to request a job based on the job's tier by setting:
+
+`Config.RequireRequestItem` — Enable or disable the requirement for an item when requesting a job.
+
+`Config.RemoveRequestedItem` — Enable or disable removing the item after a successful job request.
+
+To configure which items are required for each tier, edit the relevant settings in the tiered [houses] configurations. For more information, visit the [tiered request item settings section of the documentation](mknzz.github.io/burglary-docs/tier_config.html#changing-required-job-request-item).
 
 ## Dispatch alerts
 
