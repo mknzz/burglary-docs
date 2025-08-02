@@ -54,6 +54,11 @@ It is recommended to use a more recent FiveM server artifact version rather than
 > - **lb-phone**
 >
 > - **qs-smartphone** - `client/funcs.lua`, replace all instances of `qb-phone` with `qs-smartphone`.
+>
+> - **qs-inventory**
+>
+> - **yseries**
+>
 
 ## Using with QBox
 
