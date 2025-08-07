@@ -4,7 +4,7 @@ title: Main Config
 nav_order: 3
 ---
 
-# Configuring sk-burglary 3.3.7
+# Configuring sk-burglary 3.4.8
 
 ## Finding the main config file
 
