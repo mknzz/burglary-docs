@@ -12,43 +12,25 @@ Latest patch notes for both escrow and full source versions.
 
 **General Fixes & Improvements**
 
-- Fixed tool carry prop not being deleted when the item is removed from the inventory.
-
-→ Adjusted `tryAttachToPlayer` function in `client/carry.lua`.
+- Fixed tool carry prop not being deleted when the item is removed from the inventory. Adjusted `tryAttachToPlayer` function in `client/carry.lua`.
 
 - Fixed `task_complete_notify` message not displaying correctly in `locale_en.json`.
 
-- Ensure proper particle dict cleanup in the `CreateParticle` function.
+- Ensure proper particle dict cleanup in the `CreateParticle` function. Updated in `client/funcs.lua`.
 
-→ Updated in `client/funcs.lua`.
+- Prevent jumping while carrying props. Modified `createAndAttach` function in `client/carry.lua`.
 
-- Prevent jumping while carrying props.
+- Fixed incorrect electric box ID being used when disabling the electric box, even when the correct target was hit, it would return and notify incorrect ID, caused by a mix up between raw ID and target ID. Updated `playAxeSmashScene` function in `client/main.lua`.
 
-→ Modified `createAndAttach` function in `client/carry.lua`.
+- Fixed task menu error when an item couldn't be found. Although the case was handled, a typo in the error print caused a separate unhandled error. Fixed in `GetTaskDescription` function in `client/main.lua`.
 
-- Fixed incorrect electric box ID being used when disabling the electric box, even when the correct target was hit, it would return and notify incorrect ID, caused by a mix up between raw ID and target ID.
+- Moved guard ped clothing style/IDs and face feature configs from `client/main.lua` to `houses/tier4.lua`. Now configured via `Config.T4_GuardFaceFeatures` and `Config.T4_GuardClothing`.
 
-→ Updated `playAxeSmashScene` function in `client/main.lua`.
+- Updated cop breaching logic, cops can now only breach if the house is currently active/busy. Adjusted `setCopHouse` function and related thread in `client/main.lua`.
 
-- Fixed task menu error when an item couldn't be found. Although the case was handled, a typo in the error print caused a separate unhandled error.
+- Fixed an issue where randomly assigned interiors (when no interior ID is set in the house config) weren't syncing correctly for cops. Not an issue by default, it only occurred if the `interior = 1` setting was removed to allow random interior ID selection. Adjusted `setCopHouse` function in `client/main.lua`, and `SetForCoppas` event in `client/main.lua` and `server/main.lua`.
 
-→ Fixed in `GetTaskDescription` function in `client/main.lua`.
-
-- Moved guard ped clothing style/IDs and face feature configs from `client/main.lua to `houses/tier4.lua`.
-
-→ Now configured via `Config.T4_GuardFaceFeatures` and `Config.T4_GuardClothing`.
-
-- Updated cop breaching logic, cops can now only breach if the house is currently active/busy.
-
-→ Adjusted `setCopHouse` function and related thread in `client/main.lua`.
-
-- Fixed an issue where randomly assigned interiors (when no interior ID is set in the house config) weren't syncing correctly for cops. Not an issue by default, it only occurred if the `interior = 1` setting was removed to allow random interior ID selection.
-
-→ Adjusted `setCopHouse` function in `client/main.lua`, and `SetForCoppas` event in `client/main.lua` and `server/main.lua`.
-
-- Fixed a bug where the house unlocked state was sometimes not reset properly.
-
-→ Updated `ResetHouse` function in `client/main.lua`.
+- Fixed a bug where the house unlocked state was sometimes not reset properly. Updated `ResetHouse` function in `client/main.lua`.
 
 Mass cleanup up and refactored various functions and events, removed unused comments, improved variable naming, and reorganised or relocated several events for better structure.
 - Most client files were modified for cleanup (excluding `groups.lua` and `menu.lua`).
