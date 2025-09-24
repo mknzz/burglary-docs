@@ -8,7 +8,44 @@ nav_order: 6
 
 Latest patch notes for both escrow and full source versions.
 
-# Update 3.4.8 - Latest
+## Update 3.4.9 - Latest
+
+**General Fixes & Improvements**
+
+- Prevent `ox_target` warnings from search/pickup zones, safes, and interior door cracking (should be all of them :D).
+
+- Improved scene handling and fixed an issue where players could sometimes get stuck in the security panel scene with no minigame showing.
+
+- Removed Franklins interior sofa fix stream (already included in bob74_ipl) - also fixes occasional crashes when restarting the resource.
+
+- Added rep progress bar to the `ox_lib` context menu.
+
+- Improved `AddItem` and `AddCashReward` security. All server-side item and reward events now validate incoming data structures, config, types, and coordinates to prevent exploits and unauthorized event triggers.
+→ Introduced configurable `INTERACT_RANGE` constant in `items.lua`.
+
+- Fixed "your hands are full" issue when using `ox_inventory`.
+
+- Fixed the "Bonk A Local" task.
+
+- Reverted Tier 4 lockdown alarm back to the original.
+
+- Changed Tier 4 `securitycard` item label to "Access card" and updated its description.
+→ `items_ox.lua` & `items_qb.lua`.
+
+- Updated `securityphone` item description.
+→ `items_ox.lua` & `items_qb.lua`.
+
+- Fixed lockdown/alarm not resetting correctly for all group members.
+
+- Removed the entire traitor/setup process and related code. To obtain the required `securitycard`, you must now loot dead guards - each has a chance to drop it based on `Config.T4_SecurityCardChance` in `houses/tier4.lua`.
+
+- Notify players about looting guards for the required item when killed, based on `Config.T4_LootGuardHintChance` in `houses/tier4.lua`.
+
+- Adjusted guard ped target handling to hopefully prevent `qb-target` CheckEntity errors.
+
+- Prevent the exterior from loading multiple times when two or more group members enter the area simultaneously.
+
+## Update 3.4.8
 
 **General Fixes & Improvements**
 
