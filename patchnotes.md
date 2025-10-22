@@ -8,7 +8,66 @@ nav_order: 6
 
 Latest patch notes for both escrow and full source versions.
 
-## Update 3.4.9 - Latest
+## 🎃 Halloween Madness Update 3.5.0 - Latest
+
+☣️ **Biohazard Contamination (Tier 4)**
+- **Toxic interior environment**: Filled with dense green gas clouds using particle effects.
+- **Protection system**: A gas mask item provides full immunity. Masks can be found around the interior or looted from peds.
+- **Survival mechanics**: Gradual health damage, warning notifications at low health, screen effects (timecycle modifier, motion blur), and death consequences.
+- Fully configurable tick rate, damage amounts, protection items, and particle behavior.
+
+🐒 **Chimp Taming (Tier 3 - Franklins DJ)**
+- **Befriend hostile chimps**: Using the banana item.
+- **Companion behavior**: Tamed chimps follow players around and automatically spawn outside when exiting. Tamed chimps are friendly and won't attack players.
+- **Monkey Business**: Complete the new Monkey Business task and earn the Golden Monkey reward by successfully taming a chimp.
+
+😱 **Shadow Jumpscare**
+- **Random jump scare**: Mysterious shadow figures spawn around players at configurable intervals.
+- **Jumpscare effects**: Screen flash, camera shake, optional sound (xsound), temporary movement debuff.
+- One scare per interior visit.
+
+🧟 **Zombie Mode**
+- **Master toggle** via `Config.HalloweenMadness.zombie_peds` - Enable/disable T4 exterior guard/boss zombie models.
+
+🎭 **Hazmat Workers & Gas Masks**
+- **Hazmat worker homeowners**: For T4 contaminated interiors with automatic gas mask prop attachment.
+
+🌩️ **Halloween Weather & Time**
+- **Atmospheric effects**: Halloween weather (orange/foggy) with locked time at 23:00 PM.
+- **Client-side only**: No server load, works with routing buckets, persistent while inside with automatic cleanup on exit.
+- Per interior toggle via `halloween_weather = true` in interior configs.
+
+🔊 **Halloween Ambience**
+- **Eerie ambient soundscapes** via xsound, configurable volume/distance.
+- Per interior toggle via `halloween_ambience = true` with automatic lifecycle management.
+
+📝 **New Translations**
+Added to `locale_en.json`:
+- Biohazard warnings, death messages, and protection status notifications
+- Chimp taming interactions (success, failure, already tamed, missing item)
+
+🏚️ **New Halloween Interior Themes**
+Each tier now has its own Halloween theme:
+
+- **T1**: Zombies
+- **T2**: Murdered Family / Slasher
+- **T3** (High-End): Aliens & UFOs / Government
+- **T3** (Franklin's): Halloween Party / Chimp & Zombie Pug
+- **T4**: Biohazard
+
+**Includes major updates to all [interiors] config tables (`extra_props` and `homeowner_peds`).**
+
+**General Fixes & Changes**
+- Adjusted client-side overweight handling, added `PlyCanCarryItem` to `client/funcs.lua`, replacing the old ItemAdded and CannotAddItem event method.
+- Added Config.MaxInventoryWeight, this should match the max weight from your `qb-inventory` config (required for `PlyCanCarryItem`). **Not** needed when using `ox_inventory`.
+- Moved the `GetItemsList` function to `shared/init.lua`.
+- Fixed interior door cracking unlocking the door even after failing the minigame.
+- Added Config.NotifyRep to enable or disable reputation gain notifications.
+- Added Config.DoorHintDistance controls distance for "It's gotta be around here somewhere" hint.
+- Use `Config.ReplaceQbItemNames` to convert qb item names to ox when looting peds for better compatibility.
+- Added `banana` and `gasmask` item to the provided `items_qb.lua` and `items_ox.lua` burglary files.
+
+## Update 3.4.9
 
 **General Fixes & Improvements**
 
