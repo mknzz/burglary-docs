@@ -59,7 +59,7 @@ Each tier now has its own Halloween theme:
 
 **General Fixes & Changes**
 - Adjusted client-side overweight handling, added `PlyCanCarryItem` to `client/funcs.lua`, replacing the old ItemAdded and CannotAddItem event method.
-- Added Config.MaxInventoryWeight, this should match the max weight from your `qb-inventory` config (required for `PlyCanCarryItem`). **Not** needed when using `ox_inventory`.
+- Added `Config.MaxInventoryWeight`, **this should match the max weight from your `qb-inventory` config (required for `PlyCanCarryItem`).** Not needed when using `ox_inventory`.
 - Moved the `GetItemsList` function to `shared/init.lua`.
 - Fixed interior door cracking unlocking the door even after failing the minigame.
 - Added Config.NotifyRep to enable or disable reputation gain notifications.
