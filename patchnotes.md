@@ -62,8 +62,8 @@ Each tier now has its own Halloween theme:
 - Added `Config.MaxInventoryWeight`, **this should match the max weight from your `qb-inventory` config (required for `PlyCanCarryItem`).** Not needed when using `ox_inventory`.
 - Moved the `GetItemsList` function to `shared/init.lua`.
 - Fixed interior door cracking unlocking the door even after failing the minigame.
-- Added Config.NotifyRep to enable or disable reputation gain notifications.
-- Added Config.DoorHintDistance controls distance for "It's gotta be around here somewhere" hint.
+- Added `Config.NotifyRep` to enable or disable reputation gain notifications.
+- Added `Config.DoorHintDistance` controls distance for "It's gotta be around here somewhere" hint.
 - Use `Config.ReplaceQbItemNames` to convert qb item names to ox when looting peds for better compatibility.
 - Added `banana` and `gasmask` item to the provided `items_qb.lua` and `items_ox.lua` burglary files.
 
