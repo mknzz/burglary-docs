@@ -8,7 +8,20 @@ nav_order: 6
 
 Latest patch notes for both escrow and full source versions.
 
-## 🎃 Halloween Madness Update 3.5.0 - Latest
+## Update 3.5.1 - Latest
+
+**General Fixes & Improvements**
+- Fixed job timeout system not ending jobs. Jobs would fail to auto end after the correct duration if a previous job had been manually cancelled previously. CancelJobTimeout() now properly cleans up the timeout callback and monitoring thread.
+- **Interior door cracking actually fixed**
+- Added `EnterHouseAlert(tier, coords, success)` to `funcs.lua` - Triggered when entering or attempting to break into houses, including tier information, coordinates, and break-in success status for better police response integration.
+
+**Halloween Madness**
+Added three new daily tasks:
+- **Face Your Fears**: Encounter a shadow figure during any T1-T4 job
+- **Toxic Immunity**: Complete a T4 job without taking any biohazard damage
+- **Halloween Madness**: Experience the full Halloween chaos: survive a shadow encounter, complete a T4 job without biohazard damage, and tame a chimp. Progress persists across multiple jobs until all three conditions are met.
+
+## 🎃 Halloween Madness Update 3.5.0
 
 ☣️ **Biohazard Contamination (Tier 4)**
 - **Toxic interior environment**: Filled with dense green gas clouds using particle effects.

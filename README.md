@@ -1,6 +1,6 @@
 ## Documentation
 
-You can find the official documentation for our FiveM houserobbery script (Version 3.5.0 Halloween Madness) on the github.io page.
+You can find the official documentation for our FiveM houserobbery script (Version 3.5.1 Halloween Madness) on the github.io page.
 
 https://mknzz.github.io/burglary-docs/
 
