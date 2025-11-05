@@ -28,7 +28,6 @@ Latest patch notes for both escrow and full source versions.
 - Updated `locked_doors/required_items` in `interiors/tier3.lua` → `Config.T3_Interiors[1]` High End ID 1.
 
 **Configurable Security Card Removal**
-- T4 security cards can now be removed on failed keypad attempts.
 - Added `Config.T4_RemoveKeycardChance` (0.0 to 1.0) in `houses/tier4.lua`.
 - Modified `unlockDoorWithSecurity()` in `client/main.lua`.
 
