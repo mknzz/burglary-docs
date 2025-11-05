@@ -32,7 +32,7 @@ Latest patch notes for both escrow and full source versions.
 - Added `Config.T4_RemoveKeycardChance` (0.0 to 1.0) in `houses/tier4.lua`.
 - Modified `unlockDoorWithSecurity()` in `client/main.lua`.
 
-**General Fixes, changes & Improvements**
+**General Fixes, Changes & Improvements**
 - Fixed guard loot hints going to the wrong player. Loot hints were sent to the peds network owner instead of the killer.
 → Modified guard death event handler in `client/main.lua` and added `LootGuardHint` event in `server/main.lua`.
 
