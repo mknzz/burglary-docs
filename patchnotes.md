@@ -8,7 +8,74 @@ nav_order: 6
 
 Latest patch notes for both escrow and full source versions.
 
-## Update 3.5.1 - Latest
+## Update 3.5.2 - Latest
+
+**Jaksam Inventory Support**
+- Added full support for `jaksam-inventory`.
+- Modified `PlyHasItem()` and `PlyCanCarryItem()` functions in `client/funcs.lua`.
+- Added `onItemAdded` and `onItemRemoved` hooks in `client/carry.lua`.
+- Updated `canAddItem()`, `AddItem()`, `RemoveItem()`, and `VerifyItemInfo()` in `server/items.lua`.
+- Modified `GetItemsList()` in `shared/init.lua`.
+- Added to `Config.OptionalResources` in `shared/config.lua`.
+
+**Enhanced Item Group Support**
+- Players can now use alternative items to satisfy requirements.
+- Primarily affects T2 houses and T2/T3 interiors: `lockpick` or `advancedlockpick` + `screwdriver`.
+- Items are specified in nested table format: `{ "lockpick", "advancedlockpick" }`.
+- Modified `PlyHasItem()` function in `client/funcs.lua`.
+- Updated all `required_items` tables in `houses/tier2.lua` → `Config.T2_Houses` and `Config.T2_RequiredItem`.
+- Updated `locked_doors/required_items` in `interiors/tier2.lua` → `Config.T2_Interiors[1]` Mid Apartment ID 1.
+- Updated `locked_doors/required_items` in `interiors/tier3.lua` → `Config.T3_Interiors[1]` High End ID 1.
+
+**Configurable Security Card Removal**
+- T4 security cards can now be removed on failed keypad attempts.
+- Added `Config.T4_RemoveKeycardChance` (0.0 to 1.0) in `houses/tier4.lua`.
+- Modified `unlockDoorWithSecurity()` in `client/main.lua`.
+
+**General Fixes, changes & Improvements**
+- Fixed guard loot hints going to the wrong player. Loot hints were sent to the peds network owner instead of the killer.
+→ Modified guard death event handler in `client/main.lua` and added `LootGuardHint` event in `server/main.lua`.
+
+- Fixed juggernaut boss kill task not triggering. Task event was sent to the peds network owner instead of the killer.
+→ Modified guard death event handler in `client/main.lua` and added `JuggBossCheck` event in `server/main.lua`.
+
+- Fixed screwdriver requirement validation. Any prop in hand + screwdriver in inventory would satisfy the check. Now specifically checks if carrying the required item.
+→ Added `IsCarryingItem(itemName)` function in `client/carry.lua` and modified `TryBreakin()` and `CheckForScrewdriver()` functions in `client/main.lua`.
+
+- Fixed weapon pickup props with `ox_inventory`. Broken in update 3.5.0, weapon names weren't being converted before can carry inventory checks. Now applies `Config.ReplaceQbItemNames` conversion before `PlyCanCarryItem()`.
+→ Modified `pickupAProp()` in `client/main.lua`.
+
+- Adjusted item removal on minigame failures.
+→ Modified `setDoorTarget()` (interior door cracking), `unlockDoorWithSecurity()` (T4 security keypad), `unlockSafe()` (safe cracking), and `UnlockAndEnter()` (house break-in) in `client/main.lua`.
+
+- Fixed animation not ending after failed interior door cracking. Player remained stuck in lockpicking animation. Added proper animation cleanup on failure.
+→ Modified `setDoorTarget()` in `client/main.lua`.
+
+- Improved search zone notification timing. Moved "No Rewards" notification to after the progress bar completes.
+→ Modified `searchAZone()` in `client/main.lua`.
+
+- Added `qbcore` → `ox_inventory` item name conversion handling for search zones. Add items to convert in `Config.ReplaceQbItemNames`.
+→ Modified `searchAZone()` in `client/main.lua`.
+
+- Fixed incorrect error message params in `PlyCanCarryItem`. Error messages were passing type to the message param and vice versa. Item name wasn't being displayed correctly in "Item not found" errors.
+→ Modified `PlyCanCarryItem()` in `client/funcs.lua`.
+
+- Improved T4 medical bag search zone targeting. Adjusted vector3 coordinates for medical bag search zones to be more accessible when using `ox_target`.
+→ Modified `search_zones` coordinates in `interiors/tier4.lua` → `Config.T4_Interiors[1]`.
+
+- Improved main house cleanup and reset function. Refactored reset functions into smaller, reusable helper functions:
+  - Added `resetPlayerState()` - Cleans up player-specific data (hints, detection status, etc.)
+  - Added `resetInteriorEntities()` - Clears interior entity tracking table
+  - Added `cleanupInteriorState()` - Handles all interior resets (search zones, peds, security, doors, safes)
+  - Added `cleanupExteriorState()` - Handles all exterior cleanup (props, peds, alarms)
+  - Added `resetHouseServerState()` - Manages states when no players inside
+  - Improved `ResetHouse()` function organization with clearer flow and better separation.
+→ Modified `ResetHouse()` and added new helper functions in `client/main.lua`.
+
+- Reverted Halloween Madness changes. Removed all Halloween specific code and configurations.
+→ Removed everything related from `client/main.lua` and events from `server/main.lua`. Restored original functions in `client/funcs.lua` and settings in `shared/config.lua`. All interior configuration files reverted to original.
+
+## Update 3.5.1
 
 **General Fixes & Improvements**
 - Fixed job timeout system not ending jobs. Jobs would fail to auto end after the correct duration if a previous job had been manually cancelled previously. CancelJobTimeout() now properly cleans up the timeout callback and monitoring thread.
@@ -47,7 +114,6 @@ Added three new daily tasks:
 
 🌩️ **Halloween Weather & Time**
 - **Atmospheric effects**: Halloween weather (orange/foggy) with locked time at 23:00 PM.
-- **Client-side only**: No server load, works with routing buckets, persistent while inside with automatic cleanup on exit.
 - Per interior toggle via `halloween_weather = true` in interior configs.
 
 🔊 **Halloween Ambience**

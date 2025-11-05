@@ -4,7 +4,7 @@ title: Installing
 nav_order: 2
 ---
 
-# Installing sk-burglary 3.5.1
+# Installing sk-burglary 3.5.2
 
 {: .important }
 It is recommended to use a more recent FiveM server artifact version rather than the currently recommended **7290**. Preferably, use anything newer than artifact version **12168**, as versions at or below **12168** may cause issues such as T4 guard ped weapons disappearing or freezing when the network owner changes. For the game build, it is advised to use version **3095** or newer. Please note that **OneSync** must be enabled.
