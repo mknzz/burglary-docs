@@ -8,7 +8,41 @@ nav_order: 6
 
 Latest patch notes for both escrow and full source versions.
 
-## Update 3.5.2 - Latest
+## Update 3.5.3 - Latest
+
+**General Fixes & Improvements**
+
+- Fixed not being able to pickup/target a lot of weapon/attachment objects in the T4 interior when using `ox_target`. Added sphere zone creation for props that `ox_target` cannot detect with standard entity zones.
+  - Configurable list of models requiring sphere zones via `Config.OxUntargetableModels` in `shared/config.lua`.
+  - New functions:
+    - `calculateSphereRadius(model)` in `client/main.lua` - Calculates optimal sphere radius based on model dimensions.
+    - `requiresSphereZone(model)` in `client/main.lua` - Checks if a model needs sphere zone.
+    - `SphereZoneTarget()` in `client/funcs.lua` - Creates an `ox_target` sphere zone.
+  - Modified `setPickupPropTarget()` in `client/main.lua` to automatically choose between entity zones and sphere zones.
+  - Modified `spawnPickupProps()` in `client/main.lua` to track which props use sphere zones.
+  - Modified `removeAllPickupProps()` in `client/main.lua` to properly clean up sphere zones.
+  - Modified `RemovePickupProp()` in `client/main.lua` to properly clean up individual sphere zones.
+
+- Fixed CCTV monitoring breaking when network ownership changes. Modified `TeleportToLocation()` to transfer CCTV entity ownership and retrigger monitoring on enter/exit.
+  - New functions/events:
+    - `ensureCameraMonitoring()` in `client/main.lua`
+    - `burglary:EnsureCameraMonitoring` in `client/main.lua` and `server/main.lua`
+    - `burglary:ResumeCameraMonitoring` in `client/main.lua` and `server/main.lua`
+→ Modified `TeleportToLocation()` in `client/main.lua`.
+
+- Fixed some guard appearance reverting to default when entering and exiting the interior. Modified `TeleportToLocation()` to force guard appearance reconfiguration on exit.
+  - New event: `burglary:ForceGuardReconfig` in `client/main.lua` and `server/main.lua`
+→ Modified `TeleportToLocation()` in `client/main.lua`.
+
+- Fixed players getting stuck in the wrong routing bucket when exiting the T4 interior. Removed `SetEntityBucketTemp` usage and function completely, reverting to the previous trusty simple bucket setting.
+  - Modified `SetPlayerBucket` & `ResetPlayerBucket` events in `server/main.lua`.
+  - Removed `SetEntityBucket` & `ResetEntityBucket` events in `server/main.lua`.
+→ Modified `TeleportToLocation()` in `client/main.lua`.
+
+- Reverted T4 interior medical bag search location coordinates.
+→ Modified `search_zones` coordinates in `interiors/tier4.lua` → `Config.T4_Interiors[1]`.
+
+## Update 3.5.2
 
 **Jaksam Inventory Support**
 - Added full support for `jaksam-inventory`.
