@@ -4,7 +4,7 @@ title: Main Config
 nav_order: 3
 ---
 
-# Configuring sk-burglary 3.5.3
+# Configuring sk-burglary 3.6.0
 
 ## Finding the main config file
 
@@ -35,15 +35,16 @@ If you have not renamed your QB resources, you do not need to change the resourc
 ```
 Config.OptionalResources = {
     -- These names must match the resource names on your server.
-    target = { name = "ox_target", enabled = false },         -- Change enabled to true if you're using ox_target, make sure you set qb-target enabled to false. https://github.com/overextended/ox_target
-    lib = { name = "ox_lib", enabled = false },               -- Change enabled to true if you're using ox_lib. Set qb-menu enabled to false. https://github.com/overextended/ox_lib
-    inventory = { name = "ox_inventory", enabled = false },   -- Change enabled to true if you're using ox_inventory. https://github.com/overextended/ox_inventory
-    qsinventory = { name = "qs-inventory", enabled = false }, -- Change enabled to true if you're using quasar-inventory.
-    mysql = { name = "oxmysql", enabled = false },            -- Change enabled to true if you're using oxmysql. https://github.com/overextended/oxmysql
-    ui = { name = "ps-ui", enabled = false },                 -- https://github.com/Project-Sloth/ps-ui
-    phone = { name = "lb-phone", enabled = false },           -- Change enabled to true if you're using lb-phone (3.1.6).
-    yseries = { name = "yseries", enabled = false },          -- Change enabled to true if you're using yseries phone.
-    menu = { name = "sk-menu", enabled = false },             -- Recommended | Set qb-menu enabled to false. https://github.com/mknzz/sk-menu
+    target = { name = "ox_target", enabled = false },                     -- Change enabled to true if you're using ox_target, make sure you set qb-target enabled to false. https://github.com/overextended/ox_target
+    lib = { name = "ox_lib", enabled = false },                            -- Change enabled to true if you're using ox_lib. Set qb-menu enabled to false. https://github.com/overextended/ox_lib
+    inventory = { name = "ox_inventory", enabled = false },               -- Change enabled to true if you're using ox_inventory. https://github.com/overextended/ox_inventory
+    qsinventory = { name = "qs-inventory", enabled = false },             -- Change enabled to true if you're using quasar-inventory.
+    jaksaminventory = { name = "jaksam-inventory", enabled = false },     -- Change enabled to true if you're using jaksam-inventory.
+    mysql = { name = "oxmysql", enabled = false },                        -- Change enabled to true if you're using oxmysql. https://github.com/overextended/oxmysql
+    ui = { name = "ps-ui", enabled = false },                             -- https://github.com/Project-Sloth/ps-ui
+    phone = { name = "lb-phone", enabled = false, fix = false },          -- Change enabled to true if you're using lb-phone (3.1.6). Set fix to true if job accepting fails.
+    yseries = { name = "yseries", enabled = false },                      -- Change enabled to true if you're using yseries phone.
+    menu = { name = "sk-menu", enabled = false },                         -- Recommended | Set qb-menu enabled to false. https://github.com/mknzz/sk-menu
     safe = { name = "pd-safe", enabled = false },
 }
 ```
@@ -106,73 +107,196 @@ You can also customize the maximum level that can be achieved in the leveling sy
 Config.MaxLevel = 10  -- Set to your desired maximum level
 ```
 
-If level scaling is enabled, you can adjust the chance of getting a tier 2 or tier 3 house based on the current level. This can be done by setting the `Config.LevelScaling` variable.
+If level scaling is enabled, the chance of getting a tier 2, tier 3, or tier 4 house increases based on the player's current level. This can be toggled with the `Config.LevelScaling` variable.
 
 ```
 Config.LevelScaling = true  -- Set to 'true' to enable, 'false' to disable
 ```
 
-If level scaling is disabled, you can select which tier house if you meet the required level.
+## Maximum tier chance
 
-To add rep, you can utilize the client-side `AddRep` function as follows:
+When level scaling is enabled, the combined probability of T2+T3+T4 is capped by `Config.MaxTierChance`. The remaining chance is reserved for T1. For example, 0.85 means T1 will always have at least a 15% chance.
 
 ```
-AddRep({ 100, 200 }) -- This will add a random amount of rep between 100 and 200
+Config.MaxTierChance = 0.85  -- 0.0 to 1.0, default 0.85 (T1 gets at least 15%)
+```
+
+## Require level for tier
+
+When `Config.RequireLevelForTier` is enabled, players must meet the tier's `RequiredLevel` before that tier can appear in random job selection — even when level scaling is active. This prevents low-level players from being randomly assigned high-tier houses they aren't ready for.
+
+```
+Config.RequireLevelForTier = true  -- Set to 'true' to gate tiers behind RequiredLevel, 'false' for pure probability
+```
+
+For example, with `RequireLevelForTier = true` and default `RequiredLevel` values:
+- Level 1-3 players can only receive T1 houses
+- Level 4+ players can receive T1 and T2 houses (`T2_RequiredLevel = 4`)
+- Level 7+ players can receive T1, T2, and T3 houses (`T3_RequiredLevel = 7`)
+- Level 9+ players can receive all tiers (`T4_RequiredLevel = 9`)
+
+The `RequiredLevel` for each tier is set in the corresponding `houses/tierX.lua` file (e.g., `Config.T4_RequiredLevel = 9`).
+
+If level scaling is disabled, you can select which tier house if you meet the required level.
+
+## Door hint distance
+
+You can configure the distance at which the "It's gotta be around here somewhere" hint appears for locked interior doors:
+
+```
+Config.DoorHintDistance = 7.5  -- Distance in game units
 ```
 
 ## Reputation per level
 
-The amount of reputation required to reach each level can be configured using the `Config.RepPerLevel` table.
+The amount of reputation required to reach each level can be configured using the `Config.RepPerLevel` table. These thresholds use an accelerating progression curve for balance.
 
 ```
 Config.RepPerLevel = {
-    [1] = 5000,
-    [2] = 10000,
-    [3] = 17500,
-    [4] = 27500,
-    [5] = 40000,
-    [6] = 55000,
-    [7] = 75000,
-    [8] = 100000,
-    [9] = 130000,
-    [10] = 170000
+    [1] = 2000,       -- Level 1-2 (~6 T1 runs)
+    [2] = 3500,       -- Level 2-3 (~8 runs)
+    [3] = 6000,       -- Level 3-4 (~11 runs)
+    [4] = 9000,       -- Level 4-5 (~12 runs)
+    [5] = 13000,      -- Level 5-6 (~12 runs)
+    [6] = 18000,      -- Level 6-7 (~13 runs)
+    [7] = 25000,      -- Level 7-8 (~16 runs)
+    [8] = 33000,      -- Level 8-9 (~20 runs)
+    [9] = 42000,      -- Level 9-10 (~25 runs)
+    [10] = 55000      -- Level 10-Max (display only)
 }
 ```
 
-This table defines the reputation needed to complete each level. For example, 5,000 reputation is required for level 1 and 10,000 for level 2.
+This table defines the reputation gap needed to complete each level. For example, 2,000 reputation is required to go from level 1 to 2, and 3,500 to go from level 2 to 3. The cumulative total to max level is ~206,500 rep (~100-120 runs).
 
 ## Earning reputation
 
-Reputation is earned by completing specific actions, with rewards varying based on the action and its difficulty.
+Reputation is earned by completing specific actions, with rewards varying based on the action and its difficulty. All reputation modifications are validated and applied server-side to prevent exploitation.
 
-The `AddRepForReason` function in `func.lua` is triggered by `main.lua` when players successfully perform actions like breaking in or bypassing security.
+The `AddRepForReason` function in `funcs.lua` is triggered by `main.lua` when players successfully perform actions like breaking in or bypassing security. Reputation is distributed to all group members inside the house.
 
 {: .note }
 Reputation is also earned from daily tasks, which are loaded only when you check the list at the bossman.
 
-```
--- Reputation rewards based on different actions and tiers
-local repRewards = {
-    ['breaking_in'] = { [1] = { rep = { 500, 1000 } }, [2] = { rep = { 1000, 1500 } }, [3] = { rep = { 1500, 2500 } }, [4] = { rep = { 2500, 3500 } } },
-    ['bypass_security'] = { [1] = { rep = { 800, 1200 } }, [2] = { rep = { 1200, 1800 } }, [3] = { rep = { 1800, 2800 } }, [4] = { rep = { 2800, 4000 } } },
-    ['complete_job'] = { [1] = { rep = { 1000, 1500 } }, [2] = { rep = { 1500, 2000 } }, [3] = { rep = { 2000, 3000 } }, [4] = { rep = { 3000, 4500 } } },
-    ['crack_safe'] = { [1] = { rep = { 700, 1200 } }, [2] = { rep = { 1200, 1800 } }, [3] = { rep = { 1800, 2500 } }, [4] = { rep = { 2500, 3500 } } },
-    ['loot_ped'] = { [1] = { rep = { 300, 700 } }, [2] = { rep = { 500, 1200 } }, [3] = { rep = { 800, 1800 } }, [4] = { rep = { 1500, 2500 } } },
-    ['crack_door'] = { [1] = { rep = { 600, 1100 } }, [2] = { rep = { 1000, 1600 } }, [3] = { rep = { 1500, 2200 } }, [4] = { rep = { 2000, 3000 } } },
-}
+## Reputation limits (Config.RepLimits)
 
--- Function to add reputation based on the reason and tier
-function AddRepForReason(reason, tier)
-    -- Check if the reason exists in the repRewards table
-    if repRewards[reason] then
-        -- Check if the tier exists for that reason
-        local tierData = repRewards[reason][tier]
-        if tierData then
-            local repToAdd = tierData.rep
-            AddRep(repToAdd)
-        end
-    end
-end
+Reputation reward ranges are now configured in the main `config.lua` via `Config.RepLimits`. These values are validated server-side — the server will reject any rep amounts outside the defined ranges.
+
+```
+Config.RepLimits = {
+    breaking_in = {
+        [1] = { 50, 100 },
+        [2] = { 100, 150 },
+        [3] = { 150, 250 },
+        [4] = { 250, 350 }
+    },
+    bypass_security = {
+        [1] = { 80, 120 },
+        [2] = { 120, 180 },
+        [3] = { 180, 280 },
+        [4] = { 280, 400 }
+    },
+    complete_job = {
+        [1] = { 100, 150 },
+        [2] = { 150, 200 },
+        [3] = { 200, 300 },
+        [4] = { 300, 450 }
+    },
+    crack_safe = {
+        [1] = { 70, 120 },
+        [2] = { 120, 180 },
+        [3] = { 180, 250 },
+        [4] = { 250, 350 }
+    },
+    loot_ped = {
+        [1] = { 30, 70 },
+        [2] = { 50, 120 },
+        [3] = { 80, 180 },
+        [4] = { 150, 250 }
+    },
+    crack_door = {
+        [1] = { 60, 110 },
+        [2] = { 100, 160 },
+        [3] = { 150, 220 },
+        [4] = { 200, 300 }
+    },
+    stealth_complete = {
+        [1] = { 80, 120 },
+        [2] = { 120, 180 },
+        [3] = { 180, 250 },
+        [4] = { 250, 350 }
+    },
+    search_zone = {
+        [1] = { 15, 30 },
+        [2] = { 30, 50 },
+        [3] = { 50, 80 },
+        [4] = { 80, 120 }
+    },
+    pickup_item = {
+        [1] = { 10, 25 },
+        [2] = { 25, 45 },
+        [3] = { 45, 70 },
+        [4] = { 70, 100 }
+    },
+}
+```
+
+Each action type maps tier numbers (1-4) to a `{min, max}` rep range. A random value within that range is awarded when the action is completed.
+
+You can also set the maximum allowed custom rep range for task rewards:
+
+```
+Config.MaxCustomRepAllowed = 2000
+```
+
+## Reputation penalties (Config.RepPenalties)
+
+Reputation penalties are applied when the player fails specific actions during a burglary. Each penalty is defined as a `{min%, max%}` range per tier. A random percentage within the range is deducted from the player's current rep.
+
+Set both values to `0` to disable a penalty for that tier. All penalties require `Config.Levels = true`.
+
+```
+Config.RepPenalties = {
+    breakin_failed = {           -- Failed the front door break-in minigame
+        [1] = { 1, 2 },
+        [2] = { 1, 2 },
+        [3] = { 1, 2 },
+        [4] = { 1, 2 },
+    },
+    alarm_triggered = {          -- Interior security alarm triggered (noise, gunshot, anti-tamper)
+        [1] = { 2, 4 },         -- Only fires once per burglary (first detection)
+        [2] = { 2, 4 },
+        [3] = { 2, 3 },
+        [4] = { 1, 3 },
+    },
+    safe_failed = {              -- Failed the safe cracking minigame (not key unlock)
+        [1] = { 1, 3 },
+        [2] = { 1, 2 },
+        [3] = { 1, 2 },
+        [4] = { 1, 2 },
+    },
+    player_downed = {            -- Player killed inside the house
+        [1] = { 3, 5 },
+        [2] = { 3, 5 },
+        [3] = { 3, 5 },
+        [4] = { 3, 5 },
+    },
+    lockdown_triggered = {       -- T4 CCTV lockdown activated
+        [1] = { 0, 0 },         -- N/A for T1-T3
+        [2] = { 0, 0 },
+        [3] = { 0, 0 },
+        [4] = { 4, 6 },
+    },
+}
+```
+
+The server handler checks `Config.RepPenalties[reason][tier]` when a reason is provided. If no reason is given (e.g. job cancellation via `EndBurglary`), it falls back to `T*_RepRemovalPercent` from the tier config files.
+
+## Reputation notifications
+
+You can enable or disable notifications when reputation is gained:
+
+```
+Config.NotifyRep = true  -- Set to 'false' to hide rep gain notifications
 ```
 
 ## Break in time
@@ -232,7 +356,7 @@ You can enable or disable the removal of break in items when the minigame is fai
 To adjust the chance of item removal on failure, modify the `Config.ChanceOfItemRemoval` value.
 
 ```
-Config.ChanceOfItemRemoval = 0.5 -- 50% chance of removing the item if the break in is failed (also for cracking interior doors)
+Config.ChanceOfItemRemoval = 0.9 -- 90% chance of removing the item if the break in is failed (also for cracking interior doors)
 ```
 
 ## Job cooldown
@@ -284,6 +408,149 @@ You can control whether an item is required to request a job based on the job's 
 `Config.RemoveRequestedItem` — Enable or disable removing the item after a successful job request.
 
 To configure which items are required for each tier, edit the relevant settings in the tiered [houses] configurations. For more information, visit the [tiered request item settings section of the documentation](mknzz.github.io/burglary-docs/tier_config.html#changing-required-job-request-item).
+
+## Daily tasks
+
+Daily tasks can be enabled or disabled, and the number of tasks assigned can be configured:
+
+```
+Config.DailyTasks = true   -- Enable or disable daily tasks
+Config.MinTasks = 5        -- Minimum number of tasks assigned
+Config.MaxTasks = 8        -- Maximum number of tasks assigned
+```
+
+{: .important }
+When the server starts, the `boss_task` table will be automatically imported if `Config.DailyTasks` is true. Requires **oxmysql**.
+
+You can configure the available tasks in `Config.TasksList`. Each task has the following fields:
+
+| Field | Description |
+|---|---|
+| `id` | Unique task identifier |
+| `task` | Display name |
+| `desc` | Description (supports `%s` for tier/item placeholders) |
+| `icon` | Font Awesome icon class |
+| `tier` | Single tier number or `{min, max}` range |
+| `items` | Item(s) required or involved (string or table) |
+| `weapon` | Weapon(s) involved (for combat tasks) |
+| `rewards` | `{ rep = {min, max}, items = {"item1", "item2"} }` |
+| `hide_items` | Whether to hide reward items in the task description |
+
+## Carry system
+
+The carry system automatically attaches props to players when carry items are in their inventory.
+
+```
+Config.AlwaysCarry = true    -- Enable constant inventory checks for carrying props
+Config.DisableCarry = false  -- Completely disable carrying props
+```
+
+Carry props are configured in `Config.CarryProps`. Each entry defines the model, bone attachment, position, rotation, and whether the item is a tool:
+
+```
+Config.CarryProps = {
+    ["bigtv"] = {
+        model = "prop_tv_flat_02b",
+        bone = 60309,
+        position = vector3(0.075, 0.19, 0.295),
+        rotation = vector3(223.0, 110.0, 0.0)
+    },
+    ["housescrewdriver"] = {
+        model = "prop_tool_screwdvr02",
+        bone = 6286,
+        position = vector3(0.07, 0.07, -0.003),
+        rotation = vector3(235.0, 72.1, 180.0),
+        tool = true  -- Tool items use a different animation and don't restrict movement
+    },
+    -- You can add custom animations per item:
+    ["example"] = {
+        model = "prop_example",
+        bone = 60309,
+        position = vector3(0.0, 0.0, 0.0),
+        rotation = vector3(0.0, 0.0, 0.0),
+        animDict = "custom_anim_dict",  -- Optional: custom animation dictionary
+        anim = "custom_anim"            -- Optional: custom animation name
+    },
+}
+```
+
+Items with `tool = true` use the jerrycan carry animation by default and don't apply movement restrictions. Regular items use the box carry animation and slow the player down.
+
+## Item name mapping (ox_inventory)
+
+When using `ox_inventory`, QB item names need to be mapped to their ox equivalents for prop pickups and search zones. Configure this via `Config.ReplaceQbItemNames`:
+
+```
+Config.ReplaceQbItemNames = {
+    -- Attachments
+    ["smallscope_attachment"] = "at_scope_small",
+    ["medscope_attachment"] = "at_scope_medium",
+    ["comp_attachment"] = "at_compensator",
+    ["suppressor_attachment"] = "at_suppressor_light",
+    ["grip_attachment"] = "at_grip",
+    ["drum_attachment"] = "at_clip_drum_rifle",
+    ["weapontint_3"] = "at_skin_camo",
+    ["weapontint_7"] = "at_skin_metal",
+    ["weapontint_2"] = "at_skin_luxe",
+
+    -- Weapons
+    ["weapon_combatmg"] = "WEAPON_COMBATMG",
+    ["weapon_nightstick"] = "WEAPON_NIGHTSTICK",
+    ["weapon_battleaxe"] = "WEAPON_BATTLEAXE",
+    -- Add more mappings as needed for your server's item names
+
+    -- Ammo
+    ["pistol_ammo"] = "ammo-9",
+    ["rifle_ammo"] = "ammo-rifle",
+    ["shotgun_ammo"] = "ammo-shotgun",
+}
+```
+
+{: .note }
+This mapping is used during prop pickups (`pickupAProp`), search zones (`searchAZone`), and ped looting. If a QB item name exists as a key in this table, it will be converted to the corresponding ox name before adding to the player's inventory.
+
+## Untargetable models (ox_target)
+
+Some pickup prop models cannot be targeted by `ox_target` using standard entity zones. These models are configured to use sphere zones instead:
+
+```
+Config.OxUntargetableModels = {
+    'w_ar_carbinerifle',
+    'w_sb_microsmg',
+    'w_ar_assaultrifle',
+    -- Add more model names as needed
+}
+```
+
+If you add new pickup props to interiors and find they can't be targeted with `ox_target`, add the model name to this list.
+
+## Inventory weight
+
+When using `qb-inventory` or `qs-inventory`, set the maximum inventory weight to match your inventory config:
+
+```
+Config.MaxInventoryWeight = 120000  -- Should match the max weight from your inventory config
+```
+
+{: .note }
+Not needed when using `ox_inventory` — weight checks are handled automatically via its exports.
+
+## Sellman configuration
+
+You can fully disable the sell peds:
+
+```
+Config.DisableSellman = false  -- Set to true to disable all sellman peds
+```
+
+## Misc options
+
+```
+Config.DrawText = false        -- Enable or disable drawing text for certain actions
+Config.TeleportOnDeath = true  -- Teleport to exterior door when health reaches 0
+Config.Logs = false            -- Enable or disable webhook logging via qb-log
+Config.PrintStuff = false      -- Enable or disable debug prints
+```
 
 ## Dispatch alerts
 

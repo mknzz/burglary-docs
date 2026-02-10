@@ -4,7 +4,7 @@ title: Houses Config
 nav_order: 4
 ---
 
-# Configuring sk-burglary 3.5.3
+# Configuring sk-burglary 3.6.0
 
 ## Finding the house config files
 
@@ -76,9 +76,19 @@ There are three minigame options available:
 
 > - **square**: This is the default QB skillcheck minigame.
 >
-> - **lockpick**: This option allows you to use the default `qb-lockpick` minigame. Ensure that this resource is present and **enabled** in the `Config.RequiredResources` table in the `config.lua` file.
+> - **lockpick**: This option allows you to use the default `qb-lockpick` minigame. Ensure that this resource is present and **enabled** in the `Config.DefaultResources` table in the `config.lua` file.
 >
 > - **circle**: This option allows you to use either the `ps-ui` or `ox_lib` for the circle minigame. Ensure that one of these resources is present and **enabled** in the `Config.OptionalResources` table in the `config.lua` file.
+>
+> - **var**: Uses the `ps-ui` var minigame. Requires `ps-ui` to be present and **enabled** in `Config.OptionalResources`.
+>
+> - **thermite**: Uses the `ps-ui` thermite minigame. Requires `ps-ui` to be present and **enabled** in `Config.OptionalResources`.
+>
+> - **mhacking**: Mobile hacking minigame.
+>
+> - **scrambler**: Scrambler minigame from `ps-ui`.
+>
+> - **safecracker**: Uses `pd-safe`. Requires `pd-safe` to be present and **enabled** in `Config.OptionalResources`.
 
 ## Setting up a new minigame
 
@@ -175,19 +185,28 @@ end
 
 ## Changing level requirements
 
-You can set the chance of receiving a T3 house by changing the `Config.T3_HouseChance` variable.
+You can set the base chance of receiving a T3 house by changing the `Config.T3_HouseChance` variable.
 
 ```
-Config.T3_HouseChance = 0.17 -- The value can range from 0.0 (no chance) to 1.0 (guaranteed chance).
+Config.T3_HouseChance = 0.0 -- The value can range from 0.0 (no chance) to 1.0 (guaranteed chance).
 ``` 
 
-You can set the scaling factor that boosts the chance of receiving a T3 house. For this to take effect, the `Config.LevelScaling` variable in `config.lua` must be set to **true**.
+You can set the scaling factor that boosts the chance of receiving a T3 house as the player levels up. For this to take effect, the `Config.LevelScaling` variable in `config.lua` must be set to **true**.
+
+When level scaling is enabled, tier chances are calculated using a power curve formula:
+
+`tierChance = baseChance + (scalingFactor * (level^1.5 / maxLevel^1.5))`
+
+This means higher levels provide increasingly larger boosts to tier chances. The total of T2+T3+T4 chances is capped at 85%, reserving a minimum 15% for T1.
 
 ```
-Config.T3_LevelScaling = 0.027 -- (0.0 to 1.0)
+Config.T3_LevelScaling = 0.30 -- (0.0 to 1.0)
 ```
 
-You can set the level required to request T3 house offers. If you meet the required level, you will also be able to choose the tier of the house. For this to take effect, the `Config.LevelScaling` variable in `config.lua` must be set to **false**.
+{: .note }
+When `Config.RequireLevelForTier` is enabled in `config.lua`, tiers are also gated behind their `RequiredLevel`, a player below the required level will never receive that tier regardless of probability.
+
+You can set the level required to request T3 house offers. When `Config.RequireLevelForTier` is enabled (default), this also gates the tier in random selection. When `Config.LevelScaling` is disabled, meeting the required level allows you to choose the tier directly.
 
 ```
 Config.T3_RequiredLevel = 7 -- (1 - Config.MaxLevel)

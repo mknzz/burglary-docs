@@ -8,7 +8,204 @@ nav_order: 6
 
 Latest patch notes for both escrow and full source versions.
 
-## Update 3.5.3 - Latest
+## Update 3.6.0
+
+**Reputation System Overhaul & Carry System Rewrite**
+
+### Complete Reputation Security Overhaul
+
+**Server Side Validation**
+- All reputation calculations and modifications now happen server-side.
+- New validation system with `Config.RepLimits` table defining min/max rep ranges for each action type and tier.
+- Added `burglary:server:AddRepForGroup` event - Server validates rep amounts and distributes to all group members.
+- Added `burglary:server:RemoveRepForGroup` event - Server calculates penalties and applies to group members.
+- Modified `burglary:client:AddValidatedRep` - Now receives server `newTotal` value instead of calculating locally.
+- Modified `burglary:client:RemoveValidatedRep` - Now receives server `newTotal` value.
+- Removed vulnerable `burglary:server:UpdateRep` event that accepted client-provided rep values.
+
+**Server Side Rep Tracking**
+- Added `playerRepCache` to maintain authoritative reputation state on the server.
+- Modified `loadPlayerRep()` - Now caches rep server-side and sends values to clients.
+- Modified `updatePlayerRep()` - Server directly updates database after validation.
+- Client `currentRep` is now display only, fully synced with server's value.
+
+**Group Reputation Distribution**
+- All group members inside the house now receive reputation rewards automatically.
+- Updated `AddRepForReason(reason, tier, customRepRange)` function in `funcs.lua`.
+
+**Rep Limits**
+- Moved `repRewards` from `funcs.lua` to `Config.RepLimits` in `config.lua`.
+- Added `Config.MaxCustomRepAllowed` (default: 2,000) to cap custom task rep values.
+- Full validation for custom rep ranges - only `complete_task` can use custom values.
+- Rep limit values scaled down to match new `RepPerLevel` thresholds (e.g. `breaking_in` T1: 50-100, T4: 250-350).
+- Task rewards (`Config.TasksList`) rebalanced to match (e.g. Kill A Jugg: 1,000-1,500 rep).
+
+### Power Curve Level Scaling System
+
+**Improved Progression Formula**
+- Changed from linear (`lvl * scaling`) to a power curve (`lvl^1.5 / maxLevel^1.5`) for accelerating progression.
+- Modified `GetTierChance(lvl)` in `main.lua` - Now uses power curve scaling factor.
+- Configurable probability normalization via `Config.MaxTierChance` (default: 0.85) caps total T2+T3+T4 chances to reserve a minimum for T1.
+- More significant tier chance improvements at higher levels.
+
+**Rebalanced Reputation Thresholds**
+
+Updated `Config.RepPerLevel` for accelerating difficulty curve (~206,500 total rep, ~100-120 runs to max):
+- Level 1→2: 2,000 rep
+- Level 2→3: 3,500 rep
+- Level 3→4: 6,000 rep
+- Level 4→5: 9,000 rep
+- Level 5→6: 13,000 rep
+- Level 6→7: 18,000 rep
+- Level 7→8: 25,000 rep
+- Level 8→9: 33,000 rep
+- Level 9→10: 42,000 rep
+- Level 10→Max: 55,000 rep (display only)
+
+### Tier 4 Job Selection Fixed
+- Fixed `getRandomTier(lvl)` function to properly include tier 4 in random job selection.
+- Modified selection logic in `main.lua` to check tiers in descending order: T4 → T3 → T2 → T1.
+- Tier 4 now properly scales with level progression as intended.
+
+### Rebalanced Tier Chances & Scaling
+
+Updated tier configuration files with new base chances and power curve scaling factors. T3 and T4 now have 0% base chance, earned purely through level progression.
+
+**Added `Config.RequireLevelForTier`** (default: `true`)
+- When enabled, tiers are hard gated behind their `RequiredLevel` setting even when `LevelScaling` is enabled.
+- A level 1 player cannot roll T3/T4 by chance. Set `false` for more probability based selection.
+- Modified `getRandomTier(lvl)` in `main.lua` to enforce tier gates.
+
+**Tier Distribution by Level** (with `RequireLevelForTier = true`):
+
+Level 1-3 (New Players):
+- T1: 100% (T2/T3/T4 locked)
+
+Level 4 (Unlocks T2):
+- T1: ~87% | T2: ~13%
+
+Level 7 (Unlocks T3):
+- T1: ~60% | T2: ~23% | T3: ~18%
+
+Level 9 (Unlocks T4):
+- T1: ~15% | T2: ~30% | T3: ~25% | T4: ~30%
+
+Level 10 (Max Level):
+- T1: ~15% | T2: ~30% | T3: ~26% | T4: ~30%
+
+**Updated Configuration:**
+- **Tier 1**: Base chance 1.0 (100%), no scaling - Always available as fallback
+- **Tier 2**: Base chance 0.05 (5%), scaling factor 0.30 (was 0.03) — RequiredLevel: 4
+- **Tier 3**: Base chance 0.0 (0%), scaling factor 0.30 (was 0.04) — RequiredLevel: 7
+- **Tier 4**: Base chance 0.0 (0%), scaling factor 0.35 (was 0.047) — RequiredLevel: 9
+
+Normalization (`Config.MaxTierChance`, default 0.85) activates at level 9+ when all tiers are unlocked, ensuring T1 always has at least 15% chance.
+
+### Reputation Penalty
+
+**Action Based Penalties**
+- New `Config.RepPenalties` table in `config.lua` defines per reason, per tier penalty ranges as `{min%, max%}`.
+- Penalties are applied as a percentage of the player's current rep, matching the existing `RepRemovalPercent` format.
+- Each penalty reason can be individually tuned or disabled by setting both values to 0.
+
+**Penalty Triggers:**
+- `breakin_failed` — Failed the front door break-in minigame (default: 1-2% all tiers)
+- `alarm_triggered` — Interior security alarm triggered for the first time via noise, gunshot, or anti-tamper (default: 1-4% depending on tier). Only fires once per burglary.
+- `safe_failed` — Failed the safe cracking minigame (default: 1-3% depending on tier).
+- `player_downed` — Player killed inside the house, triggering exterior teleport (default: 3-5% all tiers)
+- `lockdown_triggered` — T4 CCTV lockdown activated (default: 4-6% T4 only, 0% T1-T3)
+
+**Server Handling**
+- Updated `burglary:server:RemoveRepForGroup` to accept an optional `reason` parameter.
+- When a reason is provided and exists in `Config.RepPenalties`, uses the reason specific penalty range.
+- Falls back to `T*_RepRemovalPercent` (job cancellation penalty) when no reason is given.
+- Ranges set to `{0, 0}` are skipped server-side.
+
+### Carry System Rewrite
+
+**Complete System Overhaul**
+- Rewrote the entire carry prop system with improved state management, reliability and performance.
+- New `carryState` table structure for cleaner state tracking.
+- Added `isAutoUpdate` and `isAttaching` flags to prevent race conditions and duplicate attachments.
+
+**Per Item Animation Support**
+- Each carry prop can now have its own custom animation.
+- Added `animDict` and `anim` fields to `Config.CarryProps` entries.
+- Default animations: Box carry for normal items, jerrycan for tools.
+
+**Universal Auto Carry Monitor**
+- Removed inventory specific event listeners in favor of universal polling system.
+- Auto carry now works with all inventory systems (`qb-inventory`, `ox_inventory`, `qs-inventory`, `jaksam-inventory`).
+- Polling based detection every 500ms using existing `PlyHasItem()` function.
+- Fixed carry props spawning on the floor/in the air when joining a server with a carry item in inventory. Added `playerReady` flag driven by `QBCore:Client:OnPlayerLoaded` to delay prop attachment, inventory monitoring, and animation monitoring until the player ped is fully loaded in.
+
+**Improved Weapon Handling**
+- Auto holster weapons when picking up carry items instead of blocking the action.
+- Weapons are automatically holstered with proper wait for completion.
+- Carry prop re-attaches after holstering if item still in inventory.
+- Notification shown when weapon is holstered while carrying.
+
+### Ped Spawning & Target Fix
+
+**Bossman & Sellman Target Fix**
+- Fixed bossman and sellman targets not appearing on first join after a fresh server start.
+- Ped creation now waits for `QBCore:Client:OnPlayerLoaded` before requesting peds from the server, ensuring the target system (qb-target/ox_target) is fully initialized.
+- On resource restart, peds are created immediately via `LocalPlayer.state.isLoggedIn` check since the player is already loaded.
+
+### Code Changes
+
+**Removed Functions**
+- Removed `AddRep(amount)` function - Replaced with server validated `AddRepForReason()`.
+- Removed `GetRepPenalty(tier)` function - Penalty calculation now handled server-side via `Config.RepPenalties`.
+- Removed legacy task rep logic from `GiveTaskRewards()`.
+- Removed unused `validateRepAmount()` function from `main.lua`.
+- Removed `repRewards` table from `funcs.lua` - Data moved to `Config.RepLimits`.
+- Removed inventory specific event listeners from carry system.
+- Removed unused `tryAttachToPlayer` function from carry system.
+
+**Modified Functions**
+- Modified `RemoveRep(tier)` → `RemoveRep(tier, reason)` - Now accepts an optional reason string to select a penalty range from `Config.RepPenalties`.
+- Modified `triggerSecurityAlarms()` - Added `wasAlreadyDetected` check so the alarm penalty only triggers once per burglary.
+- Modified `UnlockAndEnter(success)` - Calls `RemoveRep` with `'breakin_failed'` on minigame failure.
+- Modified `unlockSafe()` callback - Calls `RemoveRep` with `'safe_failed'` when safe cracking fails (key unlock unaffected).
+- Modified `TeleportOnDeath()` - Calls `RemoveRep` with `'player_downed'` before teleporting.
+- Modified `LockdownExterior()` - Calls `RemoveRep` with `'lockdown_triggered'` when CCTV lockdown activates.
+- Modified `burglary:server:RemoveRepForGroup` - Accepts optional `reason` param, looks up `Config.RepPenalties[reason][tier]` or falls back to `T*_RepRemovalPercent`.
+
+**Files Modified**
+- `server/main.lua` - Server-side validation, group distribution, rep tracking, tier validation, reason-based penalty lookup
+- `client/main.lua` - Client validation handlers, scaling formula, tier selection, penalty hooks at failure points
+- `client/funcs.lua` - New `AddRepForReason()` helper function
+- `client/carry.lua` - Complete rewrite with per item animations and universal auto carry
+- `client/peds.lua` - Added ready check for bossman/sellman target setup
+- `shared/config.lua` - Added `Config.RepLimits`, `Config.MaxCustomRepAllowed`, `Config.RequireLevelForTier`, `Config.MaxTierChance`, `Config.RepPenalties`, updated rep thresholds & task rewards
+- `houses/tier1.lua` - Added T1 chance config (1.0, no scaling)
+- `houses/tier2.lua` - Updated T2 chance (0.05) & scaling (0.30)
+- `houses/tier3.lua` - Updated T3 chance (0.0) & scaling (0.30)
+- `houses/tier4.lua` - Updated T4 chance (0.0) & scaling (0.35)
+
+### Migration Notes
+
+**Configuration Migration**
+- Rep limits are now configurable in `config.lua` via `Config.RepLimits`.
+- Carry props can now include `animDict` and `anim` fields for custom animations.
+
+**Database Migration**
+- No schema changes required as the `boss_reputation` and `boss_task` tables remain the same.
+- **Recommended**: Reset or delete all player reputation data due to the significantly rebalanced `RepPerLevel` thresholds. Existing rep values were earned under the old curve and will place players at incorrect levels.
+  - Option A: Drop the rep table, it'll be auto created when the resource starts.
+  - Option B: Reset all rep to 0 or delete all entries.
+  - Option C: Leave as is, but expect players to be at higher levels than intended.
+
+**Recommended**
+- Review `Config.RepLimits` and adjust rep ranges if needed for your server economy.
+- Review `Config.RepPerLevel` thresholds for desired progression speed.
+- Fine tune tier scaling factors if you prefer different tier distribution.
+- Adjust `Config.MaxTierChance` to control minimum T1 chance (default 0.85 = 15% T1 minimum).
+- Set `Config.RequireLevelForTier = false` if you prefer pure probability based tier selection without level gates. For `Config.LevelScaling = true` only.
+- Review `Config.RepPenalties` and adjust penalty ranges per reason and tier. Set `{0, 0}` to disable any specific penalty.
+
+## Update 3.5.3
 
 **General Fixes & Improvements**
 
