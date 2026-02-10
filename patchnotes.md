@@ -95,9 +95,9 @@ Level 10 (Max Level):
 
 **Updated Configuration:**
 - **Tier 1**: Base chance 1.0 (100%), no scaling - Always available as fallback
-- **Tier 2**: Base chance 0.05 (5%), scaling factor 0.30 (was 0.03) — RequiredLevel: 4
-- **Tier 3**: Base chance 0.0 (0%), scaling factor 0.30 (was 0.04) — RequiredLevel: 7
-- **Tier 4**: Base chance 0.0 (0%), scaling factor 0.35 (was 0.047) — RequiredLevel: 9
+- **Tier 2**: Base chance 0.05 (5%), scaling factor 0.30 (was 0.03) - RequiredLevel: 4
+- **Tier 3**: Base chance 0.0 (0%), scaling factor 0.30 (was 0.04) - RequiredLevel: 7
+- **Tier 4**: Base chance 0.0 (0%), scaling factor 0.35 (was 0.047) - RequiredLevel: 9
 
 Normalization (`Config.MaxTierChance`, default 0.85) activates at level 9+ when all tiers are unlocked, ensuring T1 always has at least 15% chance.
 
@@ -109,11 +109,11 @@ Normalization (`Config.MaxTierChance`, default 0.85) activates at level 9+ when 
 - Each penalty reason can be individually tuned or disabled by setting both values to 0.
 
 **Penalty Triggers:**
-- `breakin_failed` — Failed the front door break-in minigame (default: 1-2% all tiers)
-- `alarm_triggered` — Interior security alarm triggered for the first time via noise, gunshot, or anti-tamper (default: 1-4% depending on tier). Only fires once per burglary.
-- `safe_failed` — Failed the safe cracking minigame (default: 1-3% depending on tier).
-- `player_downed` — Player killed inside the house, triggering exterior teleport (default: 3-5% all tiers)
-- `lockdown_triggered` — T4 CCTV lockdown activated (default: 4-6% T4 only, 0% T1-T3)
+- `breakin_failed` - Failed the front door break-in minigame (default: 1-2% all tiers)
+- `alarm_triggered` - Interior security alarm triggered for the first time via noise, gunshot, or anti-tamper (default: 1-4% depending on tier). Only fires once per burglary.
+- `safe_failed` - Failed the safe cracking minigame (default: 1-3% depending on tier).
+- `player_downed` - Player killed inside the house, triggering exterior teleport (default: 3-5% all tiers)
+- `lockdown_triggered` - T4 CCTV lockdown activated (default: 4-6% T4 only, 0% T1-T3)
 
 **Server Handling**
 - Updated `burglary:server:RemoveRepForGroup` to accept an optional `reason` parameter.

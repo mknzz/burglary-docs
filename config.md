@@ -123,7 +123,7 @@ Config.MaxTierChance = 0.85  -- 0.0 to 1.0, default 0.85 (T1 gets at least 15%)
 
 ## Require level for tier
 
-When `Config.RequireLevelForTier` is enabled, players must meet the tier's `RequiredLevel` before that tier can appear in random job selection — even when level scaling is active. This prevents low-level players from being randomly assigned high-tier houses they aren't ready for.
+When `Config.RequireLevelForTier` is enabled, players must meet the tier's `RequiredLevel` before that tier can appear in random job selection for when level scaling is active.
 
 ```
 Config.RequireLevelForTier = true  -- Set to 'true' to gate tiers behind RequiredLevel, 'false' for pure probability
@@ -135,7 +135,7 @@ For example, with `RequireLevelForTier = true` and default `RequiredLevel` value
 - Level 7+ players can receive T1, T2, and T3 houses (`T3_RequiredLevel = 7`)
 - Level 9+ players can receive all tiers (`T4_RequiredLevel = 9`)
 
-The `RequiredLevel` for each tier is set in the corresponding `houses/tierX.lua` file (e.g., `Config.T4_RequiredLevel = 9`).
+The `RequiredLevel` for each tier is set in the corresponding `houses/tier*.lua` file (e.g., `Config.T4_RequiredLevel = 9`).
 
 If level scaling is disabled, you can select which tier house if you meet the required level.
 
@@ -179,7 +179,7 @@ Reputation is also earned from daily tasks, which are loaded only when you check
 
 ## Reputation limits (Config.RepLimits)
 
-Reputation reward ranges are now configured in the main `config.lua` via `Config.RepLimits`. These values are validated server-side — the server will reject any rep amounts outside the defined ranges.
+Reputation reward ranges are now configured in the main `config.lua` via `Config.RepLimits`. These values are validated server-side.
 
 ```
 Config.RepLimits = {
@@ -403,9 +403,9 @@ end
 
 You can control whether an item is required to request a job based on the job's tier by setting:
 
-`Config.RequireRequestItem` — Enable or disable the requirement for an item when requesting a job.
+`Config.RequireRequestItem` - Enable or disable the requirement for an item when requesting a job.
 
-`Config.RemoveRequestedItem` — Enable or disable removing the item after a successful job request.
+`Config.RemoveRequestedItem` - Enable or disable removing the item after a successful job request.
 
 To configure which items are required for each tier, edit the relevant settings in the tiered [houses] configurations. For more information, visit the [tiered request item settings section of the documentation](mknzz.github.io/burglary-docs/tier_config.html#changing-required-job-request-item).
 
@@ -533,7 +533,7 @@ Config.MaxInventoryWeight = 120000  -- Should match the max weight from your inv
 ```
 
 {: .note }
-Not needed when using `ox_inventory` — weight checks are handled automatically via its exports.
+Not needed when using `ox_inventory` - weight checks are handled automatically via its exports.
 
 ## Sellman configuration
 
