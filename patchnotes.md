@@ -8,6 +8,19 @@ nav_order: 6
 
 Latest patch notes for both escrow and full source versions.
 
+## Update 3.6.1
+
+**Solo Rep Rewarding & Auto Holster Fixes**
+
+- Fixed solo players not receiving reputation rewards. The `source` variable in the `burglary:server:AddRepForGroup` handler was always `nil`.
+→ Modified `burglary:server:AddRepForGroup` in `server/main.lua`.
+
+- Fixed auto holster not working with `ox_inventory` / QBox. The native `SetCurrentPedWeapon` wasn't really working with `ox_inventory` as it re-equips the weapon immediately, causing a loop of failed holster attempts and `cant_carry` notification spam. Now uses `ox_inventory:disarm` client event when `ox_inventory` is enabled, falling back to the native for `qb-inventory` and others.
+→ Modified `autoHolsterWeapon()` in `client/carry.lua`.
+
+- Fixed `autoHolsterWeapon` function ordering. It was defined after `canAttachProp` which called it, causing a nil function error. Moved `autoHolsterWeapon` above `canAttachProp`.
+→ Modified function order in `client/carry.lua`.
+
 ## Update 3.6.0
 
 **Reputation System Overhaul & Carry System Rewrite**
