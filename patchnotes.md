@@ -19,7 +19,7 @@ Latest patch notes for both escrow and full source versions.
 
 ### Carry System Bug Fix
 
-- Fixed carry system permanently stopping after entering an interior with a tool (screwdriver/axe) in hand. `PropFix()` (called at the start of `TeleportToLocation`) deleted the carry prop entity but never reset `carryState`. Added stale carry state cleanup at the end of `PropFix()` — resets all `carryState` fields and stops animations/movement restrictions when the prop entity no longer exists.
+- Fixed carry system permanently stopping after entering an interior with a tool (screwdriver/axe) in hand. `PropFix()` (called at the start of `TeleportToLocation`) deleted the carry prop entity but never reset `carryState`. Added stale carry state cleanup at the end of `PropFix()` resets all `carryState` fields and stops animations/movement restrictions when the prop entity no longer exists.
 → Modified `PropFix()` in `client/carry.lua`.
 
 ### Tier System Refactor
