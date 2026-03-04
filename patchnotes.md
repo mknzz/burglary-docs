@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Patch Notes
-nav_order: 6
+nav_order: 7
 ---
 
 # Patch Notes for sk-burglary
