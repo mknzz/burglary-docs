@@ -314,7 +314,8 @@ Config.T5_SafeMinigame = {
 
 ```
 
-> **Tip:** Look at the existing `interiors/tier1.lua` through `interiors/tier4.lua` for complete examples of interior configurations with all available options.
+{: .note }
+Look at the existing `interiors/tier1.lua` through `interiors/tier4.lua` for complete examples of interior configurations with all available options.
 
 ---
 
@@ -343,7 +344,8 @@ If you use mail/phone notifications for job start messages, you may also add:
 }
 ```
 
-> **Note:** These are only needed if your `NotifyJobStarted` and related functions reference tier specific locale keys. The default implementation constructs messages using generic keys with the tier number.
+{: .note }
+These are only needed if your `NotifyJobStarted` and related functions reference tier specific locale keys. The default implementation constructs messages using generic keys with the tier number.
 
 ---
 
@@ -383,11 +385,11 @@ Config.RepPenalties = {
 
 After adding all files and restarting the resource:
 
-1. Check the server console for the auto-discovery message:
+1. Check the server console for the auto discovery message:
    ```
    [burglary] Discovered 5 tier(s) from config.
    ```
-2. Open the bossman menu — the new tier should appear in the job list.
+2. Check the bossman menu for the new tier to appear in the job list.
 3. Test that the tier respects its `RequiredLevel` and `MinPolice` settings.
 
 ---
@@ -439,7 +441,7 @@ After adding all files and restarting the resource:
 
 ---
 
-## How It Works Under the Hood
+## How It Works
 
 The dynamic system uses string key construction to access config values:
 
