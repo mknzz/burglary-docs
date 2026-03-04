@@ -8,6 +8,77 @@ nav_order: 7
 
 Latest patch notes for both escrow and full source versions.
 
+## Update 3.6.2
+
+**Rep Cache, Carry System & Tier System**
+
+### Rep Cache Bug Fix
+
+- Fixed `AddRepForGroup` and `RemoveRepForGroup` fallback cache using `data.rep` when `MySQL.prepare.await` with `SELECT rep` returns the rep value directly. Replaced `data.rep` with `data`.
+→ Modified `burglary:server:AddRepForGroup` and `burglary:server:RemoveRepForGroup` in `server/main.lua`.
+
+### Carry System Bug Fix
+
+- Fixed carry system permanently stopping after entering an interior with a tool (screwdriver/axe) in hand. `PropFix()` (called at the start of `TeleportToLocation`) deleted the carry prop entity but never reset `carryState`. Added stale carry state cleanup at the end of `PropFix()` — resets all `carryState` fields and stops animations/movement restrictions when the prop entity no longer exists.
+→ Modified `PropFix()` in `client/carry.lua`.
+
+### Tier System Refactor
+
+The entire tier system has been refactored from a hardcoded 4 tier structure to a fully auto discovering system. New tiers can now be added by creating config files alone. This is especially beneficial for escrow users who cannot modify encrypted `client/main.lua` or `server/main.lua`.
+
+**Auto Discovery & Helpers**
+- Tiers are now automatically detected at startup by scanning for `Config.TX_Houses` keys (T1–T10). The discovered count is stored in `Config.DiscoveredMaxTiers`.
+- Added `GetTierConfig(tier, key, default)` — fetch any `Config.TX_Key` value with an optional default.
+- Added `GetHighestTierConfig(key)` — get the value from the highest tier that defines a given key.
+- RepLimits/RepPenalties for tiers beyond 4 automatically inherit values from the highest defined tier.
+→ Modified `shared/init.lua`.
+
+**Feature Flags**
+- Five new per tier config flags allow features previously exclusive to specific tiers to be toggled on/off for any tier:
+  - `Config.TX_ShowNearHint` — Show a proximity hint near the house
+  - `Config.TX_UseCustomAlarm` — Play a custom alarm sound (requires xsound)
+  - `Config.TX_UseUSBScene` — Use a USB insertion scene for security disabling
+  - `Config.TX_AllowCopBreach` — Allow police to breach this tier's houses
+  - `Config.TX_UseScrambler` — Use the Scrambler minigame for break-in
+→ Added to `houses/tier1.lua` through `houses/tier4.lua`.
+
+**Dynamic Lookup Functions**
+- All 12 lookup functions converted from static `[1]=Config.T1_X, ..., [4]=Config.T4_X` tables to dynamic `Config["T"..tier.."_X"]` resolution: `getHouseTable`, `getRandomHouseID`, `getInteriorTable`, `getRandomInteriorID`, `getRewardsTable`, `getJobAndQueueTime`, `getSecurityMinigame`, `getBreakInMinigame`, `getSafeMinigame`, `getRequiredItem`, `GetRequiredCopCount`.
+- `GetTierChance()` now returns a dynamically built table indexed by tier instead of 3 separate values.
+- `getRandomTier()` loops dynamically from highest to lowest tier instead of checking hardcoded tier variables.
+→ Modified `client/main.lua`.
+
+**Hardcoded Tier Checks Replaced (~20 locations)**
+- `tier == 4` for RequiredMemberCount → config-presence check via `GetTierConfig(tier, 'RequiredMemberCount')`.
+- `tier == 2 or tier == 3` for near-hint → `GetTierConfig(tier, 'ShowNearHint', false)`.
+- `tier > 1` / `tier < 2` for alarm sound → `GetTierConfig(tier, 'UseCustomAlarm', ...)`.
+- `tier == 3` for USB scene → `GetTierConfig(tier, 'UseUSBScene', false)`.
+- `tier < 4` for sphere zone → `not houseData.house.security_guards`.
+- `tier == 4` for keycard removal → `GetTierConfig(tier, 'RemoveKeycardChance')`.
+- `Config.T4_GuardClothing/GuardFaceFeatures` → `GetTierConfig(tier, ...)`.
+- `Config.T4_OverrideGuardModel` (3 locations) → `GetTierConfig(tier, 'OverrideGuardModel')`.
+- `Config.T4_AxePrepItem`, `Config.T4_SecurityCardChance`, `Config.T4_LootGuardHintChance` → `GetTierConfig`.
+- `for tier = 1, 3` cop breach loop → `for tier = 1, Config.DiscoveredMaxTiers` with `AllowCopBreach` check.
+- `tier == 4` for camera/guard checks → `houseData.house.security_cameras` / `security_guards` presence checks.
+→ Modified `client/main.lua`.
+
+**Menu & Blip Fallbacks**
+- All three menu functions (`OpenDefaultJobMenu`, `OpenNewJobMenu`, `OpenOptionalJobMenu`) changed from `for tier = 1, 4` to `for tier = 1, Config.DiscoveredMaxTiers`. Tier icons and colors now fall back to defaults for tiers beyond 4.
+→ Modified `client/menu.lua`.
+- `CreateBlip()` falls back to T4 blip style for tiers > 4.
+- `ShouldPedBeDeleted()` and `ForceGuardCleanup()` now check all tiers' `OverrideGuardModel`. Extracted `IsOverrideGuardModel()` helper.
+→ Modified `client/funcs.lua`.
+
+**Server Side Tier Support**
+- Tier validation changed from `tier > 4` to `tier > Config.DiscoveredMaxTiers`.
+- Rep removal penalty and `getCooldownConfig()` changed from static tables to `GetTierConfig(tier, ...)`.
+→ Modified `server/main.lua`.
+- `getConfigTable()` changed from static tables to dynamic `Config[string.format('T%s_%s', tier, key)]`.
+→ Modified `server/items.lua`.
+
+**Migration Notes**
+- All existing configurations remain fully compatible and the refactored code produces the same behavior with the default 4 tier setup.
+
 ## Update 3.6.1
 
 **Solo Rep Rewarding & Auto Holster Fixes**

@@ -4,7 +4,7 @@ title: Troubleshooting
 nav_order: 6
 ---
 
-# Troubleshooting sk-burglary 3.6.1
+# Troubleshooting sk-burglary 3.6.2
 
 Please make sure you have followed [Installing](https://mknzz.github.io/burglary-docs/install.html) and [Main Config](https://mknzz.github.io/burglary-docs/config.html).
 
