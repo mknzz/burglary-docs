@@ -7,7 +7,7 @@ nav_order: 2
 
 # skryptzOS configuration reference
 
-All main settings live in `config.lua`. The values below reflect the current repository defaults rather than older README values.
+All main settings live in `config.lua`.
 
 ## General
 
