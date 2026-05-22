@@ -21,27 +21,27 @@ This site is now the shared documentation hub for SKryptz FiveM resources. Each 
 House robbery / burglary gameplay with tiered interiors, minigames, scaling reputation, and group-aware progression.
 
 Quick links:
-[Install]({{ '/burglary-docs/install.html' | relative_url }})
-[Configuration]({{ '/burglary-docs/config.html' | relative_url }})
-[Troubleshooting]({{ '/burglary-docs/troubleshooting.html' | relative_url }})
+[Install]({{ '/install.html' | relative_url }})
+[Configuration]({{ '/config.html' | relative_url }})
+[Troubleshooting]({{ '/troubleshooting.html' | relative_url }})
 
 ### skryptzOS
 
 Darknet OS desktop, Erebus Market, dead-drop delivery, PGP messaging, surveillance tooling, and configurable anonymity systems.
 
 Quick links:
-[Overview]({{ '/burglary-docs/darknetos.html' | relative_url }})
-[Install]({{ '/burglary-docs/darknetos-install.html' | relative_url }})
-[Configuration]({{ '/burglary-docs/darknetos-config.html' | relative_url }})
+[Overview]({{ '/darknetos.html' | relative_url }})
+[Install]({{ '/darknetos-install.html' | relative_url }})
+[Configuration]({{ '/darknetos-config.html' | relative_url }})
 
 ### sk-runs
 
 Illegal delivery jobs with tier-ready configuration, multiple pickup and delivery scenarios, carry props, police alerts, and reputation progression.
 
 Quick links:
-[Overview]({{ '/burglary-docs/sk-runs.html' | relative_url }})
-[Install]({{ '/burglary-docs/sk-runs-install.html' | relative_url }})
-[Systems]({{ '/burglary-docs/sk-runs-systems.html' | relative_url }})
+[Overview]({{ '/sk-runs.html' | relative_url }})
+[Install]({{ '/sk-runs-install.html' | relative_url }})
+[Systems]({{ '/sk-runs-systems.html' | relative_url }})
 
 {: .note }
 Existing sk-burglary documentation URLs stay in place where possible so older links and bookmarks continue to work during the migration.
