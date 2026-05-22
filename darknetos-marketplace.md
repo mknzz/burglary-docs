@@ -9,7 +9,7 @@ nav_order: 3
 
 ## Core purchase lifecycle
 
-The marketplace is server-authoritative. Purchases and order transitions are validated on the server, with money, inventory, and database changes happening in the `server/sv_*.lua` modules.
+The marketplace is server authoritative. Purchases and order transitions are validated on the server, with money, inventory, and database changes happening in the `server/sv_*.lua` modules.
 
 The normal order flow is:
 
