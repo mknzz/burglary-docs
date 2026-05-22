@@ -9,7 +9,7 @@ Just the Docs
 
 # SKryptz resource documentation
 
-This site is now the shared documentation hub for SKryptz FiveM resources. Each product has its own section, but they all publish from the same GitHub Pages site.
+This site is now the shared documentation hub for SKryptz FiveM resources.
 
 ## Products
 

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Operations and QA
-parent: darknetos
+parent: skryptzOS
 nav_order: 5
 ---
 

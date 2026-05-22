@@ -1,7 +1,7 @@
 ---
 layout: default
 title: PGP, Surveillance, and Terminal
-parent: darknetos
+parent: skryptzOS
 nav_order: 4
 ---
 

@@ -1,11 +1,11 @@
 ---
 layout: default
 title: Configuration
-parent: darknetos
+parent: skryptzOS
 nav_order: 2
 ---
 
-# darknetos configuration reference
+# skryptzOS configuration reference
 
 All main settings live in `config.lua`. The values below reflect the current repository defaults rather than older README values.
 

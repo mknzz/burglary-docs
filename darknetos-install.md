@@ -1,11 +1,11 @@
 ---
 layout: default
 title: Install
-parent: darknetos
+parent: skryptzOS
 nav_order: 1
 ---
 
-# Installing darknetos
+# Installing skryptzOS
 
 ## Requirements
 

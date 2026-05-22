@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Marketplace and Delivery
-parent: darknetos
+parent: skryptzOS
 nav_order: 3
 ---
 

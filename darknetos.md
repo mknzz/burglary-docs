@@ -1,6 +1,6 @@
 ---
 layout: default
-title: darknetos
+title: skryptzOS
 nav_order: 3
 has_children: true
 ---
@@ -8,9 +8,9 @@ has_children: true
 1.0.0
 {: .label .label-green }
 
-# darknetos
+# skryptzOS
 
-darknetos is a FiveM resource that simulates a darknet operating system called SKryptzOS with a built-in marketplace called Erebus Market. It uses a server-authoritative design, a shared `FW.*` adapter for QBCore, QBox, and ESX, and a single-page NUI desktop that hosts the market, terminal, messaging, and law enforcement tooling.
+skryptzOS is documented here under the FiveM resource name `darknetos`. It simulates a darknet operating system with a built-in marketplace called Erebus Market. It uses a server-authoritative design, a shared `FW.*` adapter for QBCore, QBox, and ESX, and a single-page NUI desktop that hosts the market, terminal, messaging, and law enforcement tooling.
 
 ## What is included
 
