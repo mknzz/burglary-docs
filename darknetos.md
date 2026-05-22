@@ -10,7 +10,7 @@ has_children: true
 
 # skryptzOS
 
-skryptzOS is documented here under the FiveM resource name `darknetos`. It simulates a darknet operating system with a built-in marketplace called Erebus Market. It uses a server-authoritative design, a shared `FW.*` adapter for QBCore, QBox, and ESX, and a single-page NUI desktop that hosts the market, terminal, messaging, and law enforcement tooling.
+skryptzOS simulates a darknet operating system with a built-in marketplace called Erebus Market. It uses a server authoritative design, a shared `FW.*` adapter for QBCore, QBox, and ESX, and a NUI desktop that hosts the market, terminal, messaging, and law enforcement tooling.
 
 ## What is included
 
@@ -29,7 +29,7 @@ skryptzOS is documented here under the FiveM resource name `darknetos`. It simul
 - [Marketplace and Delivery]({{ '/darknetos-marketplace.html' | relative_url }})
 - [PGP, Surveillance, and Terminal]({{ '/darknetos-security.html' | relative_url }})
 
-## Architecture snapshot
+## Architecture
 
 ### Shared
 
@@ -57,6 +57,3 @@ skryptzOS is documented here under the FiveM resource name `darknetos`. It simul
 - `server/sv_messaging.lua` inbox and interception callbacks
 - `server/sv_terminal.lua` terminal command dispatch
 - `server/sv_timers.lua` timeouts, decay loops, payouts, and cleanup
-
-{: .note }
-Current code contains newer features than some older version labels still visible in the repo, so prefer these docs and the live config over stale text embedded in older pages or screenshots.
