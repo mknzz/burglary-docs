@@ -1,7 +1,8 @@
 ---
 layout: default
-title: Installing
-nav_order: 2
+title: Install
+parent: sk-burglary
+nav_order: 1
 ---
 
 # Installing sk-burglary 3.6.2
@@ -33,7 +34,7 @@ It is recommended to use a more recent FiveM server artifact version rather than
 >
 > 4. Add the item images from the `img` subfolder to your inventory images folder.
 >
-> 5. For a more detailed guide on configuration, please visit the [Main Config](https://mknzz.github.io/burglary-docs/config.html#configuring-sk-burglary-31) section of our docs.
+> 5. For a more detailed guide on configuration, please visit the [Main Config]({{ '/config.html#configuring-sk-burglary-362' | relative_url }}) section of our docs.
 
 ## You can also use the following optional resources for enhanced functionality.
 
@@ -68,7 +69,7 @@ It is recommended to use a more recent FiveM server artifact version rather than
 1. **Disable qb-target, qb-inventory, and qb-menu** by setting `enabled = false` in the main `config.lua`.
 2. **Enable ox_lib, ox_target, and ox_inventory** by setting `enabled = true` in the main `config.lua`.
 
-Alternatively, you can use the [Auto Setup option](https://mknzz.github.io/burglary-docs/config.html#optional-easy-resource-setup).
+Alternatively, you can use the [Auto Setup option]({{ '/config.html#optional-easy-resource-setup' | relative_url }}).
 
 ### For your **QBox** server config:
 Make sure to set: `setr qbx:enableBridge "true"` - This enables the qb-core bridge for `qbx_core`. It should be **true** by default.

@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Adding a New Tier
-nav_order: 5
+parent: sk-burglary
+nav_order: 4
 ---
 
 # Adding a New Tier

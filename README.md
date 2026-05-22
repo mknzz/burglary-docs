@@ -1,10 +1,12 @@
 ## Documentation
 
-You can find the official documentation for our FiveM houserobbery script (Version 3.6.2) on the github.io page.
+This repository now serves as the shared SKryptz documentation hub for multiple FiveM resources, including sk-burglary, darknetos, and sk-runs.
+
+Published site:
 
 https://mknzz.github.io/burglary-docs/
 
-Created using [Just The Docs](https://github.com/just-the-docs/just-the-docs) ❤️
+The site is built with [Just The Docs](https://github.com/just-the-docs/just-the-docs).
 
 ## Licensing and Attribution
 

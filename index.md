@@ -4,24 +4,44 @@ title: Home
 nav_order: 1
 ---
 
-3.6.2 Latest
+Multi-resource hub
+{: .label .label-green }
+
+Just the Docs
 {: .label .label-purple }
 
-# Welcome to the sk-burglary Documentation!
+# SKryptz resource documentation
 
-Here, you will find all the information you need to install and configure both the **escrow** and **open-source** versions of sk-burglary effectively. We have everything you need to make the most of your experience.
+This site is now the shared documentation hub for SKryptz FiveM resources. Each product has its own section, but they all publish from the same GitHub Pages site.
 
-> - **Getting Started**: Follow our detailed [Installation Guide](https://mknzz.github.io/burglary-docs/install.html) to set up sk-burglary.
->
-> - **Support**: Check out our [Troubleshooting](https://mknzz.github.io/burglary-docs/troubleshooting.html) page for common issues. For further assistance, create a ticket in the [SKryptz Discord](https://discord.com/invite/7adPGz93SU) using the **#request-help** channel. Don’t hesitate to reach out! 
+## Products
+
+### sk-burglary
+
+House robbery / burglary gameplay with tiered interiors, minigames, scaling reputation, and group-aware progression.
+
+Quick links:
+[Install]({{ '/burglary-docs/install.html' | relative_url }})
+[Configuration]({{ '/burglary-docs/config.html' | relative_url }})
+[Troubleshooting]({{ '/burglary-docs/troubleshooting.html' | relative_url }})
+
+### skryptzOS
+
+Darknet OS desktop, Erebus Market, dead-drop delivery, PGP messaging, surveillance tooling, and configurable anonymity systems.
+
+Quick links:
+[Overview]({{ '/burglary-docs/darknetos.html' | relative_url }})
+[Install]({{ '/burglary-docs/darknetos-install.html' | relative_url }})
+[Configuration]({{ '/burglary-docs/darknetos-config.html' | relative_url }})
+
+### sk-runs
+
+Illegal delivery jobs with tier-ready configuration, multiple pickup and delivery scenarios, carry props, police alerts, and reputation progression.
+
+Quick links:
+[Overview]({{ '/burglary-docs/sk-runs.html' | relative_url }})
+[Install]({{ '/burglary-docs/sk-runs-install.html' | relative_url }})
+[Systems]({{ '/burglary-docs/sk-runs-systems.html' | relative_url }})
 
 {: .note }
-If you’re having trouble finding the escrowed version of the asset on Keymaster, look for **qb-instance**.
-
-----
-[Just the Docs]: https://just-the-docs.github.io/just-the-docs/
-[GitHub Pages]: https://docs.github.com/en/pages
-[README]: https://github.com/just-the-docs/just-the-docs-template/blob/main/README.md
-[Jekyll]: https://jekyllrb.com
-[GitHub Pages / Actions workflow]: https://github.blog/changelog/2022-07-27-github-pages-custom-github-actions-workflows-beta/
-[use this template]: https://github.com/just-the-docs/just-the-docs-template/generate
+Existing sk-burglary documentation URLs stay in place where possible so older links and bookmarks continue to work during the migration.

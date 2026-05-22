@@ -1,8 +1,9 @@
-title: sk-burglary 3.6.2
-description: The official documentation for our FiveM houserobbery / burglary script by SKryptz <3
+title: SKryptz Docs
+description: documentation hub for SKryptz FiveM resources
 remote_theme: pmarsceill/just-the-docs
 
-url: https://mknzz.github.io/burglary-docs/
+url: https://mknzz.github.io
+baseurl: /burglary-docs
 
 # Enable or disable the site search
 # Supports true (default) or false
@@ -57,5 +58,5 @@ callouts:
     color: green
 
 aux_links:
-  Tebex: https://skryptz.tebex.io/package/5026669
+  Store: https://skryptz.tebex.io/
   Discord: https://discord.gg/FnbGUkWxHY

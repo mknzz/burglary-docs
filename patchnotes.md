@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Patch Notes
-nav_order: 7
+parent: sk-burglary
+nav_order: 6
 ---
 
 # Patch Notes for sk-burglary
@@ -28,18 +29,18 @@ The entire tier system has been refactored from a hardcoded 4 tier structure to 
 
 **Auto Discovery & Helpers**
 - Tiers are now automatically detected at startup by scanning for `Config.TX_Houses` keys (T1–T10). The discovered count is stored in `Config.DiscoveredMaxTiers`.
-- Added `GetTierConfig(tier, key, default)` — fetch any `Config.TX_Key` value with an optional default.
-- Added `GetHighestTierConfig(key)` — get the value from the highest tier that defines a given key.
+- Added `GetTierConfig(tier, key, default)` - fetch any `Config.TX_Key` value with an optional default.
+- Added `GetHighestTierConfig(key)` - get the value from the highest tier that defines a given key.
 - RepLimits/RepPenalties for tiers beyond 4 automatically inherit values from the highest defined tier.
 → Modified `shared/init.lua`.
 
 **Feature Flags**
 - Five new per tier config flags allow features previously exclusive to specific tiers to be toggled on/off for any tier:
-  - `Config.TX_ShowNearHint` — Show a proximity hint near the house
-  - `Config.TX_UseCustomAlarm` — Play a custom alarm sound (requires xsound)
-  - `Config.TX_UseUSBScene` — Use a USB insertion scene for security disabling
-  - `Config.TX_AllowCopBreach` — Allow police to breach this tier's houses
-  - `Config.TX_UseScrambler` — Use the Scrambler minigame for break-in
+  - `Config.TX_ShowNearHint` - Show a proximity hint near the house
+  - `Config.TX_UseCustomAlarm` - Play a custom alarm sound (requires xsound)
+  - `Config.TX_UseUSBScene` - Use a USB insertion scene for security disabling
+  - `Config.TX_AllowCopBreach` - Allow police to breach this tier's houses
+  - `Config.TX_UseScrambler` - Use the Scrambler minigame for break-in
 → Added to `houses/tier1.lua` through `houses/tier4.lua`.
 
 **Dynamic Lookup Functions**
@@ -726,7 +727,7 @@ Attempt better version control, 3.3.6 probably should've been 3.4, but 3.3 proba
 - **Guard Spawning**: Slowed down guard spawning to reduce MS load.  
 
 ### **Documentation**  
-- **Minigame Setup**: Updated documentation for setting up or changing minigames [Visit Minigame Documentation](https://mknzz.github.io/burglary-docs/tier_config.html#setting-up-a-new-minigame).
+- **Minigame Setup**: Updated documentation for setting up or changing minigames [Visit Minigame Documentation]({{ '/tier_config.html#setting-up-a-new-minigame' | relative_url }}).
 - **README.md**: Updated for clarity.
 - **Ox Items List**: Updated to work with 3.3 `ox_items.lua`.
 

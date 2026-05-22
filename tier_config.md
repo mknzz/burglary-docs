@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Houses Config
-nav_order: 4
+parent: sk-burglary
+nav_order: 3
 ---
 
 # Configuring sk-burglary 3.6.2

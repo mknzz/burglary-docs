@@ -1,12 +1,13 @@
 ---
 layout: default
 title: Troubleshooting
-nav_order: 6
+parent: sk-burglary
+nav_order: 5
 ---
 
 # Troubleshooting sk-burglary 3.6.2
 
-Please make sure you have followed [Installing](https://mknzz.github.io/burglary-docs/install.html) and [Main Config](https://mknzz.github.io/burglary-docs/config.html).
+Please make sure you have followed [Install]({{ '/install.html' | relative_url }}) and [Configuration]({{ '/config.html' | relative_url }}).
 
 ## The break in minigame is not working
 
@@ -25,7 +26,7 @@ If you're attempting to break into a door and nothing happens, follow these step
 >     - `ps-ui` or `ox_lib` (for "circle")
 >
 
-For more break in minigame information, please visit the [Houses Config](https://mknzz.github.io/burglary-docs/tier_config.html) section of our docs.
+For more break in minigame information, please visit the [Houses Config]({{ '/tier_config.html' | relative_url }}) section of our docs.
 
 ---
 
@@ -62,15 +63,15 @@ This means the item exists in the burglary config but does not exist in your inv
 
 Items appear across multiple config files. If an item is missing, check these locations:
 
-- `shared/config.lua` — `Config.CarryProps`, `Config.BuyersList`, general item references
-- `houses/tier1.lua` — `Config.T1_Houses` → `required_item` (break-in tools)
-- `houses/tier2.lua` — `Config.T2_Houses` → `required_item`, `Config.T2_RequiredItem`
-- `houses/tier3.lua` — `Config.T3_Houses` → `required_item`
-- `houses/tier4.lua` — `Config.T4_Houses` → `required_item`, guard loot, setup items
-- `interiors/tier1.lua` — `Config.T1_Interiors` → `pickup_props`, `search_zones`, `safes`
-- `interiors/tier2.lua` — `Config.T2_Interiors` → `pickup_props`, `search_zones`, `locked_doors`, `safes`
-- `interiors/tier3.lua` — `Config.T3_Interiors` → `pickup_props`, `search_zones`, `locked_doors`, `safes`
-- `interiors/tier4.lua` — `Config.T4_Interiors` → `pickup_props`, `search_zones`, `safes`
+- `shared/config.lua` - `Config.CarryProps`, `Config.BuyersList`, general item references
+- `houses/tier1.lua` - `Config.T1_Houses` → `required_item` (break-in tools)
+- `houses/tier2.lua` - `Config.T2_Houses` → `required_item`, `Config.T2_RequiredItem`
+- `houses/tier3.lua` - `Config.T3_Houses` → `required_item`
+- `houses/tier4.lua` - `Config.T4_Houses` → `required_item`, guard loot, setup items
+- `interiors/tier1.lua` - `Config.T1_Interiors` → `pickup_props`, `search_zones`, `safes`
+- `interiors/tier2.lua` - `Config.T2_Interiors` → `pickup_props`, `search_zones`, `locked_doors`, `safes`
+- `interiors/tier3.lua` - `Config.T3_Interiors` → `pickup_props`, `search_zones`, `locked_doors`, `safes`
+- `interiors/tier4.lua` - `Config.T4_Interiors` → `pickup_props`, `search_zones`, `safes`
 
 You can replace any item name in these configs with an item that exists in your inventory system.
 

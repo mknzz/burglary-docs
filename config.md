@@ -1,7 +1,8 @@
 ---
 layout: default
-title: Main Config
-nav_order: 3
+title: Configuration
+parent: sk-burglary
+nav_order: 2
 ---
 
 # Configuring sk-burglary 3.6.2
@@ -363,7 +364,7 @@ Config.ChanceOfItemRemoval = 0.9 -- 90% chance of removing the item if the break
 
 You can enable or disable global cooldown settings using the `Config.JobCooldown` table. This includes the PerPlayer, Global, and CooldownSeconds options.
 
-To adjust cooldown times and thresholds for each tier, edit the corresponding values in the tiered [houses] configurations. For more information, visit the [cooldown settings section of the documentation](https://mknzz.github.io/burglary-docs/tier_config.html#changing-job-cooldown-settings).
+To adjust cooldown times and thresholds for each tier, edit the corresponding values in the tiered [houses] configurations. For more information, visit the [cooldown settings section of the documentation]({{ '/tier_config.html#changing-job-cooldown-settings' | relative_url }}).
 
 ## Phone mail or notify
 
@@ -407,7 +408,7 @@ You can control whether an item is required to request a job based on the job's 
 
 `Config.RemoveRequestedItem` - Enable or disable removing the item after a successful job request.
 
-To configure which items are required for each tier, edit the relevant settings in the tiered [houses] configurations. For more information, visit the [tiered request item settings section of the documentation](mknzz.github.io/burglary-docs/tier_config.html#changing-required-job-request-item).
+To configure which items are required for each tier, edit the relevant settings in the tiered [houses] configurations. For more information, visit the [tiered request item settings section of the documentation]({{ '/tier_config.html#changing-required-job-request-item' | relative_url }}).
 
 ## Daily tasks
 
