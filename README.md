@@ -1,10 +1,8 @@
 ## Documentation
 
-This repository now serves as the shared SKryptz documentation hub for multiple FiveM resources, including sk-burglary, darknetos, and sk-runs.
+This repository now serves as the shared SKryptz documentation hub for multiple FiveM resources, including sk-burglary, skryptzOS, and sk-runs.
 
-Published site:
-
-https://mknzz.github.io/burglary-docs/
+Published site: https://mknzz.github.io/skryptz-docs/
 
 The site is built with [Just The Docs](https://github.com/just-the-docs/just-the-docs).
 
